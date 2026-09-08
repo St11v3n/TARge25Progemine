@@ -1,4 +1,5 @@
 using Microsoft.EntityFrameworkCore;
+using TARge25Shop.ApplicationServices.Services;
 using TARge25Shop.Core.ServiceInterface;
 using TARge25Shop.Data;
 
@@ -13,7 +14,7 @@ namespace TARge25Shop
             // Add services to the container.
             builder.Services.AddControllersWithViews();
 
-            builder.Services.AddScoped<ISpaceshipServices, ISpaceshipServices>();
+            builder.Services.AddScoped<ISpaceshipServices, SpaceshipServices>();
 
             //on vaja alla laadida Microsoft.EntityFrameworkCore.SqlServer Nuget pakett,
             //et kasutada UseSqlServer meetodit
