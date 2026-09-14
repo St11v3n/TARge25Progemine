@@ -3,6 +3,7 @@ using TARge25Shop.Core.Dto;
 using TARge25Shop.Core.Domain;
 using TARge25Shop.Data;
 using TARge25Shop.Core.ServiceInterface;
+using Microsoft.EntityFrameworkCore;
 
 namespace TARge25Shop.ApplicationServices.Services
 {
@@ -37,6 +38,37 @@ namespace TARge25Shop.ApplicationServices.Services
             await _context.SaveChangesAsync();
 
             return spaceShip;
+        }
+
+        //teha update meetod, mis võtab vastu dto ja uunedab olemasolevat kosmoselaeva
+
+        public async Task<Spaceship> Update(SpaceshipDto dto)
+        {
+            //siin peab tegema vaheinstansi dto ja domain vahel,
+            //et andmed liiguvad dto-st domain objekt
+            Spaceship spaceShip = new();
+
+            spaceShip.Id = dto.Id;
+            spaceShip.Name = dto.Name;
+            spaceShip.Crew = dto.Crew;
+            spaceShip.ShipType = dto.ShipType;
+            spaceShip.EnginePower = dto.EnginePower;
+            spaceShip.CreatedAt = dto.CreatedAt;
+            spaceShip.UpdatedAt = DateTime.Now;
+
+            //andmete uuendamine andmebaasis
+            _context.Spaceships.Update(spaceShip);
+            await _context.SaveChangesAsync();
+
+            return spaceShip;
+        }
+
+        public async Task<Spaceship> DetailAsync(Guid id)
+        {
+            var spaceship = await _context.Spaceships
+                .FirstOrDefaultAsync(x => x.Id == id);
+
+            return spaceship;
         }
     }
 
