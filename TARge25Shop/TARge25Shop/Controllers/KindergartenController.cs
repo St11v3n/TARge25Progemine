@@ -53,6 +53,7 @@ namespace TARge25Shop.Controllers
         {
             var dto = new KindergartenDto
             {
+                Id = Guid.NewGuid(),
                 GroupName = vm.GroupName,
                 ChildrenCount = vm.ChildrenCount,
                 KindergartenName = vm.KindergartenName,
