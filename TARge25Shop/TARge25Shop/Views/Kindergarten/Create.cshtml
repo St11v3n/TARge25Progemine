@@ -1,0 +1,47 @@
+﻿@model TARge25Shop.Models.Kindergarten.KindergartenCreateViewModel
+<div>
+    <a asp-action="create" asp-controller="kindergarten" type="submit" class="btn btn-primary">Create</a>
+</div>
+
+<div>
+    Kindergarten Create
+</div>
+<form method="post" enctype="multipart/form-data">
+    <input asp-for="Id" type="hidden" />
+    <input asp-for="CreatedAt" type="hidden" />
+    <input asp-for="UpdatedAt" type="hidden" />
+
+    <div class="form-group row">
+        <label asp-for="GroupName" class="col-sm-2 col-form-label"></label>
+        <div class="col-sm-10">
+            <input asp-for="GroupName" class="form-control" />
+
+        </div>
+    </div>
+
+    <div class="form-group row">
+        <label asp-for="ChildrenCount" class="col-sm-2 col-form-label"></label>
+        <div class="col-sm-10">
+            <input asp-for="ChildrenCount" class="form-control" />
+
+        </div>
+    </div>
+
+    <div class="form-group row">
+        <label asp-for="KindergartenName" class="col-sm-2 col-form-label"></label>
+        <div class="col-sm-10">
+            <input asp-for="KindergartenName" class="form-control" />
+
+        </div>
+    </div>
+
+    <div class="form-group row">
+        <label asp-for="TeacherName" class="col-sm-2 col-form-label"></label>
+        <div class="col-sm-10">
+            <input asp-for="TeacherName" class="form-control" />
+
+        </div>
+    </div>
+    <input asp-acton="create" asp-controller="kindergarten" type="submit" class="btn btn-primary" value="Create" />
+    <a asp-action="Index" asp-controller="kindergarten" class="btn btn-secondary">Back To List</a>
+</form>
