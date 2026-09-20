@@ -17,9 +17,9 @@ namespace TARge25Shop.Data.Migrations
                 {
                     Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     GroupName = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    ChildrenCount = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    KindergartenName = table.Column<int>(type: "int", nullable: false),
-                    TeacherName = table.Column<int>(type: "int", nullable: false),
+                    ChildrenCount = table.Column<int>(type: "int", nullable: false),
+                    KindergartenName = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    TeacherName = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     CreatedAt = table.Column<DateTime>(type: "datetime2", nullable: false),
                     UpdatedAt = table.Column<DateTime>(type: "datetime2", nullable: false)
                 },
