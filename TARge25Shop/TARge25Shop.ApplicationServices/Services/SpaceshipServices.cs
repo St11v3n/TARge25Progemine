@@ -10,12 +10,15 @@ namespace TARge25Shop.ApplicationServices.Services
     public class SpaceshipServices : ISpaceshipServices
     {
         private readonly TARge25ShopContext _context;
+        private readonly IFileServices _fileServices;
         public SpaceshipServices
             (
-                TARge25ShopContext context
+                TARge25ShopContext context,
+                IFileServices fileServices
             )
         {
             _context = context;
+            _fileServices = fileServices;
         }
         //see meetod on vaja controlleris esile kutsuda
         //peab lisama interface, et kutsuda see meetod välja
@@ -32,6 +35,11 @@ namespace TARge25Shop.ApplicationServices.Services
             spaceShip.EnginePower = dto.EnginePower;
             spaceShip.CreatedAt = DateTime.Now;
             spaceShip.UpdatedAt = DateTime.Now;
+            //kui uus ankeet on loodud, siis
+            //toimub ka faili salvestamine
+            //saab kutsuda teise service classi meetodit
+            //esile service classis
+            _fileServices.FilesToApi(dto, spaceShip);
 
             //andmete salvestamine andmebaasi
             _context.Spaceships.Add(spaceShip);

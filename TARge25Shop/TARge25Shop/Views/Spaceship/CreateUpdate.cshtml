@@ -51,6 +51,10 @@ else
 
         </div>
     </div>
+    @foreach (var images in Model.Image)
+    {
+          <partial name="Images" model="images"/>  
+    }
     @if (Model.Id.HasValue)
     {
         <input asp-acton="create" asp-controller="spaceship" type="submit" class="btn btn-success" value="Create" />
