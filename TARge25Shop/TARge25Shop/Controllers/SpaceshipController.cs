@@ -65,7 +65,7 @@ namespace TARge25Shop.Controllers
                     {
                         Id = x.ImageId,
                         ExistingFilePath = x.FilePath,
-                        SpaceshipId = x.SpaceshipId
+                        SpaceshipId = (Guid)x.SpaceshipId
                     }).ToArray()
             };
 
