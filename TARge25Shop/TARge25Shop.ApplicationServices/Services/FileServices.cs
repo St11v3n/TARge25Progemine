@@ -25,7 +25,7 @@ namespace TARge25Shop.ApplicationServices.Services
             _context = context;
         }
                
-        public void FilesToApi(SpaceshipDto dto, SpaceshipDto domain)
+        public void FilesToApi(SpaceshipDto dto, Spaceship domain)
         {
             if (dto.Files != null && dto.Files.Count > 0)
             {

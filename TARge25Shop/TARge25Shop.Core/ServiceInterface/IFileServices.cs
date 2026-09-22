@@ -1,13 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using TARge25Shop.Core.Domain;
 using TARge25Shop.Core.Dto;
 
 namespace TARge25Shop.Core.ServiceInterface
 {
     public interface IFileServices
     {
-        void FilesToApi(SpaceshipDto dto, SpaceshipDto domain);
+        void FilesToApi(SpaceshipDto dto, Spaceship domain);
         
             
         

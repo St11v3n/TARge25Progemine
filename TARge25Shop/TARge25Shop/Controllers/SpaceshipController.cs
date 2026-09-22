@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using TARge25Shop.Core.Dto;
 using TARge25Shop.Core.ServiceInterface;
 using TARge25Shop.Data;
@@ -44,6 +45,7 @@ namespace TARge25Shop.Controllers
         public IActionResult Create()
         {
             SpaceshipCreateUpdateViewModel result = new();
+
             return View("CreateUpdate", result);
         }
 
@@ -65,7 +67,6 @@ namespace TARge25Shop.Controllers
                         ExistingFilePath = x.FilePath,
                         SpaceshipId = x.SpaceshipId
                     }).ToArray()
-
             };
 
             //Nüüd kutsume teenuse välja, et luua uus kosmoselaev. See on
@@ -140,17 +141,26 @@ namespace TARge25Shop.Controllers
                 return NotFound();
             }
 
+            var images = await _context.FileToApis
+                .Where(x => x.SpaceshipId == id)
+                .Select(y => new ImageViewModel
+                {
+                    FilePath = y.ExistingFilePath,
+                    ImageId = y.Id
+                }).ToArrayAsync();
+
             //see on vaheinstants domaini ja vm vahel
-            var vm = new SpaceshipDeleteViewModel
-            {
-                Id = spaceship.Id,
-                Name = spaceship.Name,
-                ShipType = spaceship.ShipType,
-                Crew = spaceship.Crew,
-                EnginePower = spaceship.EnginePower,
-                CreatedAt = spaceship.CreatedAt,
-                UpdatedAt = spaceship.UpdatedAt
-            };
+            var vm = new SpaceshipDeleteViewModel();
+            
+                vm.Id = spaceship.Id;
+                vm.Name = spaceship.Name;
+                vm.ShipType = spaceship.ShipType;
+                vm.Crew = spaceship.Crew;
+                vm.EnginePower = spaceship.EnginePower;
+                vm.CreatedAt = spaceship.CreatedAt;
+                vm.UpdatedAt = spaceship.UpdatedAt;
+                vm.Image.AddRange(images);
+            
 
             return View(vm);
         }
@@ -166,6 +176,8 @@ namespace TARge25Shop.Controllers
             }
 
             return RedirectToAction(nameof(Index));
+
+
         }
 
         [HttpGet]
@@ -179,17 +191,26 @@ namespace TARge25Shop.Controllers
                 return NotFound();
             }
 
+            var images = await _context.FileToApis
+                .Where(x => x.SpaceshipId == id)
+                .Select(y => new ImageViewModel
+                {
+                    FilePath = y.ExistingFilePath,
+                    ImageId = y.Id
+                }).ToArrayAsync();
+
             //see on vaheinstants domaini ja vm vahel
-            var vm = new SpaceshipDetailsViewModel
-            {
-                Id = spaceship.Id,
-                Name = spaceship.Name,
-                ShipType = spaceship.ShipType,
-                Crew = spaceship.Crew,
-                EnginePower = spaceship.EnginePower,
-                CreatedAt = spaceship.CreatedAt,
-                UpdatedAt = spaceship.UpdatedAt
-            };
+            var vm = new SpaceshipDetailsViewModel();
+
+            vm.Id = spaceship.Id;
+            vm.Name = spaceship.Name;
+            vm.ShipType = spaceship.ShipType;
+            vm.Crew = spaceship.Crew;
+            vm.EnginePower = spaceship.EnginePower;
+            vm.CreatedAt = spaceship.CreatedAt;
+            vm.UpdatedAt = spaceship.UpdatedAt;
+            vm.Image.AddRange(images);
+
 
             return View(vm);
         }
