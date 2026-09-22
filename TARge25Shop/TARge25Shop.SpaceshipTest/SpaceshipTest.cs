@@ -47,6 +47,7 @@ namespace TARge25Shop.SpaceshipTest
         // Selles testis kontrollitakse et (2) Spaceshipi päring andmebaasist
         // (1) ei tohiks tagastada objektid (3) kui ID-d ei ole samad:
 
+        
         [Fact]
         public async Task ShouldNot_GetSpaceShipById_WhenIdNotEqual()
         {
@@ -60,5 +61,61 @@ namespace TARge25Shop.SpaceshipTest
             //kontroll
             Assert.NotEqual(wrongGuid, goodGuid);
         }
+        //Seleta kodus lahti, nagu eelnevate testide laused, eesti keelde, selle testi oma ka....
+        [Fact]
+        public async Task Should_GetSpaceshipById_WhenGuidIsEqual()
+        {
+            //ülesseade
+            Guid databaseGuid = Guid.Parse("");
+            Guid seekGuid = Guid.Parse("");
+
+            //tegevus
+            await Svc<ISpaceshipServices>().DetailAsync(seekGuid);
+
+            //kontroll
+            Assert.Equal(databaseGuid, seekGuid);
+        }
+        //Seleta kodus lahti, nagu eelnevate testide laused, eesti keelde, selle testi oma ka....
+        [Fact]
+        public async Task Should_SpaceshipDeletedById_WhenReturnedResultIsEqual()
+        {
+            //ülesseade
+            SpaceshipDto dto = MockSpaceShipData();
+
+            //tegevus
+            var addSpaceship = await Svc<ISpaceshipServices>().Create(dto);
+            var deleteSpaceship = await Svc<ISpaceshipServices>().Delete((Guid)addSpaceship.Id);
+
+            //kontroll
+            Assert.Equal(addSpaceship.Id, deleteSpaceship.Id);
+        }
+
+        private SpaceshipDto MockSpaceShipData(bool isOneOrTwo = false)
+        {
+            if (isOneOrTwo == false)
+            {
+                return new SpaceshipDto
+                {
+                    Name = "Nimi",
+                    ShipType = "Lendav taldrik",
+                    Crew = 67,
+                    EnginePower = 69, //hobujõudu siis
+                    CreatedAt = DateTime.Now,
+                    UpdatedAt = DateTime.Now,
+                };
+            }
+            else
+            {
+                return new SpaceshipDto
+                {
+                    Name = "Wow",
+                    ShipType = "Bowling Ball",
+                    Crew = 111,
+                    EnginePower = 632, //hobujõudu siis
+                    CreatedAt = DateTime.Now,
+                    UpdatedAt = DateTime.Now,
+                };
+            }
+        }   
     }
 }
