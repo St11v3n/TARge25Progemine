@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace TARge25Shop.Data.Migrations
 {
     /// <inheritdoc />
-    public partial class Init : Migration
+    public partial class KinderGartenInit : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)

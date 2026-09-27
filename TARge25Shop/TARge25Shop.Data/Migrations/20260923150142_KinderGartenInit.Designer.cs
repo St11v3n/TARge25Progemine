@@ -12,8 +12,8 @@ using TARge25Shop.Data;
 namespace TARge25Shop.Data.Migrations
 {
     [DbContext(typeof(KindergartenContext))]
-    [Migration("20260920195920_Init")]
-    partial class Init
+    [Migration("20260923150142_KinderGartenInit")]
+    partial class KinderGartenInit
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
