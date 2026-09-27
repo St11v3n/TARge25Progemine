@@ -1,15 +1,16 @@
-﻿
-using TARge25Shop.Core.Dto;
+﻿using Microsoft.EntityFrameworkCore;
 using TARge25Shop.Core.Domain;
-using TARge25Shop.Data;
+using TARge25Shop.Core.Dto;
 using TARge25Shop.Core.ServiceInterface;
-using Microsoft.EntityFrameworkCore;
+using TARge25Shop.Data;
+
 
 namespace TARge25Shop.ApplicationServices.Services
 {
     public class KindergartenServices : IKindergartenServices
     {
         private readonly KindergartenContext _context;
+
         public KindergartenServices
             (
                 KindergartenContext context
@@ -17,38 +18,34 @@ namespace TARge25Shop.ApplicationServices.Services
         {
             _context = context;
         }
-        //see meetod on vaja controlleris esile kutsuda
-        //peab lisama interface, et kutsuda see meetod välja
+
         public async Task<Kindergarten> Create(KindergartenDto dto)
         {
-            //siin peab tegema vaheinstansi dto ja domain vahel,
-            //et andmed liiguvad dto-st domain objekt
+            
             Kindergarten kinderGarten = new();
 
             kinderGarten.Id = Guid.NewGuid();
             kinderGarten.GroupName = dto.GroupName;
-            kinderGarten.ChildrenCount= dto.ChildrenCount;
-            kinderGarten.KindergartenName = dto.KindergartenName;
+            kinderGarten.ChildrenCount = dto.ChildrenCount;
+            kinderGarten.KindergartenName= dto.KindergartenName;
             kinderGarten.TeacherName = dto.TeacherName;
             kinderGarten.CreatedAt = DateTime.Now;
             kinderGarten.UpdatedAt = DateTime.Now;
 
-            //andmete salvestamine andmebaasi
+            
             _context.Kindergartens.Add(kinderGarten);
             await _context.SaveChangesAsync();
 
             return kinderGarten;
         }
 
-        //teha update meetod, mis võtab vastu dto ja uunedab olemasolevat kosmoselaeva
-
+        
         public async Task<Kindergarten> Update(KindergartenDto dto)
         {
-            //siin peab tegema vaheinstansi dto ja domain vahel,
-            //et andmed liiguvad dto-st domain objekt
+            
             Kindergarten kinderGarten = new();
 
-            kinderGarten.Id = Guid.NewGuid();
+            kinderGarten.Id = dto.Id;
             kinderGarten.GroupName = dto.GroupName;
             kinderGarten.ChildrenCount = dto.ChildrenCount;
             kinderGarten.KindergartenName = dto.KindergartenName;
@@ -56,7 +53,7 @@ namespace TARge25Shop.ApplicationServices.Services
             kinderGarten.CreatedAt = dto.CreatedAt;
             kinderGarten.UpdatedAt = DateTime.Now;
 
-            //andmete uuendamine andmebaasis
+           
             _context.Kindergartens.Update(kinderGarten);
             await _context.SaveChangesAsync();
 
@@ -82,7 +79,4 @@ namespace TARge25Shop.ApplicationServices.Services
             return result;
         }
     }
-
-
-
 }

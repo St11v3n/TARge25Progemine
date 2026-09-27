@@ -1,9 +1,9 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using TARge25Shop.Core.Domain;
 using TARge25Shop.Core.Dto;
 using TARge25Shop.Core.ServiceInterface;
 using TARge25Shop.Data;
 using TARge25Shop.Models.Kindergarten;
-
 
 namespace TARge25Shop.Controllers
 {
@@ -25,9 +25,7 @@ namespace TARge25Shop.Controllers
         public IActionResult Index()
         {
 
-            // Kutsume teenuse välja, et saada kõik kosmoselaevad. 
-            //constructoris tuleb välja kutsuda DbContext, et
-            //saaksime andmeid kätte.
+            
             var result = _context.Kindergartens
                 .Select(x => new KindergartenIndexViewModel
                 {
@@ -36,6 +34,7 @@ namespace TARge25Shop.Controllers
                     ChildrenCount = x.ChildrenCount,
                     KindergartenName = x.KindergartenName,
                     TeacherName = x.TeacherName,
+                    CreatedAt = x.CreatedAt
                 });
 
             return View(result);
@@ -45,6 +44,7 @@ namespace TARge25Shop.Controllers
         public IActionResult Create()
         {
             KindergartenCreateUpdateViewModel result = new();
+
             return View("CreateUpdate", result);
         }
 
@@ -53,21 +53,18 @@ namespace TARge25Shop.Controllers
         {
             var dto = new KindergartenDto
             {
-                Id = Guid.NewGuid(),
                 GroupName = vm.GroupName,
                 ChildrenCount = vm.ChildrenCount,
                 KindergartenName = vm.KindergartenName,
-                TeacherName = vm.TeacherName,
+                TeacherName = vm.TeacherName
             };
 
-            //Nüüd kutsume teenuse välja, et luua uus kosmoselaev. See on
-            //asünkroonne tegevus ja kasutame await.
+            
             var result = await _kindergartenServices.Create(dto);
 
             if (result == null)
             {
-                // Kui kosmoselaeva loomine ebaõnnestus, siis võime kuvada veateate
-                // ja jätta kasutaja samale lehele.
+               
                 return RedirectToAction(nameof(Index));
             }
 
@@ -77,7 +74,7 @@ namespace TARge25Shop.Controllers
         [HttpGet]
         public async Task<IActionResult> Update(Guid id)
         {
-            var kindergarten = await _kindergartenServices.DetailAsync(id);
+            var kindergarten= await _kindergartenServices.DetailAsync(id);
 
             if (kindergarten == null)
             {
@@ -132,7 +129,7 @@ namespace TARge25Shop.Controllers
                 return NotFound();
             }
 
-            //see on vaheinstants domaini ja vm vahel
+            
             var vm = new KindergartenDeleteViewModel
             {
                 Id = kindergarten.Id,
@@ -161,7 +158,7 @@ namespace TARge25Shop.Controllers
         }
 
         [HttpGet]
-        //teha Detaili vaate meetod
+        
         public async Task<IActionResult> Details(Guid id)
         {
             var kindergarten = await _kindergartenServices.DetailAsync(id);
@@ -171,7 +168,7 @@ namespace TARge25Shop.Controllers
                 return NotFound();
             }
 
-            //see on vaheinstants domaini ja vm vahel
+            
             var vm = new KindergartenDetailsViewModel
             {
                 Id = kindergarten.Id,
