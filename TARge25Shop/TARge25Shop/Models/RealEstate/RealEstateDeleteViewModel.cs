@@ -1,10 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace TARge25Shop.Core.Domain
+﻿namespace TARge25Shop.Models.RealEstate
 {
-    public class RealEstate
+    public class RealEstateDeleteViewModel
     {
         public Guid? Id { get; set; }
         public double? Area { get; set; }
@@ -13,6 +9,5 @@ namespace TARge25Shop.Core.Domain
         public string BuildingType { get; set; }
         public DateTime? CreatedAt { get; set; }
         public DateTime? ModifiedAt { get; set; }
-    
     }
 }
