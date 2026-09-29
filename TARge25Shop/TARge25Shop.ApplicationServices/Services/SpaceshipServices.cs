@@ -39,7 +39,17 @@ namespace TARge25Shop.ApplicationServices.Services
             //toimub ka faili salvestamine
             //saab kutsuda teise service classi meetodit
             //esile service classis
+
+            if (spaceShip.Crew < 4)
+            {
+                spaceShip.Crew = 4;
+            }
+
             _fileServices.FilesToApi(dto, spaceShip);
+            if (spaceShip.EnginePower < 0)
+            {
+                spaceShip.EnginePower = 1;
+            }
 
             //andmete salvestamine andmebaasi
             _context.Spaceships.Add(spaceShip);
@@ -86,6 +96,8 @@ namespace TARge25Shop.ApplicationServices.Services
 
             _context.Spaceships.Remove(result);
             await _context.SaveChangesAsync();
+
+            
 
             return result;
         }
