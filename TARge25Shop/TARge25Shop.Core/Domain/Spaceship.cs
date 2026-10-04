@@ -1,5 +1,4 @@
-﻿
-namespace TARge25Shop.Core.Domain
+﻿namespace TARge25Shop.Core.Domain
 {
     public class Spaceship
     {
