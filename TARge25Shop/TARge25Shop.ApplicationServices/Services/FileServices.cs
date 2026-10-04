@@ -1,12 +1,9 @@
 ﻿using Microsoft.Extensions.Hosting;
-using Microsoft.Identity.Client;
-using System;
-using System.Collections.Generic;
-using System.Text;
 using TARge25Shop.Core.Domain;
 using TARge25Shop.Core.Dto;
 using TARge25Shop.Core.ServiceInterface;
 using TARge25Shop.Data;
+
 
 namespace TARge25Shop.ApplicationServices.Services
 {
@@ -14,25 +11,25 @@ namespace TARge25Shop.ApplicationServices.Services
     {
         private readonly IHostEnvironment _webHost;
         private readonly TARge25ShopContext _context;
-        
+
         public FileServices
             (
                 IHostEnvironment webHost,
-            TARge25ShopContext context
+                TARge25ShopContext context
             )
         {
             _webHost = webHost;
             _context = context;
         }
-               
+
+
         public void FilesToApi(SpaceshipDto dto, Spaceship domain)
         {
             if (dto.Files != null && dto.Files.Count > 0)
             {
                 //kui Directoryt ei ole olemas, siis tee Directory
-                //\\wwwroot\\multipleFileUpload\\
+                // \\wwwroot\\multipleFileUpload\\
                 //tuleb kasutada webHosti
-                //if
                 if (!Directory.Exists(_webHost.ContentRootPath + "\\wwwroot\\multipleFileUpload\\"))
                 {
                     Directory.CreateDirectory(_webHost.ContentRootPath + "\\wwwroot\\multipleFileUpload\\");
@@ -50,7 +47,7 @@ namespace TARge25Shop.ApplicationServices.Services
                     {
                         file.CopyTo(fileStream);
 
-                        //tuleb Domaini teha class FileToApi
+                        //tuleb Domaini teha class FileToApi, 
                         //kus on muutujad Id, ExistingFilePath ja SpaceshipId
                         FileToApi path = new FileToApi
                         {
@@ -59,14 +56,11 @@ namespace TARge25Shop.ApplicationServices.Services
                             SpaceshipId = domain.Id
                         };
 
-                        //tuleb lisada context konstruktorisse
+                        //tuleb lisada context construktorisse
                         _context.FileToApis.AddAsync(path);
-                        
                     }
-
                 }
             }
-
         }
     }
 }
