@@ -65,7 +65,7 @@ namespace TARge25Shop.Controllers
                     {
                         Id = x.ImageId,
                         ExistingFilePath = x.FilePath,
-                        SpaceshipId = (Guid)x.SpaceshipId
+                        SpaceshipId = x.SpaceshipId
                     }).ToArray()
             };
 
@@ -151,16 +151,15 @@ namespace TARge25Shop.Controllers
 
             //see on vaheinstants domaini ja vm vahel
             var vm = new SpaceshipDeleteViewModel();
-            
-                vm.Id = spaceship.Id;
-                vm.Name = spaceship.Name;
-                vm.ShipType = spaceship.ShipType;
-                vm.Crew = spaceship.Crew;
-                vm.EnginePower = spaceship.EnginePower;
-                vm.CreatedAt = spaceship.CreatedAt;
-                vm.UpdatedAt = spaceship.UpdatedAt;
-                vm.Image.AddRange(images);
-            
+
+            vm.Id = spaceship.Id;
+            vm.Name = spaceship.Name;
+            vm.ShipType = spaceship.ShipType;
+            vm.Crew = spaceship.Crew;
+            vm.EnginePower = spaceship.EnginePower;
+            vm.CreatedAt = spaceship.CreatedAt;
+            vm.UpdatedAt = spaceship.UpdatedAt;
+            vm.Image.AddRange(images);
 
             return View(vm);
         }
@@ -176,8 +175,6 @@ namespace TARge25Shop.Controllers
             }
 
             return RedirectToAction(nameof(Index));
-
-
         }
 
         [HttpGet]
@@ -199,6 +196,7 @@ namespace TARge25Shop.Controllers
                     ImageId = y.Id
                 }).ToArrayAsync();
 
+            //tuleb kasutada AddRange, et saada pildid vm kaasa
             //see on vaheinstants domaini ja vm vahel
             var vm = new SpaceshipDetailsViewModel();
 
@@ -210,7 +208,6 @@ namespace TARge25Shop.Controllers
             vm.CreatedAt = spaceship.CreatedAt;
             vm.UpdatedAt = spaceship.UpdatedAt;
             vm.Image.AddRange(images);
-
 
             return View(vm);
         }
