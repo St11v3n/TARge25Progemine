@@ -8,7 +8,7 @@ namespace TARge25Shop.Data
     public class KindergartenContext : DbContext
     {
         //tegime konteksti, mis pärib DbContext klassi
-        public TARge25ShopContext(DbContextOptions<TARge25ShopContext> options)
+        public KindergartenContext(DbContextOptions<KindergartenContext> options)
             : base(options) { }
 
 

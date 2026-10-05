@@ -32,11 +32,11 @@ namespace TARge25Shop.SpaceshipTest
         /// teenused, sh ka andmebaasi.</param>
         public virtual void SetupServices(ServiceCollection services)
         {
-            services.AddScoped<ISpaceshipServices, SpaceshipServices>();
+            services.AddScoped<IKindergartenServices, KindergartenServices>();
             services.AddScoped<IFileServices, FileServices>();
             services.AddScoped<IHostEnvironment, MockIHostEnvironment>();
 
-            services.AddDbContext<TARge25ShopContext>(
+            services.AddDbContext<KindergartenContext>(
                 x =>
                 {
                     x.UseInMemoryDatabase("TEST");
