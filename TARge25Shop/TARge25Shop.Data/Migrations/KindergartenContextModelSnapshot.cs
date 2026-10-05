@@ -10,8 +10,8 @@ using TARge25Shop.Data;
 
 namespace TARge25Shop.Data.Migrations
 {
-    [DbContext(typeof(TARge25ShopContext))]
-    partial class TARge25ShopContextModelSnapshot : ModelSnapshot
+    [DbContext(typeof(KindergartenContext))]
+    partial class KindergartenContextModelSnapshot : ModelSnapshot
     {
         protected override void BuildModel(ModelBuilder modelBuilder)
         {
@@ -21,6 +21,7 @@ namespace TARge25Shop.Data.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
+
 
             modelBuilder.Entity("TARge25Shop.Core.Domain.FileToApi", b =>
                 {
@@ -40,25 +41,29 @@ namespace TARge25Shop.Data.Migrations
                 });
 
             modelBuilder.Entity("TARge25Shop.Core.Domain.Spaceship", b =>
+
+            modelBuilder.Entity("TARge25Shop.Core.Domain.Kindergarten", b =>
+
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
+                    b.Property<int>("ChildrenCount")
+                        .HasColumnType("int");
+
                     b.Property<DateTime>("CreatedAt")
                         .HasColumnType("datetime2");
 
-                    b.Property<int>("Crew")
-                        .HasColumnType("int");
-
-                    b.Property<int>("EnginePower")
-                        .HasColumnType("int");
-
-                    b.Property<string>("Name")
+                    b.Property<string>("GroupName")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("ShipType")
+                    b.Property<string>("KindergartenName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("TeacherName")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
@@ -67,7 +72,7 @@ namespace TARge25Shop.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Spaceships");
+                    b.ToTable("Kindergartens");
                 });
 #pragma warning restore 612, 618
         }

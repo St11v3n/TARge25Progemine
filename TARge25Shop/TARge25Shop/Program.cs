@@ -1,18 +1,21 @@
-using Microsoft.EntityFrameworkCore;
+
+using Microsoft.EntityFrameworkCore;                
 using TARge25Shop.ApplicationServices.Services;
 using TARge25Shop.Core.ServiceInterface;
 using TARge25Shop.Data;
 
-namespace TARge25Shop
-{
-    public class Program
-    {
-        public static void Main(string[] args)
-        {
-            var builder = WebApplication.CreateBuilder(args);
 
-            // Add services to the container.
-            builder.Services.AddControllersWithViews();
+namespace TARge25Shop 
+{
+    public class Program 
+    {
+        public static void Main(string[] args) 
+        {
+            var builder = WebApplication.CreateBuilder(args); 
+
+           
+            builder.Services.AddControllersWithViews();  
+
 
             builder.Services.AddScoped<ISpaceshipServices, SpaceshipServices>();
             builder.Services.AddScoped<IFileServices, FileServices>();
@@ -25,10 +28,21 @@ namespace TARge25Shop
             var app = builder.Build();
 
             // Configure the HTTP request pipeline.
+
+            builder.Services.AddScoped<IKindergartenServices, KindergartenServices>(); 
+                                                                                        
+            
+            builder.Services.AddDbContext<KindergartenContext>(options =>                                  
+                options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));     
+                                                                                                           
+            var app = builder.Build();  
+
+           
+
             if (!app.Environment.IsDevelopment())
             {
                 app.UseExceptionHandler("/Home/Error");
-                // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
+  
                 app.UseHsts();
             }
 

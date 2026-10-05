@@ -5,7 +5,7 @@ using TARge25Shop.Core.Domain;
 namespace TARge25Shop.Data
 {
     //nimetasime classi TARge25ShopContext, mis pärib DbContext klassi
-    public class TARge25ShopContext : DbContext
+    public class KindergartenContext : DbContext
     {
         //tegime konteksti, mis pärib DbContext klassi
         public TARge25ShopContext(DbContextOptions<TARge25ShopContext> options)
@@ -15,5 +15,11 @@ namespace TARge25Shop.Data
         //vaja lisada dbSet, mis on seotud meie domain klassiga Spaceship
         public DbSet<Spaceship> Spaceships { get; set; }
         public DbSet<FileToApi> FileToApis { get; set; }
+
+        //vaja lisada dbSet, mis on seotud meie domain klassiga Spaceship
+        public DbSet<Kindergarten> Kindergartens { get; set; }
     }
+
+
+
 }
