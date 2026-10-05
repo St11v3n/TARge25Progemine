@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using Microsoft.EntityFrameworkCore;
 using TARge25Shop.Core.Domain;
 using TARge25Shop.Core.Dto;
 using TARge25Shop.Core.ServiceInterface;
@@ -10,14 +8,17 @@ namespace TARge25Shop.ApplicationServices.Services
 {
     public class RealEstateServices : IRealEstateServices
     {
-        private readonly RealEstateContext _context;
+        private readonly TARge25ShopContext _context;
+        private readonly IFileServices _fileServices;
 
         public RealEstateServices
-           (
-            RealEstateContext context
+            (
+                TARge25ShopContext context,
+                IFileServices fileServices
             )
         {
             _context = context;
+            _fileServices = fileServices;
         }
 
         public async Task<RealEstate> Create(RealEstateDto dto)
@@ -32,17 +33,22 @@ namespace TARge25Shop.ApplicationServices.Services
             realEstate.CreatedAt = DateTime.Now;
             realEstate.ModifiedAt = DateTime.Now;
 
+            if (dto.Files != null)
+            {
+                _fileServices.UploadFilesToDatabase(dto, realEstate);
+            }
+
             _context.RealEstates.Add(realEstate);
             await _context.SaveChangesAsync();
 
             return realEstate;
         }
 
-        public async Task<RealEstate> Modify(RealEstateDto dto)
+        public async Task<RealEstate> Update(RealEstateDto dto)
         {
             RealEstate realEstate = new();
 
-            realEstate.Id = Guid.NewGuid();
+            realEstate.Id = dto.Id;
             realEstate.Area = dto.Area;
             realEstate.Location = dto.Location;
             realEstate.RoomNumber = dto.RoomNumber;
@@ -66,13 +72,13 @@ namespace TARge25Shop.ApplicationServices.Services
 
         public async Task<RealEstate> Delete(Guid id)
         {
-            var result = await _context.RealEstates
+            var realestate = await _context.RealEstates
                 .FirstOrDefaultAsync(x => x.Id == id);
+
+            _context.RealEstates.Remove(realestate);
             await _context.SaveChangesAsync();
 
-            return result;
+            return realestate;
         }
-
-
     }
 }

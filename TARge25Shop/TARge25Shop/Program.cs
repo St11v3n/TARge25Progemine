@@ -14,7 +14,7 @@ namespace TARge25Shop
             // Add services to the container.
             builder.Services.AddControllersWithViews();
 
-            builder.Services.AddScoped<ISpaceshipServices, SpaceshipServices>();
+            builder.Services.AddScoped<IRealEstateServices, RealEstateServices>();
             builder.Services.AddScoped<IFileServices, FileServices>();
             builder.Services.AddScoped<IRealEstateServices, RealEstateServices>();
 

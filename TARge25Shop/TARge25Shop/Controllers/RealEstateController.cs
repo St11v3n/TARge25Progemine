@@ -11,12 +11,12 @@ namespace TARge25Shop.Controllers
     public class RealEstateController : Controller
     {
         private readonly IRealEstateServices _realestateServices;
-        private readonly RealEstateContext _context;
+        private readonly TARge25ShopContext _context;
 
         public RealEstateController
             (
                 IRealEstateServices realestateServices,
-                RealEstateContext context
+                TARge25ShopContext context
             )
 
         {
@@ -47,14 +47,26 @@ namespace TARge25Shop.Controllers
 
         [HttpPost]
 
-        public async Task<IActionResult> Create(RealEstateCreateUpdateViewModel vm)
+        public async Task<IActionResult> 
+            Create(RealEstateCreateUpdateViewModel vm)
         {
             var dto = new RealEstateDto
             {
                 Area = vm.Area,
                 Location = vm.Location,
                 RoomNumber = vm.RoomNumber,
-                BuildingType = vm.BuildingType
+                BuildingType = vm.BuildingType,
+                //failide lisamine
+                Files = vm.Files,
+                Image = vm.Image
+                    .Select(x => new FileToDatabaseDto
+                    {
+                        Id = x.ImageId,
+                        ImageData = x.ImageData,
+                        ImageTitle = x.ImageTitle,
+                        RealEstateId = x.RealEstateId
+
+                    }).ToArray()
             };
 
             var result = await _realestateServices.Create(dto);
@@ -105,7 +117,7 @@ namespace TARge25Shop.Controllers
                 ModifiedAt = vm.ModifiedAt
             };
 
-            var result = await _realestateServices.Modify(dto);
+            var result = await _realestateServices.Update(dto);
             if (result == null)
             {
                 return RedirectToAction(nameof(Index));
