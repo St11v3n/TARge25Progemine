@@ -1,13 +1,9 @@
 ﻿@model TARge25Shop.Models.RealEstate.RealEstateImageViewModel
 
-@{
-    var photoPaths = "~/multipleFileUpload/" + (Model.ImageTitle ?? "noimage.jpg");
-}
+
 <div class="form-group row col-sm-4 offset-2">
         <div>@Model.ImageTitle</div>
-        <img src="@Model.Image" class="img-thumbnail" />
-        <div>@Model.ImageTitle</div>
-        <img class="card-image-top" src="@photoPaths" asp-append-version="true" />
-
+        <img src="@Model.Image" class="card-img-top" asp-append-version="true" />
+        
 
 </div>
