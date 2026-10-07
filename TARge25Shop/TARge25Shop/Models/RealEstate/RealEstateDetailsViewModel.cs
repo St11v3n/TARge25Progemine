@@ -1,6 +1,4 @@
-﻿using TARge25Shop.Models.Spaceship;
-
-namespace TARge25Shop.Models.RealEstate
+﻿namespace TARge25Shop.Models.RealEstate
 {
     public class RealEstateDetailsViewModel
     {
@@ -12,6 +10,7 @@ namespace TARge25Shop.Models.RealEstate
 
         public List<RealEstateImageViewModel> Images { get; set; }
             = new List<RealEstateImageViewModel>();
+
         public DateTime? CreatedAt { get; set; }
         public DateTime? ModifiedAt { get; set; }
     }

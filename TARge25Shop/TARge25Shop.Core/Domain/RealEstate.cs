@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace TARge25Shop.Core.Domain
+﻿namespace TARge25Shop.Core.Domain
 {
     public class RealEstate
     {
@@ -11,8 +7,8 @@ namespace TARge25Shop.Core.Domain
         public string Location { get; set; }
         public int RoomNumber { get; set; }
         public string BuildingType { get; set; }
+
         public DateTime? CreatedAt { get; set; }
         public DateTime? ModifiedAt { get; set; }
-    
     }
 }
