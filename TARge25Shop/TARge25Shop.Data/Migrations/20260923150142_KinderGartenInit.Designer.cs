@@ -11,7 +11,7 @@ using TARge25Shop.Data;
 
 namespace TARge25Shop.Data.Migrations
 {
-    [DbContext(typeof(KindergartenContext))]
+    [DbContext(typeof(TARge25ShopContext))]
     [Migration("20260923150142_KinderGartenInit")]
     partial class KinderGartenInit
     {
