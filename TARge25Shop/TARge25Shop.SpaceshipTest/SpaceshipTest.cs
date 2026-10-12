@@ -111,11 +111,15 @@ namespace TARge25Shop.SpaceshipTest
         public async Task Should_UpdateSpaceshipByID_WhenUpdatingData()
         {
             //ülesseade
-            var guid = new Guid("68eb8abd-086a-4c8b-9695-71234143f709");
+
+            //a
+
 
             SpaceshipDto dto = MockSpaceshipData();
-
+            var result = await Svc<ISpaceshipServices>().Create(dto);
+            Guid guid = (Guid)result.Id;
             SpaceshipDto domain = new();
+
 
             domain.Id = Guid.Parse("68eb8abd-086a-4c8b-9695-71234143f709");
             domain.EnginePower = 10000000;
@@ -127,15 +131,16 @@ namespace TARge25Shop.SpaceshipTest
 
             //tegevus
             await Svc<ISpaceshipServices>().Update(dto);
+            var result2 = await Svc<ISpaceshipServices>().DetailAsync(guid);
 
             //kontroll
             Assert.Equal(domain.Id, guid);
-            Assert.NotEqual(dto.EnginePower, domain.EnginePower);
-            Assert.NotEqual(dto.Name, domain.Name);
-            Assert.DoesNotMatch(dto.Crew.ToString(), domain.Crew.ToString());
-            Assert.DoesNotMatch(dto.ShipType, domain.ShipType);
-            Assert.Equal(dto.CreatedAt, domain.CreatedAt);
-            Assert.NotEqual(dto.UpdatedAt, domain.CreatedAt);
+            Assert.NotEqual(dto.EnginePower, result2.EnginePower);
+            Assert.NotEqual(dto.Name, result2.Name);
+            Assert.DoesNotMatch(dto.Crew.ToString(), result2.Crew.ToString());
+            Assert.DoesNotMatch(dto.ShipType, result2.ShipType);
+            Assert.Equal(dto.CreatedAt, result2.CreatedAt);
+            Assert.NotEqual(dto.UpdatedAt, result2.CreatedAt);
         }
         [Fact]
         public async Task ShouldNot_UpdateSpaceshipByID_WhenNoDataIsUpdated()

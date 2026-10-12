@@ -32,6 +32,11 @@ namespace TARge25Shop.ApplicationServices.Services
             kinderGarten.CreatedAt = DateTime.Now;
             kinderGarten.UpdatedAt = DateTime.Now;
 
+            if ( kinderGarten.TeacherName.Any(char.IsDigit))
+            {
+
+            }
+                
             
             _context.Kindergartens.Add(kinderGarten);
             await _context.SaveChangesAsync();

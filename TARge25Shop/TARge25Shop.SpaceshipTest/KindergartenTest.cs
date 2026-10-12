@@ -6,6 +6,7 @@ using TARge25Shop.Core.ServiceInterface;
 using Xunit;
 
 namespace TARge25Shop.SpaceshipTest
+
 {
     public class KindergartenTest : TestBase
     {
@@ -119,7 +120,7 @@ namespace TARge25Shop.SpaceshipTest
 
             domain.Id = Guid.Parse("68eb8abd-086a-4c8b-9695-71234143f709");
             domain.KindergartenName = "1 D0nT Kn0W Wh4T T0 D0";
-            domain.GroupName= "WAZZAA";
+            domain.GroupName = "WAZZAA";
             domain.TeacherName = "Mike Bozawski";
             domain.ChildrenCount = 10;
             domain.CreatedAt = dto.CreatedAt;//  <-- ei tohi muutuda Update korral, tuleb võtta olemasolevast objektist.
@@ -173,15 +174,115 @@ namespace TARge25Shop.SpaceshipTest
         //service ei tohi lisada sellest vähema arvuga objekti, service
         //võib selle probleemi lahendada ükskõik kuidas
         [Fact]
-        public async Task ShouldNot_CreateKindergarten_WhenCrewIsThreeOrLess()
+        public async Task ShouldNot_CreateKindergarten_WhenChildrenCountIsThreeOrLess()
         {
             //ülesseade
             KindergartenDto dto = MockKindergartenData();
-            dto.Crew = 0;
+            dto.ChildrenCount = 0;
             //tegevus
-            var result = await Svc<ISpaceshipServices>().Create(dto);
+            var result = await Svc<IKindergartenServices>().Create(dto);
             //kontroll
-            Assert.True(result.Crew > 3);
+            Assert.True(result.ChildrenCount > 3);
         }
+
+        [Fact]
+        public async Task Should_RemoveKindergartenFromDatabase_WhenKindergartenIsDeleted()
+        {
+            //ülesseade
+            KindergartenDto dto = MockKindergartenData();
+
+            //tegevus
+            var createdKindergarten = await Svc<IKindergartenServices>().Create(dto);
+            var deletedKindergarten = await Svc<IKindergartenServices>().Delete((Guid)createdKindergarten.Id);
+            var result = await Svc<IKindergartenServices>().DetailAsync((Guid)createdKindergarten.Id);
+
+            //kontrollimine
+            Assert.Equal(createdKindergarten.Id, deletedKindergarten.Id);
+            Assert.Null(result);
+        }
+
+        [Fact]
+        public async Task ShouldNot_RemoveKindergartenFromDatabase_WhenKindergartenIdIsDifferent()
+        {
+            var dto = MockKindergartenData();
+            var createdKindergarten1 = await Svc<IKindergartenServices>().Create(dto);
+            var createdKindergarten2 = await Svc<IKindergartenServices>().Create(dto);
+            var deleteResult = await Svc<IKindergartenServices>().Delete((Guid)createdKindergarten2.Id);
+            var spaceshipindb = await Svc<IKindergartenServices>().DetailAsync((Guid)createdKindergarten1.Id);
+
+            //kontroll
+            Assert.NotNull(spaceshipindb);
+            Assert.NotEqual(deleteResult.Id, createdKindergarten1.Id);
+            Assert.Equal(createdKindergarten1, spaceshipindb);
+        }
+
+        /// <summary>
+        /// Returns a nulled object for testing purposes
+        /// </summary>
+        /// <returns></returns>
+        private KindergartenDto MockKindergartenNullData()
+        {
+            return new KindergartenDto
+            {
+                Id = null,
+                GroupName = "Infinity And Beyond",
+                ChildrenCount = 5,
+                KindergartenName = "Bullworth",
+                TeacherName = "Jacob Jacob",
+                CreatedAt = DateTime.MinValue,
+                UpdatedAt = DateTime.MinValue,
+            };
+        }
+
+
+        /* üleval testid, all abimeetodid */
+
+        private KindergartenDto MockKindergartenData(bool isOneOrTwo = false)
+        {
+            if (isOneOrTwo == false)
+            {
+                return new KindergartenDto
+                {
+                    GroupName = "Something Something",
+                    ChildrenCount = 5,
+                    KindergartenName = "My Creativity With Names Are Terrible",
+                    TeacherName = "Dunba Dunba Mahor",
+                    CreatedAt = DateTime.MinValue,
+                    UpdatedAt = DateTime.MinValue,
+                };
+            }
+            else
+            {
+                return new KindergartenDto
+                {
+                    GroupName = "Nothing Has Changed",
+                    ChildrenCount = 5,
+                    KindergartenName = "Still Cant Think Of Anything Good",
+                    TeacherName = "Marvin Marvin",
+                    CreatedAt = DateTime.MinValue,
+                    UpdatedAt = DateTime.MinValue,
+                };
+            }
+        }
+
+        //------------------------------------------------------------------------------------------
+
+        //Nüüd algavad lisa 15 teste, eelmised olid koos tehtud testid, mis olid mõeldud Spaceshipile.
+
+        [Fact]
+        
+        public async Task ShouldNot_CreateKindergarten_WhenTeacherNameContainsANumber()
+        {
+            //ülesseade
+            KindergartenDto dto = MockKindergartenData();
+
+            //tegevus
+            var result = await Svc<IKindergartenServices>().Create(dto);
+
+            //kontroll
+        }   
+
+
+
     }
 }
