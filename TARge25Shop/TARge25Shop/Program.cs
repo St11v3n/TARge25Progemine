@@ -22,17 +22,17 @@ namespace TARge25Shop
 
             //on vaja alla laadida Microsoft.EntityFrameworkCore.SqlServer NuGet pakett,
             //et kasutada UseSqlServer meetodit
-            builder.Services.AddDbContext<KindergartenContext>(options =>
+            builder.Services.AddDbContext<TARge25ShopContext>(options =>
                 options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
 
-            var app = builder.Build();
+            
 
             // Configure the HTTP request pipeline.
 
             builder.Services.AddScoped<IKindergartenServices, KindergartenServices>(); 
                                                                                         
             
-            builder.Services.AddDbContext<KindergartenContext>(options =>                                  
+            builder.Services.AddDbContext<TARge25ShopContext>(options =>                                  
                 options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));     
                                                                                                            
             var app = builder.Build();  

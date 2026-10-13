@@ -36,7 +36,7 @@ namespace TARge25Shop.SpaceshipTest
             services.AddScoped<IFileServices, FileServices>();
             services.AddScoped<IHostEnvironment, MockIHostEnvironment>();
             services.AddScoped<ISpaceshipServices, SpaceshipServices>();
-            services.AddDbContext<KindergartenContext>(
+            services.AddDbContext<TARge25ShopContext>(
                 x =>
                 {
                     x.UseInMemoryDatabase("TEST");

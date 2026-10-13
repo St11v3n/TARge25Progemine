@@ -10,12 +10,12 @@ namespace TARge25Shop.Controllers
     public class KindergartenController : Controller
     {
         private readonly IKindergartenServices _kindergartenServices;
-        private readonly KindergartenContext _context;
+        private readonly TARge25ShopContext _context;
 
         public KindergartenController
             (
                 IKindergartenServices kindergartenServices,
-                KindergartenContext context
+                TARge25ShopContext context
             )
         {
             _kindergartenServices = kindergartenServices;

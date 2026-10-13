@@ -9,11 +9,11 @@ namespace TARge25Shop.ApplicationServices.Services
 {
     public class KindergartenServices : IKindergartenServices
     {
-        private readonly KindergartenContext _context;
+        private readonly TARge25ShopContext _context;
 
         public KindergartenServices
             (
-                KindergartenContext context
+                TARge25ShopContext context
             )
         {
             _context = context;
