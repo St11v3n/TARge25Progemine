@@ -1,4 +1,5 @@
 using Microsoft.EntityFrameworkCore;
+using TARge25Shop.ApplicationServices;
 using TARge25Shop.ApplicationServices.Services;
 using TARge25Shop.Core.ServiceInterface;
 using TARge25Shop.Data;
@@ -17,6 +18,7 @@ namespace TARge25Shop
             builder.Services.AddScoped<ISpaceshipServices, SpaceshipServices>();
             builder.Services.AddScoped<IFileServices, FileServices>();
             builder.Services.AddScoped<IRealEstateServices, RealEstateServices>();
+            builder.Services.AddHttpClient<IChuckNorrisServices, ChuckNorrisServices>();
 
             //on vaja alla laadida Microsoft.EntityFrameworkCore.SqlServer NuGet pakett,
             //et kasutada UseSqlServer meetodit
