@@ -11,15 +11,9 @@ using TARge25Shop.Data;
 
 namespace TARge25Shop.Data.Migrations
 {
-<<<<<<<< HEAD:TARge25Shop/TARge25Shop.Data/Migrations/20260922154855_Init.Designer.cs
     [DbContext(typeof(TARge25ShopContext))]
-    [Migration("20260922154855_Init")]
-    partial class Init
-========
-    [DbContext(typeof(KindergartenContext))]
-    [Migration("20260923150142_KinderGartenInit")]
-    partial class KinderGartenInit
->>>>>>>> origin/Kindergarden:TARge25Shop/TARge25Shop.Data/Migrations/20260923150142_KinderGartenInit.Designer.cs
+    [Migration("20261014190435_KindergartenInit")]
+    partial class KindergartenInit
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -31,7 +25,6 @@ namespace TARge25Shop.Data.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
-<<<<<<<< HEAD:TARge25Shop/TARge25Shop.Data/Migrations/20260922154855_Init.Designer.cs
             modelBuilder.Entity("TARge25Shop.Core.Domain.FileToApi", b =>
                 {
                     b.Property<Guid>("Id")
@@ -49,10 +42,27 @@ namespace TARge25Shop.Data.Migrations
                     b.ToTable("FileToApis");
                 });
 
-            modelBuilder.Entity("TARge25Shop.Core.Domain.Spaceship", b =>
-========
+            modelBuilder.Entity("TARge25Shop.Core.Domain.FileToDatabase", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<byte[]>("ImageData")
+                        .HasColumnType("varbinary(max)");
+
+                    b.Property<string>("ImageTitle")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<Guid?>("KindergartenId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("FileToDatabases");
+                });
+
             modelBuilder.Entity("TARge25Shop.Core.Domain.Kindergarten", b =>
->>>>>>>> origin/Kindergarden:TARge25Shop/TARge25Shop.Data/Migrations/20260923150142_KinderGartenInit.Designer.cs
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
@@ -61,7 +71,7 @@ namespace TARge25Shop.Data.Migrations
                     b.Property<int>("ChildrenCount")
                         .HasColumnType("int");
 
-                    b.Property<DateTime>("CreatedAt")
+                    b.Property<DateTime?>("CreatedAt")
                         .HasColumnType("datetime2");
 
                     b.Property<string>("GroupName")
@@ -76,12 +86,43 @@ namespace TARge25Shop.Data.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<DateTime>("UpdatedAt")
+                    b.Property<DateTime?>("UpdatedAt")
                         .HasColumnType("datetime2");
 
                     b.HasKey("Id");
 
                     b.ToTable("Kindergartens");
+                });
+
+            modelBuilder.Entity("TARge25Shop.Core.Domain.Spaceship", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("Crew")
+                        .HasColumnType("int");
+
+                    b.Property<int>("EnginePower")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("ShipType")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("UpdatedAt")
+                        .HasColumnType("datetime2");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Spaceships");
                 });
 #pragma warning restore 612, 618
         }

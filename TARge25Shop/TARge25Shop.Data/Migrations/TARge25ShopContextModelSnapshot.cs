@@ -10,8 +10,8 @@ using TARge25Shop.Data;
 
 namespace TARge25Shop.Data.Migrations
 {
-    [DbContext(typeof(KindergartenContext))]
-    partial class KindergartenContextModelSnapshot : ModelSnapshot
+    [DbContext(typeof(TARge25ShopContext))]
+    partial class TARge25ShopContextModelSnapshot : ModelSnapshot
     {
         protected override void BuildModel(ModelBuilder modelBuilder)
         {
@@ -21,7 +21,6 @@ namespace TARge25Shop.Data.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
-
 
             modelBuilder.Entity("TARge25Shop.Core.Domain.FileToApi", b =>
                 {
@@ -40,10 +39,27 @@ namespace TARge25Shop.Data.Migrations
                     b.ToTable("FileToApis");
                 });
 
-            modelBuilder.Entity("TARge25Shop.Core.Domain.Spaceship", b =>
+            modelBuilder.Entity("TARge25Shop.Core.Domain.FileToDatabase", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<byte[]>("ImageData")
+                        .HasColumnType("varbinary(max)");
+
+                    b.Property<string>("ImageTitle")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<Guid?>("KindergartenId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("FileToDatabases");
+                });
 
             modelBuilder.Entity("TARge25Shop.Core.Domain.Kindergarten", b =>
-
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
@@ -52,7 +68,7 @@ namespace TARge25Shop.Data.Migrations
                     b.Property<int>("ChildrenCount")
                         .HasColumnType("int");
 
-                    b.Property<DateTime>("CreatedAt")
+                    b.Property<DateTime?>("CreatedAt")
                         .HasColumnType("datetime2");
 
                     b.Property<string>("GroupName")
@@ -67,12 +83,43 @@ namespace TARge25Shop.Data.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<DateTime>("UpdatedAt")
+                    b.Property<DateTime?>("UpdatedAt")
                         .HasColumnType("datetime2");
 
                     b.HasKey("Id");
 
                     b.ToTable("Kindergartens");
+                });
+
+            modelBuilder.Entity("TARge25Shop.Core.Domain.Spaceship", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("Crew")
+                        .HasColumnType("int");
+
+                    b.Property<int>("EnginePower")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("ShipType")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("UpdatedAt")
+                        .HasColumnType("datetime2");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Spaceships");
                 });
 #pragma warning restore 612, 618
         }

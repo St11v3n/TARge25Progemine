@@ -6,13 +6,12 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace TARge25Shop.Data.Migrations
 {
     /// <inheritdoc />
-    public partial class KinderGartenInit : Migration
+    public partial class KindergartenInit : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateTable(
-<<<<<<<< HEAD:TARge25Shop/TARge25Shop.Data/Migrations/20260922154855_Init.cs
                 name: "FileToApis",
                 columns: table => new
                 {
@@ -26,10 +25,21 @@ namespace TARge25Shop.Data.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Spaceships",
-========
+                name: "FileToDatabases",
+                columns: table => new
+                {
+                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    ImageTitle = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    ImageData = table.Column<byte[]>(type: "varbinary(max)", nullable: true),
+                    KindergartenId = table.Column<Guid>(type: "uniqueidentifier", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_FileToDatabases", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Kindergartens",
->>>>>>>> origin/Kindergarden:TARge25Shop/TARge25Shop.Data/Migrations/20260923150142_KinderGartenInit.cs
                 columns: table => new
                 {
                     Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
@@ -37,12 +47,29 @@ namespace TARge25Shop.Data.Migrations
                     ChildrenCount = table.Column<int>(type: "int", nullable: false),
                     KindergartenName = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     TeacherName = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    CreatedAt = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    UpdatedAt = table.Column<DateTime>(type: "datetime2", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Kindergartens", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Spaceships",
+                columns: table => new
+                {
+                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    ShipType = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Crew = table.Column<int>(type: "int", nullable: false),
+                    EnginePower = table.Column<int>(type: "int", nullable: false),
                     CreatedAt = table.Column<DateTime>(type: "datetime2", nullable: false),
                     UpdatedAt = table.Column<DateTime>(type: "datetime2", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Kindergartens", x => x.Id);
+                    table.PrimaryKey("PK_Spaceships", x => x.Id);
                 });
         }
 
@@ -50,14 +77,16 @@ namespace TARge25Shop.Data.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-<<<<<<<< HEAD:TARge25Shop/TARge25Shop.Data/Migrations/20260922154855_Init.cs
                 name: "FileToApis");
 
             migrationBuilder.DropTable(
-                name: "Spaceships");
-========
+                name: "FileToDatabases");
+
+            migrationBuilder.DropTable(
                 name: "Kindergartens");
->>>>>>>> origin/Kindergarden:TARge25Shop/TARge25Shop.Data/Migrations/20260923150142_KinderGartenInit.cs
+
+            migrationBuilder.DropTable(
+                name: "Spaceships");
         }
     }
 }
