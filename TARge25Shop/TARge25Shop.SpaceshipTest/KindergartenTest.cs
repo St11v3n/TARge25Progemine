@@ -222,7 +222,7 @@ namespace TARge25Shop.SpaceshipTest
         //Nüüd algavad lisa 15 teste, eelmised olid koos tehtud testid, mis olid mõeldud Spaceshipile, aga lihstalt ümbernimetatud, et sobiks Kindergartenile.
 
         [Fact]
-
+        //Kontrollime, et kui string elemendis on olemas number, siis ei tohiks lasteaed tekkida.
         public async Task ShouldNot_CreateKindergarten_WhenAnyStringElementContainsANumber()
         {
             //ülesseade
@@ -240,6 +240,7 @@ namespace TARge25Shop.SpaceshipTest
         }
 
         [Fact]
+        //Kontrollime, et kui ükski element on null, siis ei tohiks tekkida lasteaed.
         public async Task ShouldNot_CreateKindergarten_WhenAnyOfTheElementsAreNull()
         {
             //ülesseade
@@ -256,6 +257,7 @@ namespace TARge25Shop.SpaceshipTest
         }
 
         [Fact]
+        //Kontrollime, et kui ükski element on null, siis ei tohiks uuendada lasteaeda.
         public async Task ShouldNot_UpdateKindergarten_WhenAnyOfTheElementsAreNull()
         {
             //ülesseade
@@ -273,6 +275,7 @@ namespace TARge25Shop.SpaceshipTest
         }
 
         [Fact]
+        //Kontrollime, et kui string elemendid on kõik sama tulemusega, siis peaks lasteaed ikkagi uuendada saada.
         public async Task Should_UpdateKindergarten_WhenStringElementsAreTheSame()
         {
             //ülesseade
@@ -292,6 +295,7 @@ namespace TARge25Shop.SpaceshipTest
         }
 
         [Fact]
+        //Kontrollime, et kui laste loetlus on negatiivne, siis ei tohiks lasteaed uuendada saada.
         public async Task ShouldNot_UpdateKindergarten_WhenChildrenCountNegative()
         {
             //ülesseade
@@ -310,6 +314,7 @@ namespace TARge25Shop.SpaceshipTest
 
 
         [Fact]
+        //Kontrollime, et kui laste loetlus on 3 või vähem, siis ei tohi uuendada lasteaeda.
         public async Task ShouldNot_UpdateKindergarten_WhenChildrenCountIsThreeOrLess()
         {
             //ülesseade
@@ -333,6 +338,7 @@ namespace TARge25Shop.SpaceshipTest
         }
 
         [Fact]
+        //Kontrollime, et kui ID on tühi, siis ei tohi kustutada lasteaeda.
         public async Task ShouldNot_RemoveKindergarten_WhenIdIsEmpty()
         {
             //ülesseade
@@ -346,6 +352,7 @@ namespace TARge25Shop.SpaceshipTest
         }
 
         [Fact]
+        //Kontrollime, kui ükski string elemendis on olemas number, siis ei tohiks uuendada lasteaeda.
         public async Task ShouldNot_UpdateKindergarten_WhenAnyStringElementContainsANumber()
         {
 
@@ -365,6 +372,7 @@ namespace TARge25Shop.SpaceshipTest
             Assert.Null(updoot_result);
         }
         [Fact]
+        //Kontrollime, et kui string elementidel on kõik sama tulemus, siis tohiks tekkitada lasteaeda.
         public async Task Should_CreateKindergarten_WhenStringElementsAreTheSame()
         {
             //ülesseade
@@ -386,6 +394,7 @@ namespace TARge25Shop.SpaceshipTest
         }
 
         [Fact]
+        //Kontrollime, et kui gruppinimi on string, siis peaks lasteaed tekkima.
         public async Task Should_CreateKindergarten_WhenGroupNameIsAString()
         {
             //ülesseade
@@ -401,6 +410,7 @@ namespace TARge25Shop.SpaceshipTest
         }
 
         [Fact]
+        //Kontrollime, et kui gruppinimi on string, siis peaks lasteaed uuendama.
         public async Task Should_UpdateKindergarten_WhenGroupNameIsAString()
         {
             //ülesseade
@@ -420,6 +430,7 @@ namespace TARge25Shop.SpaceshipTest
         }
 
         [Fact]
+        //Kontrollime, et kui laste loetlus on täisarv, siis peaks tekkima lasteaed.
         public async Task Should_CreateKindergarten_WhenChildrenCountIsAnInterger()
         {
             //ülesseade
@@ -438,6 +449,7 @@ namespace TARge25Shop.SpaceshipTest
         }
 
         [Fact]
+        //Kontrollime, et kui laste loetlus on täisarv, siis peaks lastead uuendama.
         public async Task Should_UpdateKindergarten_WhenChildrenCountIsAnInterger()
         {
             //ülesseade
@@ -460,6 +472,7 @@ namespace TARge25Shop.SpaceshipTest
         }
 
         [Fact]
+        //Kontrollime, et kui laste loetlus on million või suurem, siis ei tohiks tekkida lasteaed.
         public async Task ShouldNot_CreateKindergarten_WhenChildrenCountIsAtAMillionOrHigherRange()
         {
             //ülesseade
@@ -480,6 +493,7 @@ namespace TARge25Shop.SpaceshipTest
         }
 
         [Fact]
+        //Kontrollime, et kui laste loetlus on million või suurem, siis ei tohiks uuendada lasteaeda.
         public async Task ShouldNot_UpdateKindergarten_WhenChildrenCountIsAtAMillionOrHigherRange()
         {
             //ülesseade
