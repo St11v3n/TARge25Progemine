@@ -85,8 +85,8 @@ namespace TARge25Shop.SpaceshipTest
             KindergartenDto dto = MockKindergartenData();
 
             // tegevus
-            var addKindergarten = await Svc<ISpaceshipServices>().Create(dto);
-            var deleteKindergarten = await Svc<ISpaceshipServices>().Delete((Guid)addKindergarten.Id);
+            var addKindergarten = await Svc<IKindergartenServices>().Create(dto);
+            var deleteKindergarten = await Svc<IKindergartenServices>().Delete((Guid)addKindergarten.Id);
 
             // kontroll
             Assert.Equal(addKindergarten.Id, deleteKindergarten.Id);
@@ -217,26 +217,348 @@ namespace TARge25Shop.SpaceshipTest
             Assert.Equal(createdKindergarten1, spaceshipindb);
         }
 
-        /// <summary>
-        /// Returns a nulled object for testing purposes
-        /// </summary>
-        /// <returns></returns>
+        //------------------------------------------------------------------------------------------
+
+        //Nüüd algavad lisa 15 teste, eelmised olid koos tehtud testid, mis olid mõeldud Spaceshipile, aga lihstalt ümbernimetatud, et sobiks Kindergartenile.
+
+        [Fact]
+
+        public async Task ShouldNot_CreateKindergarten_WhenAnyStringElementContainsANumber()
+        {
+            //ülesseade
+            KindergartenDto dto = MockKindergartenData();
+
+            dto.TeacherName = "Wh33Zi3 M4C ChIzz13"; //My creativity when it comes to names is....questionable.
+
+            //tegevus
+            var result = await Svc<IKindergartenServices>().Create(dto);
+
+
+
+            //kontroll
+            Assert.Null(result);
+        }
+
+        [Fact]
+        public async Task ShouldNot_CreateKindergarten_WhenAnyOfTheElementsAreNull()
+        {
+            //ülesseade
+            KindergartenDto dto = MockKindergartenData();
+            dto.TeacherName = null;
+
+            //tegevus
+            var result = await Svc<IKindergartenServices>().Create(dto);
+
+            //kontroll
+            Assert.Null(result);
+
+
+        }
+
+        [Fact]
+        public async Task ShouldNot_UpdateKindergarten_WhenAnyOfTheElementsAreNull()
+        {
+            //ülesseade
+            KindergartenDto dto = MockKindergartenData();
+
+
+            //tegevus
+            var createKindergarten = await Svc<IKindergartenServices>().Create(dto);
+
+            KindergartenDto WhereIsMyStringElementDto = MockKindergartenDataWithAMissingStringElement(); // "Honey, where is my super suit?"
+            var result = await Svc<IKindergartenServices>().Update(WhereIsMyStringElementDto);
+
+            //kontroll
+            Assert.Null(result);
+        }
+
+        [Fact]
+        public async Task Should_UpdateKindergarten_WhenStringElementsAreTheSame()
+        {
+            //ülesseade
+            KindergartenDto dto = MockKindergartenData();
+
+
+            //tegevus
+            var createKindergarten = await Svc<IKindergartenServices>().Create(dto);
+
+            KindergartenDto EveryStringIsTheSameWhatIsGoingOnDto = MockKindergartenDataWithSameStringInEveryStringElement(); //Perfect for ppl like me who have terrible creativity when it comes to names.
+            var result = await Svc<IKindergartenServices>().Update(EveryStringIsTheSameWhatIsGoingOnDto);
+
+            //kontroll
+            Assert.Equal(EveryStringIsTheSameWhatIsGoingOnDto.GroupName, result.GroupName);
+            Assert.Equal(EveryStringIsTheSameWhatIsGoingOnDto.TeacherName, result.TeacherName);
+            Assert.Equal(EveryStringIsTheSameWhatIsGoingOnDto.KindergartenName, result.KindergartenName);
+        }
+
+        [Fact]
+        public async Task ShouldNot_UpdateKindergarten_WhenChildrenCountNegative()
+        {
+            //ülesseade
+            KindergartenDto dto = MockKindergartenData();
+
+
+            //tegevus
+            var createKindergarten = await Svc<IKindergartenServices>().Create(dto);
+
+            KindergartenDto NegativeChildrenCountDontMakeSenseHereDto = MockKindergartenDataWithNegativeChildrenCount();
+            var result = await Svc<IKindergartenServices>().Update(NegativeChildrenCountDontMakeSenseHereDto);
+
+            //kontroll
+            Assert.Null(result);
+        }
+
+
+        [Fact]
+        public async Task ShouldNot_UpdateKindergarten_WhenChildrenCountIsThreeOrLess()
+        {
+            //ülesseade
+            KindergartenDto dto = MockKindergartenData();
+
+            //tegevus
+            var createKindergarten = await Svc<IKindergartenServices>().Create(dto);
+            KindergartenDto updoot = new KindergartenDto()
+            {
+                Id = createKindergarten.Id,
+                GroupName = "WAZZZAAAAA",
+                ChildrenCount = 2,
+                TeacherName = "Scatman",
+                KindergartenName = "AYAYAYAYA"
+
+            };
+            var updoot_result = await Svc<IKindergartenServices>().Update(updoot);
+
+            //kontroll
+            Assert.Null(updoot_result);
+        }
+
+        [Fact]
+        public async Task ShouldNot_RemoveKindergarten_WhenIdIsEmpty()
+        {
+            //ülesseade
+            var guid = Guid.Empty;
+
+            //tegevus
+            var result = await Svc<IKindergartenServices>().Delete(guid);
+
+            //kontroll
+            Assert.Null(result);
+        }
+
+        [Fact]
+        public async Task ShouldNot_UpdateKindergarten_WhenAnyStringElementContainsANumber()
+        {
+
+            //ülesseade
+            KindergartenDto dto = MockKindergartenData();
+
+
+
+            //tegevus
+            var createKindergarten = await Svc<IKindergartenServices>().Create(dto);
+            KindergartenDto updoot = MockKindergartenData();
+            updoot.Id = createKindergarten.Id;
+            var updoot_result = await Svc<IKindergartenServices>().Update(updoot);
+
+
+            //kontroll
+            Assert.Null(updoot_result);
+        }
+        [Fact]
+        public async Task Should_CreateKindergarten_WhenStringElementsAreTheSame()
+        {
+            //ülesseade
+            KindergartenDto dto = MockKindergartenData();
+            dto.TeacherName = "Hello";
+            dto.GroupName = dto.TeacherName;
+            dto.KindergartenName = dto.TeacherName;
+
+
+            //tegevus
+            var result = await Svc<IKindergartenServices>().Create(dto);
+
+
+
+            //kontroll
+            Assert.Equal(dto.GroupName, result.GroupName);
+            Assert.Equal(dto.TeacherName, result.TeacherName);
+            Assert.Equal(dto.KindergartenName, result.KindergartenName);
+        }
+
+        [Fact]
+        public async Task Should_CreateKindergarten_WhenGroupNameIsAString()
+        {
+            //ülesseade
+            KindergartenDto dto = MockKindergartenData();
+            dto.GroupName = "This test is literally pointless, but at the same time im basically just throwing stuff at a wall when it comes to ideas.";
+
+            //tegevus
+            var result = await Svc<IKindergartenServices>().Create(dto);
+
+            //kontroll
+            Assert.NotNull(result);
+
+        }
+
+        [Fact]
+        public async Task Should_UpdateKindergarten_WhenGroupNameIsAString()
+        {
+            //ülesseade
+            KindergartenDto dto = MockKindergartenData();
+            dto.GroupName = "This test is literally pointless, but at the same time im basically just throwing stuff at a wall when it comes to ideas.";
+
+            //tegevus
+            var createKindergarten = await Svc<IKindergartenServices>().Create(dto);
+            KindergartenDto updoot = MockKindergartenData();
+            updoot.Id = dto.Id;
+            updoot.GroupName = "Same thing, but in update this time.";
+            var result = await Svc<IKindergartenServices>().Update(updoot);
+
+            //kontroll
+            Assert.NotNull(result);
+
+        }
+
+        [Fact]
+        public async Task Should_CreateKindergarten_WhenChildrenCountIsAnInterger()
+        {
+            //ülesseade
+            KindergartenDto dto = MockKindergartenData();
+            dto.ChildrenCount = 5;
+
+            //tegevus
+            var result = await Svc<IKindergartenServices>().Create(dto);
+
+
+
+
+            //kontroll
+            Assert.NotNull(result);
+
+        }
+
+        [Fact]
+        public async Task Should_UpdateKindergarten_WhenChildrenCountIsAnInterger()
+        {
+            //ülesseade
+            KindergartenDto dto = MockKindergartenData();
+
+
+            //tegevus
+            var createKindergarten = await Svc<IKindergartenServices>().Create(dto);
+            KindergartenDto updoot = MockKindergartenData();
+            updoot.Id = dto.Id;
+            updoot.ChildrenCount = 5;
+            var result = await Svc<IKindergartenServices>().Update(updoot);
+
+
+
+
+            //kontroll
+            Assert.NotNull(result);
+
+        }
+
+        [Fact]
+        public async Task ShouldNot_CreateKindergarten_WhenChildrenCountIsAtAMillionOrHigherRange()
+        {
+            //ülesseade
+            KindergartenDto dto = MockKindergartenData();
+            dto.ChildrenCount = 1000000;
+
+            //tegevus
+
+
+            var result = await Svc<IKindergartenServices>().Create(dto);
+
+
+
+
+            //kontroll
+            Assert.Null(result);
+
+        }
+
+        [Fact]
+        public async Task ShouldNot_UpdateKindergarten_WhenChildrenCountIsAtAMillionOrHigherRange()
+        {
+            //ülesseade
+            KindergartenDto dto = MockKindergartenData();
+
+
+            //tegevus
+
+
+            var createKindergarten = await Svc<IKindergartenServices>().Create(dto);
+            KindergartenDto updoot = MockKindergartenData();
+            updoot.Id = dto.Id;
+            dto.ChildrenCount = 1000000;
+            var result = await Svc<IKindergartenServices>().Update(updoot);
+
+
+
+
+            //kontroll
+            Assert.Null(result);
+
+        }
+
+        /* üleval testid, all abimeetodid */
+
+        private KindergartenDto MockKindergartenDataWithNegativeChildrenCount()
+        {
+            return new KindergartenDto
+            {
+                GroupName = "Something Something",
+                ChildrenCount = -4,
+                KindergartenName = "My Creativity With Names is Terrible",
+                TeacherName = "Lamar Davis", //God help us if that were the case.
+                CreatedAt = DateTime.MinValue,
+                UpdatedAt = DateTime.MinValue,
+            };
+        }
+
+        private KindergartenDto MockKindergartenDataWithSameStringInEveryStringElement()
+        {
+            return new KindergartenDto
+            {
+                GroupName = "Hello",
+                ChildrenCount = 5,
+                KindergartenName = "Hello",
+                TeacherName = "Hello",
+                CreatedAt = DateTime.MinValue,
+                UpdatedAt = DateTime.MinValue,
+            };
+        }
+
+        private KindergartenDto MockKindergartenDataWithAMissingStringElement()
+        {
+            return new KindergartenDto
+            {
+                GroupName = "Insert some name here",
+                ChildrenCount = 5,
+                KindergartenName = "Same as before",
+                TeacherName = null, 
+                CreatedAt = DateTime.MinValue,
+                UpdatedAt = DateTime.MinValue,
+            };
+        }
         private KindergartenDto MockKindergartenNullData()
         {
             return new KindergartenDto
             {
                 Id = null,
-                GroupName = "Infinity And Beyond",
-                ChildrenCount = 5,
-                KindergartenName = "Bullworth",
-                TeacherName = "Jacob Jacob",
+                GroupName = null,
+                ChildrenCount = 0,
+                KindergartenName = null,
+                TeacherName = null,
                 CreatedAt = DateTime.MinValue,
                 UpdatedAt = DateTime.MinValue,
             };
         }
 
 
-        /* üleval testid, all abimeetodid */
+        
 
         private KindergartenDto MockKindergartenData(bool isOneOrTwo = false)
         {
@@ -246,8 +568,8 @@ namespace TARge25Shop.SpaceshipTest
                 {
                     GroupName = "Something Something",
                     ChildrenCount = 5,
-                    KindergartenName = "My Creativity With Names Are Terrible",
-                    TeacherName = "Dunba Dunba Mahor",
+                    KindergartenName = "My Creativity With Names is Terrible",
+                    TeacherName = "Lamar Davis", //God help us if that were the case.
                     CreatedAt = DateTime.MinValue,
                     UpdatedAt = DateTime.MinValue,
                 };
@@ -259,35 +581,18 @@ namespace TARge25Shop.SpaceshipTest
                     GroupName = "Nothing Has Changed",
                     ChildrenCount = 5,
                     KindergartenName = "Still Cant Think Of Anything Good",
-                    TeacherName = "Marvin Marvin",
+                    TeacherName = "Samuel Leroy Jackson", // Perfect candidate for the job.
                     CreatedAt = DateTime.MinValue,
                     UpdatedAt = DateTime.MinValue,
                 };
             }
         }
 
-        //------------------------------------------------------------------------------------------
-
-        //Nüüd algavad lisa 15 teste, eelmised olid koos tehtud testid, mis olid mõeldud Spaceshipile.
-
-        [Fact]
         
-        public async Task ShouldNot_CreateKindergarten_WhenTeacherNameContainsANumber()
-        {
-            //ülesseade
-            KindergartenDto dto = MockKindergartenData();
 
-            //tegevus
-            var result = await Svc<IKindergartenServices>().Create(dto);
-
-            //kontroll
-            Assert.True(result.TeacherName.Any(char.IsDigit) == true);
-        }
+        
 
 
-        [Fact]
-
-        public async Task Should
 
 
 
