@@ -1,35 +1,25 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore.Migrations.Operations;
-using TARge25Shop.ApplicationServices.Services;
 using TARge25Shop.Core.ServiceInterface;
-using TARge25Shop.Data;
 using TARge25Shop.Models.ChuckNorris;
-using TARge25Shop.Models.RealEstate;
 
 namespace TARge25Shop.Controllers
 {
     public class ChuckNorrisController : Controller
     {
         private readonly IChuckNorrisServices _chuckNorrisServices;
-        private readonly TARge25ShopContext _context;
 
         public ChuckNorrisController
             (
-                IChuckNorrisServices chuckNorrisServices,
-                TARge25ShopContext context
-                
+                IChuckNorrisServices chuckNorrisServices
             )
         {
             _chuckNorrisServices = chuckNorrisServices;
-            _context = context;
-            
-        }
-        public IActionResult Index()
-        { 
-            return View();
         }
 
-        
+        public IActionResult Index()
+        {
+            return View();
+        }
 
         [HttpGet]
         public async Task<IActionResult> Joke()
@@ -47,7 +37,6 @@ namespace TARge25Shop.Controllers
             vm.Value = joke.Value;
 
             return View("Joke", vm);
-
         }
     }
 }

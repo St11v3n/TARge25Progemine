@@ -1,0 +1,62 @@
+﻿@model TARge25Shop.Models.Cocktails.CocktailsViewModel
+
+
+
+<div class="container">
+    <h2>Drink:</h2>
+    @*<h2>@Html.DisplayFor(model => model.Drinks)</h2>*@
+    <hr />
+    <dl class="row text-dark">
+        <div class="form-group row">
+            <label asp-for="Id" class="col-sm-2 col-form-label"></label>
+            @Html.DisplayFor(Model => Model.Id)
+        </div>
+        <div class="form-group row">
+            <label asp-for="Name" class="col-sm-2 col-form-label"></label>
+            @Html.DisplayFor(Model => Model.Name)
+        </div>
+        <div class="form-group row">
+            <label asp-for="Alternative" class="col-sm-2 col-form-label"></label>
+            @Html.DisplayFor(Model => Model.Alternative)
+        </div>
+        <div class="form-group row">
+            <label asp-for="Tags" class="col-sm-2 col-form-label"></label>
+            @Html.DisplayFor(Model => Model.Tags)
+        </div>
+        <div class="form-group row">
+            <label asp-for="Video" class="col-sm-2 col-form-label"></label>
+            @Html.DisplayFor(Model => Model.Video)
+        </div>
+        <div class="form-group row">
+            <label asp-for="Category" class="col-sm-2 col-form-label"></label>
+            @Html.DisplayFor(Model => Model.Category)
+        </div>
+        <div class="form-group row">
+            <label asp-for="IBA" class="col-sm-2 col-form-label"></label>
+            @Html.DisplayFor(Model => Model.IBA)
+        </div>
+        <div class="form-group row">
+            <label asp-for="Alcoholic" class="col-sm-2 col-form-label"></label>
+            @Html.DisplayFor(Model => Model.Alcoholic)
+        </div>
+        <div class="form-group row">
+            <label asp-for="Glass" class="col-sm-2 col-form-label"></label>
+            @Html.DisplayFor(Model => Model.Glass)
+        </div>
+        <div class="form-group row">
+            <label asp-for="Instructions" class="col-sm-2 col-form-label"></label>
+            @Html.DisplayFor(Model => Model.Instructions)
+        </div>
+
+
+
+    </dl>
+    <hr />
+    <div>
+        
+        <a asp-action="Index" asp-controller="cocktail" class="btn btn-success">Back</a>
+    </div>
+</div>
+
+
+    

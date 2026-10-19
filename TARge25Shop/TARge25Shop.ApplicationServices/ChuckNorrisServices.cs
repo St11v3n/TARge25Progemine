@@ -1,12 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Runtime.Serialization;
-using System.Text;
-using System.Text.Json;
+﻿using System.Text.Json;
 using TARge25Shop.Core.Dto;
 using TARge25Shop.Core.ServiceInterface;
 
-namespace TARge25Shop.ApplicationServices
+namespace TARge25Shop.ApplicationServices.Services
 {
     public class ChuckNorrisServices : IChuckNorrisServices
     {
@@ -19,6 +15,7 @@ namespace TARge25Shop.ApplicationServices
         {
             _httpClient = httpClient;
         }
+
         public async Task<ChuckNorrisRootDto> ChuckNorrisResultHttpClient()
         {
             //var response on vaja ühendada https://api.chucknorris.io/jokes/random
@@ -33,10 +30,11 @@ namespace TARge25Shop.ApplicationServices
                 //olek true laseb ignoreerida täpset tähe suurustundlikust JSON muutujate nimes
                 PropertyNameCaseInsensitive = true
             };
-            //muutuja var joke tuleb deserialiseerida 
-            
+
+            //muutuja var joke tuleb deserialiseerida
             var joke = JsonSerializer.Deserialize<ChuckNorrisRootDto>(json, options);
-            //null andestav operaator(!) on turvaline viis kuna API alati tagastab JSON 
+
+            //null andestav operaator(!) on turvaline viis kuna API alati tagastab JSON
             return joke!;
         }
     }
