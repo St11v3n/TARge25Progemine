@@ -8,8 +8,13 @@ namespace TARge25Shop.Core.Dto
     public class CocktailRootDto
     {
         [JsonPropertyName("Drinks")]
-        public List<string> Drinks { get; set; }
+        public List<Drinks> Drinks { get; set; }
 
+        
+    }
+
+    public class Drinks
+    {
         [JsonPropertyName("idDrink")]
         public string Id { get; set; }
 

@@ -38,5 +38,7 @@ namespace TARge25Shop.ApplicationServices.Services
             //null andestav operaator(!) on turvaline viis kuna API alati tagastab JSON 
             return drink!;
         }
+
+        
     }
 }
