@@ -83,6 +83,11 @@ namespace TARge25Shop.ApplicationServices.Services
                 return null;
             }
 
+            if (dto.ChildrenCount < 0 )
+            {
+                return null;
+            }
+
             if (dto.Files != null)
             {
                 _fileServices.UploadFilesToDatabase(dto, kinderGarten);
