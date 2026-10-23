@@ -8,35 +8,35 @@
     <dl class="row">
         <div class="form-group row">
             <label asp-for="Id" class="col-sm-2 col-form-label"></label>
-            @Html.DisplayFor(model => model.Id)
+            <span id="Details_KindergartenId">@Html.DisplayFor(model => model.Id)</span>
         </div>
     </dl>
 
     <dl class="row">
         <div class="form-group row">
             <label asp-for="GroupName" class="col-sm-2 col-form-label"></label>
-            @Html.DisplayFor(model => model.GroupName)
+            <span id="Details_KindergartenGroupName">@Html.DisplayFor(model => model.GroupName)</span>
         </div>
     </dl>
 
     <dl class="row">
         <div class="form-group row">
             <label asp-for="ChildrenCount" class="col-sm-2 col-form-label"></label>
-            @Html.DisplayFor(model => model.ChildrenCount)
+            <span id="Details_KindergartenChildrenCount">@Html.DisplayFor(model => model.ChildrenCount)</span>
         </div>
     </dl>
 
     <dl class="row">
         <div class="form-group row">
             <label asp-for="KindergartenName" class="col-sm-2 col-form-label"></label>
-            @Html.DisplayFor(model => model.KindergartenName)
+            <span id="Details_KindergartenName">@Html.DisplayFor(model => model.KindergartenName)</span>
         </div>
     </dl>
 
     <dl class="row">
         <div class="form-group row">
             <label asp-for="TeacherName" class="col-sm-2 col-form-label"></label>
-            @Html.DisplayFor(model => model.TeacherName)
+            <span id="Details_KindergartenTeacherName">@Html.DisplayFor(model => model.TeacherName)</span>
         </div>
     </dl>
 
@@ -61,6 +61,6 @@
         }
     </dl>
 
-    <a asp-action="Index" asp-controller="kindergarten" class="btn btn-success">Back</a>
+    <a asp-action="Index" asp-controller="kindergarten" id="Details_Back" class="btn btn-success">Back</a>
 
 </div>
