@@ -379,6 +379,28 @@ namespace TARge25Shop.SpaceshipTest
             Assert.Null(updoot_result);
         }
 
+        [Fact]
+        //Kontrollime, et kui string elementidel on kõik sama tulemus, siis tohiks tekkitada lasteaeda.
+        public async Task Should_CreateKindergarten_WhenStringElementsAreTheSame()
+        {
+            //ülesseade
+            KindergartenDto dto = MockKindergartenData();
+            dto.TeacherName = "Hello";
+            dto.GroupName = dto.TeacherName;
+            dto.KindergartenName = dto.TeacherName;
+
+
+            //tegevus
+            var result = await Svc<IKindergartenServices>().Create(dto);
+
+
+
+            //kontroll
+            Assert.Equal(dto.GroupName, result.GroupName);
+            Assert.Equal(dto.TeacherName, result.TeacherName);
+            Assert.Equal(dto.KindergartenName, result.KindergartenName);
+        }
+
 
 
         //Siia alla tulevad abimeetodid.
