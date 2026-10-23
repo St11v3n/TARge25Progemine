@@ -110,6 +110,11 @@ namespace TARge25Shop.ApplicationServices.Services
 
         public async Task<Kindergarten> Delete(Guid id)
         {
+            if (id == Guid.Empty)
+            {
+                return null;
+            }
+
             var kindergarten = await _context.Kindergartens
                 .FirstOrDefaultAsync(x => x.Id == id);
 
