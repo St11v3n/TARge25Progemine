@@ -37,7 +37,7 @@ namespace TARge25Shop.ApplicationServices.Services
             kinderGarten.CreatedAt = DateTime.Now;
             kinderGarten.UpdatedAt = DateTime.Now;
 
-            if (dto.ChildrenCount < 0)
+            if (dto.ChildrenCount <= 3)
             {
                 dto.ChildrenCount = 6;
             }
