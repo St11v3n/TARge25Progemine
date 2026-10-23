@@ -89,4 +89,34 @@ namespace TARge25Shop.SpaceshipTest
             // kontroll
             Assert.Equal(addKindergarten.Id, deleteKindergarten.Id);
         }
+
+        //Siia alla tulevad abimeetodid.
+        private KindergartenDto MockKindergartenData(bool isOneOrTwo = false)
+        {
+            if (isOneOrTwo == false)
+            {
+                return new KindergartenDto
+                {
+                    GroupName = "Something Something",
+                    ChildrenCount = 5,
+                    KindergartenName = "My Creativity With Names is Terrible",
+                    TeacherName = "Lamar Davis", //God help us if that were the case.
+                    CreatedAt = DateTime.MinValue,
+                    UpdatedAt = DateTime.MinValue,
+                };
+            }
+            else
+            {
+                return new KindergartenDto
+                {
+                    GroupName = "Nothing Has Changed",
+                    ChildrenCount = 5,
+                    KindergartenName = "Still Cant Think Of Anything Good",
+                    TeacherName = "Samuel Leroy Jackson", // Perfect candidate for the job.
+                    CreatedAt = DateTime.MinValue,
+                    UpdatedAt = DateTime.MinValue,
+                };
+            }
+
+        }
 }
