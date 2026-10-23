@@ -479,6 +479,27 @@ namespace TARge25Shop.SpaceshipTest
 
         }
 
+        [Fact]
+        //Kontrollime, et kui laste loetlus on million või suurem, siis ei tohiks tekkida lasteaed.
+        public async Task ShouldNot_CreateKindergarten_WhenChildrenCountIsAtAMillionOrHigherRange()
+        {
+            //ülesseade
+            KindergartenDto dto = MockKindergartenData();
+            dto.ChildrenCount = 1000000;
+
+            //tegevus
+
+
+            var result = await Svc<IKindergartenServices>().Create(dto);
+
+
+
+
+            //kontroll
+            Assert.Null(result);
+
+        }
+
 
 
         //Siia alla tulevad abimeetodid.
