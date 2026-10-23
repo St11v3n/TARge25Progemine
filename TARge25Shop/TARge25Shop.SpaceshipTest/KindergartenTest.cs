@@ -298,6 +298,26 @@ namespace TARge25Shop.SpaceshipTest
             Assert.Equal(EveryStringIsTheSameWhatIsGoingOnDto.KindergartenName, result.KindergartenName);
         }
 
+        [Fact]
+        //Kontrollime, et kui laste loetlus on negatiivne, siis ei tohiks lasteaed uuendada saada.
+        public async Task ShouldNot_UpdateKindergarten_WhenChildrenCountNegative()
+        {
+            //ülesseade
+            KindergartenDto dto = MockKindergartenData();
+
+
+            //tegevus
+            var createKindergarten = await Svc<IKindergartenServices>().Create(dto);
+
+            KindergartenDto NegativeChildrenCountDontMakeSenseHereDto = MockKindergartenDataWithNegativeChildrenCount();
+            var result = await Svc<IKindergartenServices>().Update(NegativeChildrenCountDontMakeSenseHereDto);
+
+            //kontroll
+            Assert.Null(result);
+        }
+
+
+
 
 
 
