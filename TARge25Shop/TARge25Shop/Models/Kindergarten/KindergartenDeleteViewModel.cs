@@ -12,8 +12,6 @@ namespace TARge25Shop.Models.Kindergarten
 
         public List<IFormFile> Files { get; set; }
         
-        
-
 
         public List<KindergartenImageViewModel> Image { get; set; }
            = new List<KindergartenImageViewModel>();
