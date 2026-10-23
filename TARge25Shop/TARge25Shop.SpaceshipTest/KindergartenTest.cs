@@ -40,5 +40,25 @@ namespace TARge25Shop.SpaceshipTest
             // kontroll
             Assert.NotNull(result);
         }
+
+        // Selles testis kontrollitakse et (2) Kindergarteni päring andmebaasist
+        // (1) ei tohiks tagastada objekti (3) kui ID-d ei ole samad:
+        //
+        //                  1           2               3
+        //                  \/          \/              \/
+        [Fact]
+        public async Task ShouldNot_GetKindergartenByID_WhenIDNotEqual()
+        {
+            // ülesseade
+            Guid wrongGuid = Guid.NewGuid();
+            Guid goodGuid = Guid.Parse("ecbc059a-0bca-4df2-aae9-a3211e69185a");
+
+            // tegevus
+            await Svc<IKindergartenServices>().DetailAsync(goodGuid);
+
+            // kontroll
+            Assert.NotEqual(wrongGuid, goodGuid);
+        }
+
     }
 }
