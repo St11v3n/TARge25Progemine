@@ -500,6 +500,31 @@ namespace TARge25Shop.SpaceshipTest
 
         }
 
+        [Fact]
+        //Kontrollime, et kui laste loetlus on million või suurem, siis ei tohiks uuendada lasteaeda.
+        public async Task ShouldNot_UpdateKindergarten_WhenChildrenCountIsAtAMillionOrHigherRange()
+        {
+            //ülesseade
+            KindergartenDto dto = MockKindergartenData();
+
+
+            //tegevus
+
+
+            var createKindergarten = await Svc<IKindergartenServices>().Create(dto);
+            KindergartenDto updoot = MockKindergartenData();
+            updoot.Id = createKindergarten.Id;
+            dto.ChildrenCount = 1000000;
+            var result = await Svc<IKindergartenServices>().Update(updoot);
+
+
+
+
+            //kontroll
+            Assert.Null(result);
+
+        }
+
 
 
         //Siia alla tulevad abimeetodid.
