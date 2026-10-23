@@ -83,7 +83,7 @@ namespace TARge25Shop.ApplicationServices.Services
                 return null;
             }
 
-            if (dto.ChildrenCount < 0 )
+            if (dto.ChildrenCount <= 3 )
             {
                 return null;
             }
