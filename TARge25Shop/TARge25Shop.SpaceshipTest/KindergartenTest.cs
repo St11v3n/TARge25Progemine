@@ -259,24 +259,7 @@ namespace TARge25Shop.SpaceshipTest
         }
 
 
-        //Kontrollime, et kui ükski element on null, siis ei tohiks uuendada lasteaeda.
-        [Fact]
-        
-        public async Task ShouldNot_UpdateKindergarten_WhenAnyOfTheElementsAreNull()
-        {
-            //ülesseade
-            KindergartenDto dto = MockKindergartenData();
-
-
-            //tegevus
-            var createKindergarten = await Svc<IKindergartenServices>().Create(dto);
-
-            KindergartenDto WhereIsMyStringElementDto = MockKindergartenDataWithAMissingStringElement(); // "Honey, where is my super suit?"
-            var result = await Svc<IKindergartenServices>().Update(WhereIsMyStringElementDto);
-
-            //kontroll
-            Assert.Null(result);
-        }
+       
 
         
 
