@@ -240,6 +240,23 @@ namespace TARge25Shop.SpaceshipTest
             Assert.Null(result);
         }
 
+        [Fact]
+        //Kontrollime, et kui ükski element on null, siis ei tohiks tekkida lasteaed.
+        public async Task ShouldNot_CreateKindergarten_WhenAnyOfTheElementsAreNull()
+        {
+            //ülesseade
+            KindergartenDto dto = MockKindergartenData();
+            dto.TeacherName = null;
+
+            //tegevus
+            var result = await Svc<IKindergartenServices>().Create(dto);
+
+            //kontroll
+            Assert.Null(result);
+
+
+        }
+
 
 
         //Siia alla tulevad abimeetodid.
