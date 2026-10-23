@@ -216,6 +216,29 @@ namespace TARge25Shop.SpaceshipTest
             Assert.NotEqual(deleteResult.Id, createdKindergarten1.Id);
             Assert.Equal(createdKindergarten1, kindergartenindb);
         }
+        //------------------------------------------------------------------------------------------------------------------------
+
+        //Nüüd algavad lisa 15 testid, mida pidi ise mõtlema.
+
+
+        //Kontrollime, et kui string elemendis on olemas number, siis ei tohiks lasteaed tekkida.
+        [Fact]
+        
+        public async Task ShouldNot_CreateKindergarten_WhenAnyStringElementContainsANumber()
+        {
+            //ülesseade
+            KindergartenDto dto = MockKindergartenData();
+
+            dto.TeacherName = "Wh33Zi3 M4C Ch33zz13"; //My creativity when it comes to names is....questionable.
+
+            //tegevus
+            var result = await Svc<IKindergartenServices>().Create(dto);
+
+
+
+            //kontroll
+            Assert.Null(result);
+        }
 
 
 
