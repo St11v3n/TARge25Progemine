@@ -139,6 +139,23 @@ namespace TARge25Shop.SpaceshipTest
             Assert.NotEqual(dto.UpdatedAt, domain.CreatedAt);
         }
 
+        //Test, mis kontrollib kui ei ole mingit andmed mis on uuendatud, siis ei tohiks uuendada lasteaia id kaudu.
+        [Fact]
+        public async Task ShouldNot_UpdateKindergartenByID_WhenNoDataIsUpdated()
+        {
+            //ülesseade
+            KindergartenDto dto = MockKindergartenData();
+            var createdKindergarten = await Svc<IKindergartenServices>().Create(dto);
+
+            //tegevus
+            KindergartenDto nullDto = MockKindergartenNullData();
+            var result = await Svc<IKindergartenServices>().Update(nullDto);
+
+            //kontroll
+            Assert.NotEqual(createdKindergarten.Id, result.Id);
+        }
+
+
 
         //Siia alla tulevad abimeetodid.
         private KindergartenDto MockKindergartenData(bool isOneOrTwo = false)
