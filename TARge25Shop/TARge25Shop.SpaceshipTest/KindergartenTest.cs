@@ -417,6 +417,26 @@ namespace TARge25Shop.SpaceshipTest
 
         }
 
+        [Fact]
+        //Kontrollime, et kui gruppinimi on string, siis peaks lasteaed uuendama.
+        public async Task Should_UpdateKindergarten_WhenGroupNameIsAString()
+        {
+            //ülesseade
+            KindergartenDto dto = MockKindergartenData();
+            dto.GroupName = "This test is literally pointless, but at the same time im basically just throwing stuff at a wall when it comes to ideas.";
+
+            //tegevus
+            var createKindergarten = await Svc<IKindergartenServices>().Create(dto);
+            KindergartenDto updoot = MockKindergartenData();
+            updoot.Id = dto.Id;
+            updoot.GroupName = "Same thing, but in update this time.";
+            var result = await Svc<IKindergartenServices>().Update(updoot);
+
+            //kontroll
+            Assert.NotNull(result);
+
+        }
+
 
 
         //Siia alla tulevad abimeetodid.
