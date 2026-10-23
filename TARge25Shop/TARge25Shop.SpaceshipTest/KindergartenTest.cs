@@ -187,5 +187,19 @@ namespace TARge25Shop.SpaceshipTest
 
         }
 
+        private KindergartenDto MockKindergartenNullData()
+        {
+            return new KindergartenDto
+            {
+                Id = null,
+                GroupName = null,
+                ChildrenCount = 0,
+                KindergartenName = null,
+                TeacherName = null,
+                CreatedAt = DateTime.MinValue,
+                UpdatedAt = DateTime.MinValue,
+            };
+        }
+
     }
 }
