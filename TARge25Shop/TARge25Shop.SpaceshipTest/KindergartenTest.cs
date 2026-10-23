@@ -90,6 +90,24 @@ namespace TARge25Shop.SpaceshipTest
             Assert.Equal(addKindergarten.Id, deleteKindergarten.Id);
         }
 
+        //Selles testis kontrollitakse, et kui lasteaia ei valitud kustutamiseks, siis ei tohiks kustutada lasteaia id kaudu.
+        [Fact]
+        public async Task ShouldNot_DeleteKindergartenByID_WhenDidNotDeleteKindergarten()
+        {
+            //ülesseade
+            var dto = MockKindergartenData();
+
+            //tegevus
+            var kinderGarten1 = await Svc<IKindergartenServices>().Create(dto);
+            var kinderGarten2 = await Svc<IKindergartenServices>().Create(dto);
+
+            var result = await Svc<IKindergartenServices>().Delete((Guid)kinderGarten2.Id);
+
+            //kontroll
+            Assert.NotEqual(kinderGarten1.Id, result.Id);
+        }
+
+
         //Siia alla tulevad abimeetodid.
         private KindergartenDto MockKindergartenData(bool isOneOrTwo = false)
         {
