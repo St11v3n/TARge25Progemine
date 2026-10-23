@@ -51,13 +51,28 @@ namespace TARge25Shop.SpaceshipTest
         {
             // ülesseade
             Guid wrongGuid = Guid.NewGuid();
-            Guid goodGuid = Guid.Parse("ecbc059a-0bca-4df2-aae9-a3211e69185a");
+            Guid goodGuid = Guid.Parse("F6F51483-E28A-4211-BC99-2305141B4CB9");
 
             // tegevus
             await Svc<IKindergartenServices>().DetailAsync(goodGuid);
 
             // kontroll
             Assert.NotEqual(wrongGuid, goodGuid);
+        }
+
+        // Selles testis kontrollitakse et lasteaia päringul andmebaasist peaks tagastama objekti siis kui ID on sama
+        [Fact]
+        public async Task Should_GetKindergartenByID_WhenGuidIsEqual()
+        {
+            // ülessezade
+            Guid databaseGuid = Guid.Parse("F6F51483-E28A-4211-BC99-2305141B4CB9");
+            Guid seekGuid = Guid.Parse("F6F51483-E28A-4211-BC99-2305141B4CB9");
+
+            // tegevus
+            await Svc<IKindergartenServices>().DetailAsync(seekGuid);
+
+            // kontroll
+            Assert.Equal(databaseGuid, seekGuid);
         }
 
     }
