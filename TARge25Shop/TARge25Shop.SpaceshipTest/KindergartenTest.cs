@@ -107,6 +107,38 @@ namespace TARge25Shop.SpaceshipTest
             Assert.NotEqual(kinderGarten1.Id, result.Id);
         }
 
+        // test mis kontrollib, et kui uuendatakse andmeid, siis peaks lasteaed uuendatud saada id kaudu.
+        [Fact]
+        public async Task Should_UpdateKindergartenByID_WhenUpdatingData()
+        {
+            //ülesseade
+            var guid = new Guid("F6F51483-E28A-4211-BC99-2305141B4CB9");
+
+            KindergartenDto dto = MockKindergartenData();
+
+            KindergartenDto domain = new();
+
+            domain.Id = Guid.Parse("F6F51483-E28A-4211-BC99-2305141B4CB9");
+            domain.KindergartenName = "I DonT KnOW WhAT To DO";
+            domain.GroupName = "WAZZAA";
+            domain.TeacherName = "Mike Bozawski";
+            domain.ChildrenCount = 10;
+            domain.CreatedAt = dto.CreatedAt;//  <-- ei tohi muutuda Update korral, tuleb võtta olemasolevast objektist.
+            domain.UpdatedAt = DateTime.UtcNow;//  <-- PEAB muutuma Update korral
+
+            //tegevus
+            await Svc<IKindergartenServices>().Update(dto);
+
+            //kontroll
+            Assert.Equal(domain.Id, guid);
+            Assert.NotEqual(dto.KindergartenName, domain.KindergartenName);
+            Assert.NotEqual(dto.GroupName, domain.GroupName);
+            Assert.DoesNotMatch(dto.TeacherName, domain.TeacherName);
+            Assert.DoesNotMatch(dto.ChildrenCount.ToString(), domain.ChildrenCount.ToString());
+            Assert.Equal(dto.CreatedAt, domain.CreatedAt);
+            Assert.NotEqual(dto.UpdatedAt, domain.CreatedAt);
+        }
+
 
         //Siia alla tulevad abimeetodid.
         private KindergartenDto MockKindergartenData(bool isOneOrTwo = false)
