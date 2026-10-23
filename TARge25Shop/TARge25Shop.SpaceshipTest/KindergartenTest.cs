@@ -155,6 +155,21 @@ namespace TARge25Shop.SpaceshipTest
             Assert.NotEqual(createdKindergarten.Id, result.Id);
         }
 
+        //Test, mis kontrollib, et kui laste loetlus on negatiivne, siis ei tohiks koostada lasteaeda.
+        [Fact]
+        public async Task ShouldNot_CreateKindergartenWithNegativeChildrenCount_WhenChildrenCountNegative()
+        {
+            //ülesseade
+            KindergartenDto dto = MockKindergartenData(true);
+            dto.ChildrenCount -= (dto.ChildrenCount * 2);
+
+            //tegevus
+            var result = await Svc<IKindergartenServices>().Create(dto);
+
+            //kontroll
+            Assert.True(result.ChildrenCount > 0);
+        }
+
 
 
         //Siia alla tulevad abimeetodid.
