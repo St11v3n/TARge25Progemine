@@ -278,6 +278,27 @@ namespace TARge25Shop.SpaceshipTest
             Assert.Null(result);
         }
 
+        [Fact]
+        //Kontrollime, et kui string elemendid on kõik sama tulemusega, siis peaks lasteaed ikkagi uuendada saada.
+        public async Task Should_UpdateKindergarten_WhenStringElementsAreTheSame()
+        {
+            //ülesseade
+            KindergartenDto dto = MockKindergartenData();
+
+
+            //tegevus
+            var createKindergarten = await Svc<IKindergartenServices>().Create(dto);
+
+            KindergartenDto EveryStringIsTheSameWhatIsGoingOnDto = MockKindergartenDataWithSameStringInEveryStringElement(); //Perfect for ppl like me who have terrible creativity when it comes to names.
+            var result = await Svc<IKindergartenServices>().Update(EveryStringIsTheSameWhatIsGoingOnDto);
+
+            //kontroll
+            Assert.Equal(EveryStringIsTheSameWhatIsGoingOnDto.GroupName, result.GroupName);
+            Assert.Equal(EveryStringIsTheSameWhatIsGoingOnDto.TeacherName, result.TeacherName);
+            Assert.Equal(EveryStringIsTheSameWhatIsGoingOnDto.KindergartenName, result.KindergartenName);
+        }
+
+
 
 
         //Siia alla tulevad abimeetodid.
