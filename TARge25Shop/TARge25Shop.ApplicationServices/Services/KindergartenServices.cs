@@ -37,6 +37,11 @@ namespace TARge25Shop.ApplicationServices.Services
             kinderGarten.CreatedAt = DateTime.Now;
             kinderGarten.UpdatedAt = DateTime.Now;
 
+            if (dto.TeacherName.Any(char.IsDigit) || dto.GroupName.Any(char.IsDigit) || dto.KindergartenName.Any(char.IsDigit))
+            {
+                return null;
+            }
+
             if (dto.ChildrenCount <= 3)
             {
                 dto.ChildrenCount = 6;
