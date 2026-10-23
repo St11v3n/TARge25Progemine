@@ -358,6 +358,27 @@ namespace TARge25Shop.SpaceshipTest
             Assert.Null(updoot_result);
         }
 
+        [Fact]
+        //Kontrollime, kui ükski string elemendis on olemas number, siis ei tohiks uuendada lasteaeda.
+        public async Task ShouldNot_UpdateKindergarten_WhenAnyStringElementContainsANumber()
+        {
+
+            //ülesseade
+            KindergartenDto dto = MockKindergartenData();
+
+
+
+            //tegevus
+            var createKindergarten = await Svc<IKindergartenServices>().Create(dto);
+            KindergartenDto updoot = MockKindergartenData();
+            updoot.Id = createKindergarten.Id;
+            var updoot_result = await Svc<IKindergartenServices>().Update(updoot);
+
+
+            //kontroll
+            Assert.Null(updoot_result);
+        }
+
 
 
         //Siia alla tulevad abimeetodid.
