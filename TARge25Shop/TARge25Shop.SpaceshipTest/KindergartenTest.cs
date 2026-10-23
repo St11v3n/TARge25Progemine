@@ -201,6 +201,21 @@ namespace TARge25Shop.SpaceshipTest
             Assert.Equal(createdKindergarten.Id, deletedKindergarten.Id);
             Assert.Null(result);
         }
+        //Test, mis kontrollib et kui lasteaia id on erinev, siis ei peaks lasteaeda kustutada andmebaasist.
+        [Fact]
+        public async Task ShouldNot_RemoveKindergartenFromDatabase_WhenKindergartenIdIsDifferent()
+        {
+            var dto = MockKindergartenData();
+            var createdKindergarten1 = await Svc<IKindergartenServices>().Create(dto);
+            var createdKindergarten2 = await Svc<IKindergartenServices>().Create(dto);
+            var deleteResult = await Svc<IKindergartenServices>().Delete((Guid)createdKindergarten2.Id);
+            var kindergartenindb = await Svc<IKindergartenServices>().DetailAsync((Guid)createdKindergarten1.Id);
+
+            //kontroll
+            Assert.NotNull(kindergartenindb);
+            Assert.NotEqual(deleteResult.Id, createdKindergarten1.Id);
+            Assert.Equal(createdKindergarten1, kindergartenindb);
+        }
 
 
 
