@@ -340,6 +340,21 @@ namespace TARge25Shop.SpaceshipTest
             Assert.Null(updoot_result);
         }
 
+        [Fact]
+        //Kontrollime, et kui ID on tühi, siis ei tohi kustutada lasteaeda.
+        public async Task ShouldNot_RemoveKindergarten_WhenIdIsEmpty()
+        {
+            //ülesseade
+            var guid = Guid.Empty;
+
+            //tegevus
+            var result = await Svc<IKindergartenServices>().Delete(guid);
+
+            //kontroll
+            Assert.Null(result);
+        }
+
+
 
 
 
