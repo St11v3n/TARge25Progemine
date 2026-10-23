@@ -36,6 +36,12 @@ namespace TARge25Shop.ApplicationServices.Services
                 return null;
             }
 
+            if (dto.GroupName is not string )
+
+            {
+                return null;
+            }
+
             if (dto.ChildrenCount <= 3)
             {
                 dto.ChildrenCount = 6;
