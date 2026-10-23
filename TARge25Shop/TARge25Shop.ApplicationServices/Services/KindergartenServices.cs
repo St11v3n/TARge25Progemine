@@ -101,7 +101,13 @@ namespace TARge25Shop.ApplicationServices.Services
                 return null;
             }
 
-            Kindergarten kinderGarten = new();
+            if (dto.ChildrenCount is string)
+            {
+                return null;
+            }
+
+
+                Kindergarten kinderGarten = new();
 
             kinderGarten.Id = dto.Id;
             kinderGarten.GroupName = dto.GroupName;
