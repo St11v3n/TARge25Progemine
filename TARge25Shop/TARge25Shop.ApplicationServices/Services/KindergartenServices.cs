@@ -26,6 +26,20 @@ namespace TARge25Shop.ApplicationServices.Services
 
         public async Task<Kindergarten> Create(KindergartenDto dto)
         {
+            if (dto.GroupName == null || dto.ChildrenCount == 0 || dto.KindergartenName == null || dto.TeacherName == null)
+            {
+                return null;
+            }
+
+            if (dto.TeacherName.Any(char.IsDigit) || dto.GroupName.Any(char.IsDigit) || dto.KindergartenName.Any(char.IsDigit))
+            {
+                return null;
+            }
+
+            if (dto.ChildrenCount <= 3)
+            {
+                dto.ChildrenCount = 6;
+            }
 
             Kindergarten kinderGarten = new();
 
