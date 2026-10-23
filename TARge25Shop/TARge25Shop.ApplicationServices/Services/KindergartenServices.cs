@@ -106,6 +106,11 @@ namespace TARge25Shop.ApplicationServices.Services
                 return null;
             }
 
+            if (dto.ChildrenCount >= 1000000)
+            {
+                return null;
+            }
+
             if (dto.ChildrenCount is string)
             {
                 return null;
