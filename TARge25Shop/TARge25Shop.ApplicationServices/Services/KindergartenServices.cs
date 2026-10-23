@@ -37,6 +37,11 @@ namespace TARge25Shop.ApplicationServices.Services
             kinderGarten.CreatedAt = DateTime.Now;
             kinderGarten.UpdatedAt = DateTime.Now;
 
+            if (dto.ChildrenCount < 0)
+            {
+                dto.ChildrenCount = 6;
+            }
+
             if (dto.Files != null)
             {
                 _fileServices.UploadFilesToDatabase(dto, kinderGarten);
