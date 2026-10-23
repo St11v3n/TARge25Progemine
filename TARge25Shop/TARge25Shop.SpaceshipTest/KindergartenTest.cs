@@ -428,7 +428,7 @@ namespace TARge25Shop.SpaceshipTest
             //tegevus
             var createKindergarten = await Svc<IKindergartenServices>().Create(dto);
             KindergartenDto updoot = MockKindergartenData();
-            updoot.Id = dto.Id;
+            updoot.Id = createKindergarten.Id;
             updoot.GroupName = "Same thing, but in update this time.";
             var result = await Svc<IKindergartenServices>().Update(updoot);
 
