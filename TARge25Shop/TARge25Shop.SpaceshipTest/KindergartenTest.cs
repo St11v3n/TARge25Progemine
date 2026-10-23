@@ -391,5 +391,18 @@ namespace TARge25Shop.SpaceshipTest
             };
         }
 
+        private KindergartenDto MockKindergartenDataWithNegativeChildrenCount()
+        {
+            return new KindergartenDto
+            {
+                GroupName = "Something Something",
+                ChildrenCount = -4,
+                KindergartenName = "My Creativity With Names is Terrible",
+                TeacherName = "Lamar Davis", //God help us if that were the case.
+                CreatedAt = DateTime.MinValue,
+                UpdatedAt = DateTime.MinValue,
+            };
+        }
+
     }
 }
