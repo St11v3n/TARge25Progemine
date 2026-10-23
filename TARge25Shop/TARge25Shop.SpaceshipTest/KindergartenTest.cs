@@ -75,5 +75,18 @@ namespace TARge25Shop.SpaceshipTest
             Assert.Equal(databaseGuid, seekGuid);
         }
 
-    }
+        // Selles testis kontrollitakse et lasteaia kustutamisel andmebaasist peaks kustuma objekt kui tagastatav väärtus on sama
+        [Fact]
+        public async Task Should_KindergartenDeletedByID_WhenReturnedResultIsEqual()
+        {
+            // ülesseade
+            KindergartenDto dto = MockKindergartenData();
+
+            // tegevus
+            var addKindergarten = await Svc<IKindergartenServices>().Create(dto);
+            var deleteKindergarten = await Svc<IKindergartenServices>().Delete((Guid)addKindergarten.Id);
+
+            // kontroll
+            Assert.Equal(addKindergarten.Id, deleteKindergarten.Id);
+        }
 }
