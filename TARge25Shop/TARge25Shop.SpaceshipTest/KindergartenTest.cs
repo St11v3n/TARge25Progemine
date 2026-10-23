@@ -259,10 +259,6 @@ namespace TARge25Shop.SpaceshipTest
         }
 
 
-       
-
-        
-
         [Fact]
         //Kontrollime, et kui ID on tühi, siis ei tohi kustutada lasteaeda.
         public async Task ShouldNot_RemoveKindergarten_WhenIdIsEmpty()
@@ -277,7 +273,27 @@ namespace TARge25Shop.SpaceshipTest
             Assert.Null(result);
         }
 
-        
+
+        [Fact]
+        //Kontrollime, et kui ükski element on null, siis ei tohiks uuendada lasteaeda.
+        public async Task ShouldNot_UpdateKindergarten_WhenAnyOfTheElementsAreNull()
+        {
+            //ülesseade
+            KindergartenDto dto = MockKindergartenData();
+
+
+            //tegevus
+            var createKindergarten = await Svc<IKindergartenServices>().Create(dto);
+
+            KindergartenDto WhereIsMyStringElementDto = MockKindergartenDataWithAMissingStringElement();
+            WhereIsMyStringElementDto.Id = createKindergarten.Id;
+            var result = await Svc<IKindergartenServices>().Update(WhereIsMyStringElementDto);
+
+            //kontroll
+            Assert.Null(result);
+        }
+
+
 
 
 
