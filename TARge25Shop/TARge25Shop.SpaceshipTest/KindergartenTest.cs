@@ -401,6 +401,22 @@ namespace TARge25Shop.SpaceshipTest
             Assert.Equal(dto.KindergartenName, result.KindergartenName);
         }
 
+        [Fact]
+        //Kontrollime, et kui gruppinimi on string, siis peaks lasteaed tekkima.
+        public async Task Should_CreateKindergarten_WhenGroupNameIsAString()
+        {
+            //ülesseade
+            KindergartenDto dto = MockKindergartenData();
+            dto.GroupName = "This test is literally pointless, but at the same time im basically just throwing stuff at a wall when it comes to ideas.";
+
+            //tegevus
+            var result = await Svc<IKindergartenServices>().Create(dto);
+
+            //kontroll
+            Assert.NotNull(result);
+
+        }
+
 
 
         //Siia alla tulevad abimeetodid.
