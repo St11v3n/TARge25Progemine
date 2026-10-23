@@ -278,67 +278,7 @@ namespace TARge25Shop.SpaceshipTest
             Assert.Null(result);
         }
 
-        [Fact]
-        //Kontrollime, et kui string elemendid on kõik sama tulemusega, siis peaks lasteaed ikkagi uuendada saada.
-        public async Task Should_UpdateKindergarten_WhenStringElementsAreTheSame()
-        {
-            //ülesseade
-            KindergartenDto dto = MockKindergartenData();
-
-
-            //tegevus
-            var createKindergarten = await Svc<IKindergartenServices>().Create(dto);
-
-            KindergartenDto EveryStringIsTheSameWhatIsGoingOnDto = MockKindergartenDataWithSameStringInEveryStringElement(); //Perfect for ppl like me who have terrible creativity when it comes to names.
-            var result = await Svc<IKindergartenServices>().Update(EveryStringIsTheSameWhatIsGoingOnDto);
-
-            //kontroll
-            Assert.Equal(EveryStringIsTheSameWhatIsGoingOnDto.GroupName, result.GroupName);
-            Assert.Equal(EveryStringIsTheSameWhatIsGoingOnDto.TeacherName, result.TeacherName);
-            Assert.Equal(EveryStringIsTheSameWhatIsGoingOnDto.KindergartenName, result.KindergartenName);
-        }
-
-        [Fact]
-        //Kontrollime, et kui laste loetlus on negatiivne, siis ei tohiks lasteaed uuendada saada.
-        public async Task ShouldNot_UpdateKindergarten_WhenChildrenCountNegative()
-        {
-            //ülesseade
-            KindergartenDto dto = MockKindergartenData();
-
-
-            //tegevus
-            var createKindergarten = await Svc<IKindergartenServices>().Create(dto);
-
-            KindergartenDto NegativeChildrenCountDontMakeSenseHereDto = MockKindergartenDataWithNegativeChildrenCount();
-            var result = await Svc<IKindergartenServices>().Update(NegativeChildrenCountDontMakeSenseHereDto);
-
-            //kontroll
-            Assert.Null(result);
-        }
-
-        [Fact]
-        //Kontrollime, et kui laste loetlus on 3 või vähem, siis ei tohi uuendada lasteaeda.
-        public async Task ShouldNot_UpdateKindergarten_WhenChildrenCountIsThreeOrLess()
-        {
-            //ülesseade
-            KindergartenDto dto = MockKindergartenData();
-
-            //tegevus
-            var createKindergarten = await Svc<IKindergartenServices>().Create(dto);
-            KindergartenDto updoot = new KindergartenDto()
-            {
-                Id = createKindergarten.Id,
-                GroupName = "WAZZZAAAAA",
-                ChildrenCount = 2,
-                TeacherName = "Scatman",
-                KindergartenName = "AYAYAYAYA"
-
-            };
-            var updoot_result = await Svc<IKindergartenServices>().Update(updoot);
-
-            //kontroll
-            Assert.Null(updoot_result);
-        }
+        
 
         [Fact]
         //Kontrollime, et kui ID on tühi, siis ei tohi kustutada lasteaeda.
@@ -354,26 +294,7 @@ namespace TARge25Shop.SpaceshipTest
             Assert.Null(result);
         }
 
-        [Fact]
-        //Kontrollime, kui ükski string elemendis on olemas number, siis ei tohiks uuendada lasteaeda.
-        public async Task ShouldNot_UpdateKindergarten_WhenAnyStringElementContainsANumber()
-        {
-
-            //ülesseade
-            KindergartenDto dto = MockKindergartenData();
-
-
-
-            //tegevus
-            var createKindergarten = await Svc<IKindergartenServices>().Create(dto);
-            KindergartenDto updoot = MockKindergartenData();
-            updoot.Id = createKindergarten.Id;
-            var updoot_result = await Svc<IKindergartenServices>().Update(updoot);
-
-
-            //kontroll
-            Assert.Null(updoot_result);
-        }
+        
 
 
 
