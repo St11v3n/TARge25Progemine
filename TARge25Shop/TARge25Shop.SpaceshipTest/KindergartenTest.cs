@@ -185,6 +185,23 @@ namespace TARge25Shop.SpaceshipTest
             Assert.True(result.ChildrenCount > 3);
         }
 
+        //Test, mis kontrollib et kui lasteaed on kustutatud, siis peaks lasteaed olema kustutatud ka andmebaasist.
+        [Fact]
+        public async Task Should_RemoveKindergartenFromDatabase_WhenKindergartenIsDeleted()
+        {
+            //ülesseade
+            KindergartenDto dto = MockKindergartenData();
+
+            //tegevus
+            var createdKindergarten = await Svc<IKindergartenServices>().Create(dto);
+            var deletedKindergarten = await Svc<IKindergartenServices>().Delete((Guid)createdKindergarten.Id);
+            var result = await Svc<IKindergartenServices>().DetailAsync((Guid)createdKindergarten.Id);
+
+            //kontrollimine
+            Assert.Equal(createdKindergarten.Id, deletedKindergarten.Id);
+            Assert.Null(result);
+        }
+
 
 
         //Siia alla tulevad abimeetodid.
