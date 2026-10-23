@@ -81,8 +81,11 @@ namespace TARge25Shop.ApplicationServices.Services
 
         public async Task<Kindergarten> Update(KindergartenDto dto)
         {
-            
 
+            if (dto.GroupName == null || dto.ChildrenCount == 0 || dto.KindergartenName == null || dto.TeacherName == null)
+            {
+                return null;
+            }
 
             Kindergarten kinderGarten = new();
 
