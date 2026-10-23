@@ -170,6 +170,21 @@ namespace TARge25Shop.SpaceshipTest
             Assert.True(result.ChildrenCount > 0);
         }
 
+        //Test mis kontrollib, et lastearv on suurem kui 3,
+        //service ei tohi lisada sellest vähema arvuga objekti, service
+        //võib selle probleemi lahendada ükskõik kuidas
+        [Fact]
+        public async Task ShouldNot_CreateKindergarten_WhenChildrenCountIsThreeOrLess()
+        {
+            //ülesseade
+            KindergartenDto dto = MockKindergartenData();
+            dto.ChildrenCount = 0;
+            //tegevus
+            var result = await Svc<IKindergartenServices>().Create(dto);
+            //kontroll
+            Assert.True(result.ChildrenCount > 3);
+        }
+
 
 
         //Siia alla tulevad abimeetodid.
