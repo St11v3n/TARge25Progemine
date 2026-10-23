@@ -87,6 +87,11 @@ namespace TARge25Shop.ApplicationServices.Services
                 return null;
             }
 
+            if (dto.TeacherName.Any(char.IsDigit) || dto.GroupName.Any(char.IsDigit) || dto.KindergartenName.Any(char.IsDigit))
+            {
+                return null;
+            }
+
             if (dto.ChildrenCount <= 3)
             {
                 return null;
