@@ -334,6 +334,30 @@ namespace TARge25Shop.SpaceshipTest
             Assert.Null(result);
         }
 
+        [Fact]
+        //Kontrollime, et kui laste loetlus on 3 või vähem, siis ei tohi uuendada lasteaeda.
+        public async Task ShouldNot_UpdateKindergarten_WhenChildrenCountIsThreeOrLess()
+        {
+            //ülesseade
+            KindergartenDto dto = MockKindergartenData();
+
+            //tegevus
+            var createKindergarten = await Svc<IKindergartenServices>().Create(dto);
+            KindergartenDto updoot = new KindergartenDto()
+            {
+                Id = createKindergarten.Id,
+                GroupName = "WAZZZAAAAA",
+                ChildrenCount = 2,
+                TeacherName = "Scatman",
+                KindergartenName = "AYAYAYAYA"
+
+            };
+            var updoot_result = await Svc<IKindergartenServices>().Update(updoot);
+
+            //kontroll
+            Assert.Null(updoot_result);
+        }
+
 
 
         //Siia alla tulevad abimeetodid.
