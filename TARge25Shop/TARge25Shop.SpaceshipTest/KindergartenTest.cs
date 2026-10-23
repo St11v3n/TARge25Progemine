@@ -358,5 +358,18 @@ namespace TARge25Shop.SpaceshipTest
             };
         }
 
+        private KindergartenDto MockKindergartenDataWithSameStringInEveryStringElement()
+        {
+            return new KindergartenDto
+            {
+                GroupName = "Hello",
+                ChildrenCount = 5,
+                KindergartenName = "Hello",
+                TeacherName = "Hello",
+                CreatedAt = DateTime.MinValue,
+                UpdatedAt = DateTime.MinValue,
+            };
+        }
+
     }
 }
