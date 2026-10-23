@@ -437,6 +437,25 @@ namespace TARge25Shop.SpaceshipTest
 
         }
 
+        [Fact]
+        //Kontrollime, et kui laste loetlus on täisarv, siis peaks tekkima lasteaed.
+        public async Task Should_CreateKindergarten_WhenChildrenCountIsAnInterger()
+        {
+            //ülesseade
+            KindergartenDto dto = MockKindergartenData();
+            dto.ChildrenCount = 5;
+
+            //tegevus
+            var result = await Svc<IKindergartenServices>().Create(dto);
+
+
+
+
+            //kontroll
+            Assert.NotNull(result);
+
+        }
+
 
 
         //Siia alla tulevad abimeetodid.
