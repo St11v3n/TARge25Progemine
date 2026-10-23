@@ -12,16 +12,12 @@ namespace TARge25Shop.ApplicationServices.Services
     public class KindergartenServices : IKindergartenServices
     {
         private readonly TARge25ShopContext _context;
-
-
-    
         private readonly IFileServices _fileServices;
 
         public KindergartenServices
             (
                 TARge25ShopContext context,
                 IFileServices fileServices
-
             )
         {
             _context = context;
@@ -41,49 +37,10 @@ namespace TARge25Shop.ApplicationServices.Services
             kinderGarten.CreatedAt = DateTime.Now;
             kinderGarten.UpdatedAt = DateTime.Now;
 
-            if (dto.GroupName == null || dto.ChildrenCount == 0 || dto.KindergartenName == null || dto.TeacherName == null)
-            {
-                return null;
-            }
-
-            if (dto.TeacherName.Any(char.IsDigit) || dto.GroupName.Any(char.IsDigit) || dto.KindergartenName.Any(char.IsDigit) )
-            {
-                return null;
-            }
-
-            if (dto.GroupName is string)
-            {
-                return kinderGarten;
-            }
-
-            if (dto.ChildrenCount < 0)
-            {
-                return null;
-            }
-
-            if (dto.ChildrenCount < 4)
-            {
-                return null;
-            }
-
-            if (dto.ChildrenCount >= 1000000)
-            {
-                return null;
-            }
-
-            if (dto.ChildrenCount is int)
-            {
-                return kinderGarten;
-            }
-
-
-
             if (dto.Files != null)
             {
                 _fileServices.UploadFilesToDatabase(dto, kinderGarten);
             }
-
-            
 
 
             _context.Kindergartens.Add(kinderGarten);
@@ -105,46 +62,6 @@ namespace TARge25Shop.ApplicationServices.Services
             kinderGarten.TeacherName = dto.TeacherName;
             kinderGarten.CreatedAt = dto.CreatedAt;
             kinderGarten.UpdatedAt = DateTime.Now;
-
-            if (dto.GroupName == null || dto.ChildrenCount == 0 || dto.KindergartenName == null || dto.TeacherName == null)
-            {
-                return null;
-            }
-
-            if (dto.TeacherName.Any(char.IsDigit) || dto.GroupName.Any(char.IsDigit) || dto.KindergartenName.Any(char.IsDigit))
-            {
-                return null;
-            }
-
-
-
-            if (dto.ChildrenCount < 0)
-            {
-                return null;
-            }
-
-            if (dto.ChildrenCount < 4)
-            {
-                return null;
-            }
-
-            if (dto.ChildrenCount >= 1000000)
-            {
-                return null;
-            }
-
-            if (dto.ChildrenCount is int)
-            {
-                return kinderGarten;
-            }
-
-            if (dto.GroupName is string)
-            {
-                return kinderGarten;
-            }
-
-
-
 
             if (dto.Files != null)
             {
@@ -168,10 +85,6 @@ namespace TARge25Shop.ApplicationServices.Services
 
         public async Task<Kindergarten> Delete(Guid id)
         {
-            if (id == Guid.Empty)
-            {
-                return null;
-            }
             var kindergarten = await _context.Kindergartens
                 .FirstOrDefaultAsync(x => x.Id == id);
 
@@ -181,8 +94,6 @@ namespace TARge25Shop.ApplicationServices.Services
                 {
                     Id = y.Id,
                 }).ToArrayAsync();
-
-            
 
             await _fileServices.RemoveImagesFromDatabase(images);
             _context.Kindergartens.Remove(kindergarten);

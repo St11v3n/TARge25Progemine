@@ -11,8 +11,7 @@ namespace TARge25Shop.Models.Kindergarten
         public string TeacherName { get; set; } = string.Empty;
 
         public List<IFormFile> Files { get; set; }
-        public List<ImageViewModel> Image { get; set; }
-            = new List<ImageViewModel>();
+        
         
 
 
