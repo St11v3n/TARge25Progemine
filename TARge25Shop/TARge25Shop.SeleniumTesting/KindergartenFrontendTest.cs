@@ -57,6 +57,7 @@ namespace TARge25Shop.SeleniumTesting
     {
         public static string thisRunGuid { get; set; }
 
+        //See test testib, et navigeerides koostmise lehele ning lisades unikaalse lasteaia koos õige andmetega, minnakse tagasi indeksi vaatele.
         [Fact]
         [Order(1)]
         public void Should_NavigateToCreate_AddUniqueKindergarten_WithCorrectData_ReturnToIndex()
@@ -114,6 +115,7 @@ namespace TARge25Shop.SeleniumTesting
                 && ("7" == kindergartenChildrenCountData));
         }
 
+        //See test testib, et navigeerides detailide lehele spetsiifilise valitud lasteaiale näidatakse varem näidatud õiged andmeid, mis oli juba nähtav indeksi vaates.
         [Fact]
         [Order(2)]
         public void Should_NavigateToDetails_OfThisKindergarten_WithPreviouslyCorrectData()
@@ -176,7 +178,7 @@ namespace TARge25Shop.SeleniumTesting
             Assert.True(int.Parse(details_kindergartenchildrencount).GetType() == typeof(int));
    
         }
-
+        //Test, mis testib, et uuendatakse detailid spetsiifilise valitud lasteaia jaoks uue andmetega.
         [Fact]
         [Order(3)]
         public void Should_UpdateDetails_OfThisKindergarten_WithNewData()
@@ -265,6 +267,7 @@ namespace TARge25Shop.SeleniumTesting
             return driver;
         }
 
+        //Test testib, et kustutatakse spetsiifilise valitud lasteaia rakendusest kustutamise vaate kaudu.
         [Fact]
         [Order(4)]
         public void Should_DeleteThisKindergarten_FromAppVIADeleteView()
