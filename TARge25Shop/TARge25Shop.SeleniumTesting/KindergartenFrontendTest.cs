@@ -128,5 +128,42 @@ namespace TARge25Shop.SeleniumTesting
             return driver;
         }
 
+        private string InsertKindergartenData_ReturnName(IWebDriver driver, bool isOneOrTwo = false)
+        {
+            Guid returnGuid = Guid.NewGuid();
+            if (isOneOrTwo)
+            {
+                IWebElement cu_NameEntryKindergarten = driver.FindElement(By.Id("CU_NameEntryKindergarten"));
+                cu_NameEntryKindergarten.Clear();
+                cu_NameEntryKindergarten.SendKeys(returnGuid.ToString());
+                IWebElement cu_GroupNameEntryKindergarten = driver.FindElement(By.Id("CU_GroupNameEntryKindergarten"));
+                cu_GroupNameEntryKindergarten.Clear();
+                cu_GroupNameEntryKindergarten.SendKeys("Group with no name.");
+                IWebElement cu_ChildrenCountEntryKindergarten = driver.FindElement(By.Id("CU_ChildrenCountEntryKindergarten"));
+                cu_ChildrenCountEntryKindergarten.Clear();
+                cu_ChildrenCountEntryKindergarten.SendKeys("7");
+                IWebElement cu_TeacherNameEntryKindergarten = driver.FindElement(By.Id("CU_TeacherNameEntryKindergarten"));
+                cu_TeacherNameEntryKindergarten.Clear();
+                cu_TeacherNameEntryKindergarten.SendKeys("Rip Van Winkle");
+            }
+            else
+            {
+                IWebElement cu_NameEntryKindergarten = driver.FindElement(By.Id("CU_NameEntryKindergarten"));
+                cu_NameEntryKindergarten.Clear();
+                cu_NameEntryKindergarten.SendKeys(returnGuid.ToString());
+                IWebElement cu_GroupNameEntryKindergarten = driver.FindElement(By.Id("CU_GroupNameEntryKindergarten"));
+                cu_GroupNameEntryKindergarten.Clear();
+                cu_GroupNameEntryKindergarten.SendKeys("Something something");
+                IWebElement cu_ChildrenCountEntryKindergarten = driver.FindElement(By.Id("CU_ChildrenCountEntryKindergarten"));
+                cu_ChildrenCountEntryKindergarten.Clear();
+                cu_ChildrenCountEntryKindergarten.SendKeys("9");
+                IWebElement cu_TeacherNameEntryKindergarten = driver.FindElement(By.Id("CU_TeacherNameEntryKindergarten"));
+                cu_TeacherNameEntryKindergarten.Clear();
+                cu_TeacherNameEntryKindergarten.SendKeys("Yusuf Onion");
+            }
+            return returnGuid.ToString();
+        }
     }
+
+
 }
