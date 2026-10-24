@@ -10,6 +10,15 @@ using Xunit.Sdk;
 
 namespace TARge25Shop.SeleniumTesting
 {
+    //järjesti klass, mis omab omadusi mille järgi teste saab järjestada
+    public class OrderAttribute : Attribute
+    {
+        public int Value { get; } //väärtus
+        public OrderAttribute(int value) //lihtne omistuskonstruktor
+        {
+            Value = value;
+        }
+    }
     internal class KindergartenFrontendTest
     {
     }
