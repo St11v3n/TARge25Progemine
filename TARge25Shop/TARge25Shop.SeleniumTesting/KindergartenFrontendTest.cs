@@ -251,20 +251,7 @@ namespace TARge25Shop.SeleniumTesting
             Assert.True(kindergartenGroupNameData == "completely unheard of haunebu");
             Assert.False(string.IsNullOrEmpty(kindergartenGroupNameData));
             //kontrolli kõik teised andmed ka üle põhjalikult.
-        }
 
-        //abimeetodid käivad siia alla.
-        private static IWebDriver SetupAndNavigateSIndex()
-        {
-            //firefoxi käskiv ja juhtiv draiver
-            IWebDriver driver = new FirefoxDriver();
-            //aadress millele draiver navigeerib
-            driver.Url = "https://localhost:7227/";
-            //lehelt otsitav element
-            IWebElement navigateToKindergarten = driver.FindElement(By.LinkText("Kindergarten"));
-            //selle elemendiga tehtav tegevus
-            navigateToKindergarten.Click();
-            return driver;
         }
 
         //Test testib, et kustutatakse spetsiifilise valitud lasteaia rakendusest kustutamise vaate kaudu.
@@ -323,6 +310,32 @@ namespace TARge25Shop.SeleniumTesting
             Assert.False(isDeleted);
             Assert.True(!isDeleted);
         }
+
+        [Fact]
+        [Order(5)]
+
+        public void ShouldNot_DeleteANonSelectedKindergarten_FromAppVIADeleteView
+        {
+            //ülesseade
+        }
+
+        //abimeetodid käivad siia alla.
+        private static IWebDriver SetupAndNavigateSIndex()
+        {
+            //firefoxi käskiv ja juhtiv draiver
+            IWebDriver driver = new FirefoxDriver();
+            //aadress millele draiver navigeerib
+            driver.Url = "https://localhost:7227/";
+            //lehelt otsitav element
+            IWebElement navigateToKindergarten = driver.FindElement(By.LinkText("Kindergarten"));
+            //selle elemendiga tehtav tegevus
+            navigateToKindergarten.Click();
+            return driver;
+        }
+
+       
+
+        
 
         private string InsertKindergartenData_ReturnName(IWebDriver driver, bool isOneOrTwo = false)
         {
