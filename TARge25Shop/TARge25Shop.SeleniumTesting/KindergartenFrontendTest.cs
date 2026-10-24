@@ -56,5 +56,63 @@ namespace TARge25Shop.SeleniumTesting
     public class KindergartenFrontendTest
     {
         public static string thisRunGuid { get; set; }
+
+        [Fact]
+        [Order(1)]
+        public void Should_NavigateToCreate_AddUniqueKindergarten_WithCorrectData_ReturnToIndex()
+        {
+            //ülesseade
+            IWebDriver driver = SetupAndNavigateSIndex();
+
+            //tegevus
+            IWebElement createInIndex = driver.FindElement(By.Id("CreateInIndex"));
+            createInIndex.Click();
+
+            //sisestatavad andmed, siin tagastub ka kasutatud nimi
+            string concreteName = InsertKindergartenData_ReturnName(driver, false);
+            thisRunGuid = concreteName;
+
+            IWebElement cu_CreateKindergarten = driver.FindElement(By.Id("CU_CreateKindergarten"));
+            cu_CreateKindergarten.Click();
+
+            
+
+            //andmete kogumine pärast reloadi
+            var tableOfIndex = driver.FindElement(By.Id("IndexTable"));
+            List<IWebElement> rowsOfTable = tableOfIndex.FindElements(By.TagName("tr")).ToList();
+            rowsOfTable.RemoveAt(0);
+            string kindergartenGroupNameData = "";
+            string kindergartenNameData = "";
+            string kindergartenTeacherNameData = "";
+            string kindergartenChildrenCountData = "";
+            string kindergartenBuiltAtData = "";
+            
+            bool doesItExist = false;
+            foreach (var row in rowsOfTable)
+            {
+                if (row.FindElement(By.Id("IndexNameKindergarten")).Text == thisRunGuid)
+                {
+                    doesItExist = true;
+                    kindergartenNameData = thisRunGuid;
+                    kindergartenGroupNameData = row.FindElement(By.Id("IndexGroupNameKindergarten")).Text;
+                    kindergartenTeacherNameData = row.FindElement(By.Id("IndexTeacherNameKindergarten")).Text;
+                    kindergartenChildrenCountData = row.FindElement(By.Id("IndexChildrenCountKindergarten")).Text;
+                    kindergartenBuiltAtData = row.FindElement(By.Id("IndexBuiltDateSpaceship")).Text;
+                    break;
+                }
+            }
+            driver.Quit();
+
+            //kontroll
+            
+            Assert.True(true == doesItExist);
+            Assert.Equal(kindergartenNameData, thisRunGuid);
+            Assert.True(kindergartenGroupNameData == "Group with no name.");
+            Assert.Equal(kindergartenChildrenCountData, "7");
+            Assert.True((thisRunGuid == kindergartenNameData)
+                && ("Group with no name." == kindergartenGroupNameData)
+                && ("7" == kindergartenChildrenCountData));
+        }
+
     }
 }
