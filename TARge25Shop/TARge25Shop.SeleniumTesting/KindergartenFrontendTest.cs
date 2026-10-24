@@ -177,6 +177,80 @@ namespace TARge25Shop.SeleniumTesting
    
         }
 
+        [Fact]
+        [Order(3)]
+        public void Should_UpdateDetails_OfThisKindergarten_WithNewData()
+        {
+            //ülesseade
+            IWebDriver driver = SetupAndNavigateSIndex();
+
+            //otsime üles kõik tabeli read, rida htmli tabelis tähistatakse "tr"iga
+            //ICollection<IWebElement> table = driver.FindElements(By.TagName("tr"));
+            var table = driver.FindElement(By.Id("IndexTable"));
+            List<IWebElement> rows = table.FindElements(By.TagName("tr")).ToList();
+            rows.RemoveAt(0);
+            bool doesItExist = false;
+            //tsükkel käib kõik read läbi
+
+            foreach (var row in rows)
+            {
+
+                var locatedelement = row.FindElement(By.Id("IndexNameKindergarten"));
+                if (locatedelement.Text == thisRunGuid)
+                {
+                    doesItExist = true;
+                    //siis vajuta selles reas asuvat details nuppu
+                    var rowelement = row.FindElement(By.Id("IndexActionsKindergarten"));
+                    var button = rowelement.FindElement(By.Id("IndexKindergartenUpdate"));
+                    button.Click();
+                    //pärast õiget vajutust, tsükkel katkestatakse
+                    //arvuti tudub
+                    Thread.Sleep(500);
+                    break;
+                }
+            }
+            //sisestatavad andmed
+            InsertKindergartenData(driver, thisRunGuid, true);
+
+            IWebElement cu_CreateKindergarten = driver.FindElement(By.Id("CU_UpdateKindergarten"));
+            cu_CreateKindergarten.Click();
+
+            //andmete kogumine pärast reloadi
+            var tableOfIndex = driver.FindElement(By.Id("IndexTable"));
+            List<IWebElement> rowsOfTable = tableOfIndex.FindElements(By.TagName("tr")).ToList();
+            rowsOfTable.RemoveAt(0);
+            string kindergartenNameData = "";
+            string kindergartenGroupNameData = "";
+            string kindergartenChildrenCountData = "";
+            string kindergartenTeacherNameData = "";
+            string kindergartenBuiltAtData = "";
+            doesItExist = false;
+            foreach (var row in rowsOfTable)
+            {
+                if (row.FindElement(By.Id("IndexNameKindergarten")).Text == thisRunGuid)
+                {
+                    doesItExist = true;
+                    kindergartenNameData = thisRunGuid;
+                    kindergartenGroupNameData = row.FindElement(By.Id("IndexGroupNameKindergarten")).Text;
+                    kindergartenChildrenCountData = row.FindElement(By.Id("IndexChildrenCountKindergarten")).Text;
+                    kindergartenBuiltAtData = row.FindElement(By.Id("IndexBuiltDateKindergarten")).Text;
+                    break;
+                }
+            }
+            driver.Quit();
+
+            ////arvuti tudub
+            //Thread.Sleep(1000);
+            Assert.True(doesItExist);
+            Assert.NotNull(kindergartenNameData);
+            Assert.Equal(thisRunGuid, kindergartenNameData);
+            Assert.False(string.IsNullOrEmpty(kindergartenGroupNameData));
+            Assert.NotEqual(kindergartenGroupNameData, "Group with no name.");
+            Assert.True(kindergartenGroupNameData == "completely unheard of haunebu");
+            Assert.False(string.IsNullOrEmpty(kindergartenGroupNameData));
+            //kontrolli kõik teised andmed ka üle põhjalikult.
+        }
+
         //abimeetodid käivad siia alla.
         private static IWebDriver SetupAndNavigateSIndex()
         {
