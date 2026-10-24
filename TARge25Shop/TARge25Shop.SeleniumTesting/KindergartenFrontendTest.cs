@@ -114,5 +114,19 @@ namespace TARge25Shop.SeleniumTesting
                 && ("7" == kindergartenChildrenCountData));
         }
 
+        //abimeetodid käivad siia alla.
+        private static IWebDriver SetupAndNavigateSIndex()
+        {
+            //firefoxi käskiv ja juhtiv draiver
+            IWebDriver driver = new FirefoxDriver();
+            //aadress millele draiver navigeerib
+            driver.Url = "https://localhost:7227/";
+            //lehelt otsitav element
+            IWebElement navigateToKindergarten = driver.FindElement(By.LinkText("Kindergarten"));
+            //selle elemendiga tehtav tegevus
+            navigateToKindergarten.Click();
+            return driver;
+        }
+
     }
 }
