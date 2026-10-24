@@ -97,7 +97,7 @@ namespace TARge25Shop.SeleniumTesting
                     kindergartenGroupNameData = row.FindElement(By.Id("IndexGroupNameKindergarten")).Text;
                     kindergartenTeacherNameData = row.FindElement(By.Id("IndexTeacherNameKindergarten")).Text;
                     kindergartenChildrenCountData = row.FindElement(By.Id("IndexChildrenCountKindergarten")).Text;
-                    kindergartenBuiltAtData = row.FindElement(By.Id("IndexBuiltDateSpaceship")).Text;
+                    kindergartenBuiltAtData = row.FindElement(By.Id("IndexBuiltDateKindergarten")).Text;
                     break;
                 }
             }
