@@ -49,6 +49,10 @@ namespace TARge25Shop.SeleniumTesting
             }).ToList(); //pannakse loendisse, ToList on linq meetod.
         }
     }
+
+    //enne testi klassi kirjeldatakse ära mille järgi testid sorteeritakse
+    //tunnuse "TestCaseOrderer"i järgi. Sulgude vahel esimene väärtus on klassi asukoht ise, teine väärtus on nimeruum kus klass asub.
+    [TestCaseOrderer("TARge25Shop.SeleniumTesting.PriorityOrderer", "TARge25Shop.SeleniumTesting")]
     internal class KindergartenFrontendTest
     {
     }
