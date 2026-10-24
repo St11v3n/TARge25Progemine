@@ -114,6 +114,69 @@ namespace TARge25Shop.SeleniumTesting
                 && ("7" == kindergartenChildrenCountData));
         }
 
+        [Fact]
+        [Order(2)]
+        public void Should_NavigateToDetails_OfThisKindergarten_WithPreviouslyCorrectData()
+        {
+            //ülesseade
+            IWebDriver driver = SetupAndNavigateSIndex();
+
+            //otsime üles kõik tabeli read, rida htmli tabelis tähistatakse "tr"iga
+            //ICollection<IWebElement> table = driver.FindElements(By.TagName("tr"));
+            var table = driver.FindElement(By.Id("IndexTable"));
+            List<IWebElement> rows = table.FindElements(By.TagName("tr")).ToList();
+            rows.RemoveAt(0);
+            bool isObjectFound = false;
+
+            //tsükkel käib kõik read läbi            
+            foreach (var row in rows)
+            {
+
+                var locatedelement = row.FindElement(By.Id("IndexNameKindergarten"));
+                if (locatedelement.Text == thisRunGuid)
+                {
+                    //siis vajuta selles reas asuvat details nuppu
+                    var rowelement = row.FindElement(By.Id("IndexActionsKindergarten"));
+                    var button = rowelement.FindElement(By.Id("IndexKindergartenDetails"));
+                    button.Click();
+                    //pärast õiget vajutust, tsükkel katkestatakse
+                    //arvuti tudub
+                    Thread.Sleep(500);
+                    break;
+                }
+            }
+            //andmete kogumine pärast reloadi
+            IWebElement details_KindergartenId = driver.FindElement(By.Id("Details_KindergartenId"));
+            var details_kindergartenid = details_KindergartenId.Text;
+
+            IWebElement details_KindergartenName = driver.FindElement(By.Id("Details_KindergartenName"));
+            var details_kindergartenname = details_KindergartenName.Text;
+
+            IWebElement details_KindergartenGroupName = driver.FindElement(By.Id("Details_KindergartenGroupName"));
+            var details_kindergartengroupname = details_KindergartenGroupName.Text;
+
+            IWebElement details_KindergartenChildrenCount = driver.FindElement(By.Id("Details_KindergartenChildrenCount"));
+            var details_kindergartenchildrencount = details_KindergartenChildrenCount.Text;
+
+            IWebElement details_KindergartenTeacherName = driver.FindElement(By.Id("Details_KindergartenTeacherName"));
+            var details_kindergartenteachername = details_KindergartenTeacherName.Text;
+
+            driver.Quit();
+            //kontroll
+            Assert.True(isObjectFound);
+            Assert.NotNull(details_kindergartenid);
+            // et ei oleks tühi kontrollid kõikidele andmetele
+            Assert.NotEmpty(details_kindergartenname);
+            Assert.NotNull(details_kindergartengroupname);
+            Assert.True(!string.IsNullOrEmpty(details_kindergartenchildrencount));
+            Assert.Equal(thisRunGuid, details_kindergartenname);
+            Assert.Equal("Group with no name.", details_kindergartengroupname);
+            Assert.Equal("7", details_kindergartenchildrencount);
+            Assert.Equal("Rip Van Winkle", details_kindergartenteachername);
+            Assert.True(int.Parse(details_kindergartenchildrencount).GetType() == typeof(int));
+   
+        }
+
         //abimeetodid käivad siia alla.
         private static IWebDriver SetupAndNavigateSIndex()
         {
