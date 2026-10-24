@@ -57,6 +57,12 @@ namespace TARge25Shop.SeleniumTesting
     {
         public static string thisRunGuid { get; set; }
 
+        public static string thisRunGuid1 { get; set; }
+
+        public static string thisRunGuid2 { get; set; }
+
+
+
         //See test testib, et navigeerides koostmise lehele ning lisades unikaalse lasteaia koos õige andmetega, minnakse tagasi indeksi vaatele.
         [Fact]
         [Order(1)]
