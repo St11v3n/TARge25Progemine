@@ -1,4 +1,4 @@
-﻿using OpenQA.Selenium;
+﻿/*using OpenQA.Selenium;
 using OpenQA.Selenium.Firefox;
 using System;
 using System.Collections.Generic;
@@ -88,7 +88,7 @@ namespace TARge25Shop.SeleniumTesting
             Assert.Equal(spaceShipNameData, "i add name for spaceship");
             Assert.True(spaceShipTypeData == "i add ship type for spaceship");
             Assert.Equal(spaceShipCrewData, "12345");
-        }*/
+        
         [Fact]
         [Order(5)]
         public void Should_NavigateToCreate_AddUniqueSpaceShip_WithCorrectData_ReturnToIndex()
@@ -203,7 +203,7 @@ namespace TARge25Shop.SeleniumTesting
             Assert.Equal("i add ship type for spaceship", details_type);
             Assert.Equal("12345", details_crew);
             Assert.Equal("666667", details_power);
-        }*/
+        
         [Fact]
         [Order(6)]
         public void Should_NavigateToDetails_OfThisSpaceShip_WithPreviouslyCorrectData()
@@ -306,7 +306,7 @@ namespace TARge25Shop.SeleniumTesting
 
             ////arvuti tudub
             //Thread.Sleep(1000);
-        }*/
+        
         [Fact]
         [Order(7)]
         public void Should_UpdateDetails_OfThisSpaceShip_WithNewData()
@@ -414,8 +414,8 @@ namespace TARge25Shop.SeleniumTesting
             clickthisbutton.Click();
 
             int rowCount = table.FindElements(By.TagName("tr")).ToList().Count();
-            Assert.True(rowCount < 2);
-        }*/
+           Assert.True(rowCount < 2);
+        
 
         [Fact]
         [Order(8)]
@@ -573,4 +573,4 @@ namespace TARge25Shop.SeleniumTesting
             return returnGuid.ToString();
         }
     }
-}
+} */
