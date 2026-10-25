@@ -1,0 +1,21 @@
+﻿@model TARge25Shop.Models.Weather.SearchWeatherViewModel
+
+<h1>Search Weather</h1>
+
+<div class="container">
+    <form method="post">
+        <div class="container">
+            <div class="form-group col-md-offset-3 col-md-5">
+                <h2>Find current weather conditions</h2>
+                <label asp-for="SearchCity" style="font-family: Arial">Enter City Name</label>
+                <input asp-for="SearchCity" class="form-control" placeholder="e.g., Tallinn" />
+                <span asp-validation-for="SearchCity" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="container">
+            <div class="form-group col-md-offset-3 col-md-5">
+                <button asp-controller="weather" asp-action="searchWeather" class="btn btn-primary">Search</button>
+            </div>
+        </div>
+    </form>
+</div>

@@ -1,0 +1,178 @@
+﻿@model TARge25Shop.Models.Weather.WeatherViewModel
+
+<div class="container">
+    <h2>Current Weather Conditions</h2>
+    <h2>@Html.DisplayFor(model => model.Name)</h2>
+    <hr />
+    <dl class="row text-dark">
+        @if (Model.Main != null && !String.IsNullOrEmpty(Model.Main))
+        {
+            <div class="form-group row">
+                <label asp-for="Main" class="col-sm-2 col-form-label"></label>
+                @Html.DisplayFor(model => model.Main)
+            </div>
+        }
+        else
+        {
+            @Html.HiddenFor(model => model.Main)
+        }
+
+        @if (Model.Description != null && !String.IsNullOrEmpty(Model.Description))
+        {
+            <div class="form-group row">
+                <label asp-for="Description" class="col-sm-2 col-form-label"></label>
+                @Html.DisplayFor(model => model.Description)
+            </div>
+        }
+        else
+        {
+            @Html.HiddenFor(model => model.Description)
+        }
+
+        @if (Model.Icon != null && !String.IsNullOrEmpty(Model.Icon))
+        {
+            <div class="form-group row">
+                <label asp-for="Icon" class="col-sm-2 col-form-label"></label>
+                <div class="col-sm-10">
+                    <img src="https://openweathermap.org" alt="Weather icon" />
+                </div>
+            </div>
+        }
+        else
+        {
+            @Html.HiddenFor(model => model.Icon)
+        }
+
+        @if (Model.Temp != 0)
+        {
+            <div class="form-group row">
+                <label asp-for="Temp" class="col-sm-2 col-form-label"></label>
+                @Html.DisplayFor(model => model.Temp)
+            </div>
+        }
+        else
+        {
+            @Html.HiddenFor(model => model.Temp)
+        }
+
+        @if (Model.FeelsLike != 0)
+        {
+            <div class="form-group row">
+                <label asp-for="FeelsLike" class="col-sm-2 col-form-label"></label>
+                @Html.DisplayFor(model => model.FeelsLike)
+            </div>
+        }
+        else
+        {
+            @Html.HiddenFor(model => model.FeelsLike)
+        }
+
+        @if (Model.TempMin != 0)
+        {
+            <div class="form-group row">
+                <label asp-for="TempMin" class="col-sm-2 col-form-label"></label>
+                @Html.DisplayFor(model => model.TempMin)
+            </div>
+        }
+        else
+        {
+            @Html.HiddenFor(model => model.TempMin)
+        }
+
+        @if (Model.TempMax != 0)
+        {
+            <div class="form-group row">
+                <label asp-for="TempMax" class="col-sm-2 col-form-label"></label>
+                @Html.DisplayFor(model => model.TempMax)
+            </div>
+        }
+        else
+        {
+            @Html.HiddenFor(model => model.TempMax)
+        }
+
+        @if (Model.Pressure != 0)
+        {
+            <div class="form-group row">
+                <label asp-for="Pressure" class="col-sm-2 col-form-label"></label>
+                @Html.DisplayFor(model => model.Pressure)
+            </div>
+        }
+        else
+        {
+            @Html.HiddenFor(model => model.Pressure)
+        }
+
+        @if (Model.Humidity != 0)
+        {
+            <div class="form-group row">
+                <label asp-for="Humidity" class="col-sm-2 col-form-label"></label>
+                @Html.DisplayFor(model => model.Humidity)
+            </div>
+        }
+        else
+        {
+            @Html.HiddenFor(model => model.Humidity)
+        }
+
+        @if (Model.Speed != 0)
+        {
+            <div class="form-group row">
+                <label asp-for="Speed" class="col-sm-2 col-form-label"></label>
+                @Html.DisplayFor(model => model.Speed)
+            </div>
+        }
+        else
+        {
+            @Html.HiddenFor(model => model.Speed)
+        }
+
+        @if (Model.Deg != 0)
+        {
+            <div class="form-group row">
+                <label asp-for="Deg" class="col-sm-2 col-form-label"></label>
+                @Html.DisplayFor(model => model.Deg)
+            </div>
+        }
+        else
+        {
+            @Html.HiddenFor(model => model.Deg)
+        }
+
+        @if (Model.All != 0)
+        {
+            <div class="form-group row">
+                <label asp-for="All" class="col-sm-2 col-form-label"></label>
+                @Html.DisplayFor(model => model.All)
+            </div>
+        }
+        else
+        {
+            @Html.HiddenFor(model => model.All)
+        }
+
+        @if (Model.Lon != 0)
+        {
+            <div class="form-group row">
+                <label asp-for="Lon" class="col-sm-2 col-form-label"></label>
+                @Html.DisplayFor(model => model.Lon)
+            </div>
+        }
+        else
+        {
+            @Html.HiddenFor(model => model.Lon)
+        }
+
+        @if (Model.Lat != 0)
+        {
+            <div class="form-group row">
+                <label asp-for="Lat" class="col-sm-2 col-form-label"></label>
+                @Html.DisplayFor(model => model.Lat)
+            </div>
+        }
+        else
+        {
+            @Html.HiddenFor(model => model.Lat)
+        }
+    </dl>
+</div>
