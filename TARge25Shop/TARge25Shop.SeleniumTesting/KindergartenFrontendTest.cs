@@ -681,6 +681,60 @@ namespace TARge25Shop.SeleniumTesting
 
 
         }
+        //Test, mis testib, et mitte valitud lasteaed ei kustutatakse pärast valitud lasteaia kustutamist läbi kustutamise vaatest.
+        [Fact]
+        [Order(8)]
+
+        public void ShouldNot_DeleteANonSelectedKindergarten_FromAppVIADeleteView()
+        {
+            //ülesseade
+            IWebDriver driver = SetupAndNavigateSIndex();
+
+            //otsime üles kõik tabeli read, rida htmli tabelis tähistatakse "tr"iga
+            //ICollection<IWebElement> table = driver.FindElements(By.TagName("tr"));
+            var table = driver.FindElement(By.Id("IndexTable"));
+            List<IWebElement> rows = table.FindElements(By.TagName("tr")).ToList();
+            rows.RemoveAt(0);
+            bool doesItExist = false;
+            //tsükkel käib kõik read läbi
+
+            foreach (var row in rows)
+            {
+
+                var locatedelement = row.FindElement(By.Id("IndexNameKindergarten"));
+                if (locatedelement.Text == thisRunGuid1)
+                {
+                    doesItExist = true;
+                    //siis vajuta selles reas asuvat details nuppu
+                    var rowelement = row.FindElement(By.Id("IndexActionsKindergarten"));
+                    var button = rowelement.FindElement(By.Id("IndexKindergartenDelete"));
+                    button.Click();
+                    //pärast õiget vajutust, tsükkel katkestatakse
+                    //arvuti tudub
+                    Thread.Sleep(500);
+                    break;
+                }
+            }
+            var clickthisbutton = driver.FindElement(By.Id("Delete_Delete"));
+            clickthisbutton.Click();
+            bool isAvailable = false;
+            table = driver.FindElement(By.Id("IndexTable"));
+            rows = table.FindElements(By.TagName("tr")).ToList();
+            rows.RemoveAt(0);
+            foreach (var row in rows)
+            {
+                var nameElement = row.FindElement(By.Id("IndexNameKindergarten")).Text;
+                if (nameElement == thisRunGuid2)
+                {
+                    isAvailable = true;
+                    break;
+                }
+                
+            }
+
+            Assert.False(!isAvailable);
+            Assert.True(isAvailable);
+        }
 
         //abimeetodid käivad siia alla.
         private static IWebDriver SetupAndNavigateSIndex()
