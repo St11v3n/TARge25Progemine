@@ -785,8 +785,33 @@ namespace TARge25Shop.SeleniumTesting
             }
         }
 
+        private void InsertKindergartenDataForTwo(IWebDriver driver, string name = null)
+        {
+
+            IWebElement cu_NameEntryKindergarten = driver.FindElement(By.Id("CU_NameEntryKindergarten"));
+            cu_NameEntryKindergarten.Clear();
+            if (name != null)
+            {
+                cu_NameEntryKindergarten.SendKeys(name);
+            }
+            else
+            {
+                cu_NameEntryKindergarten.SendKeys("Shovels are spoons.");
+            }
+            IWebElement cu_GroupNameEntryKindergarten = driver.FindElement(By.Id("CU_GroupNameEntryKindergarten"));
+            cu_GroupNameEntryKindergarten.Clear();
+            cu_GroupNameEntryKindergarten.SendKeys("idk");
+            IWebElement cu_ChildrenCountEntryKindergarten = driver.FindElement(By.Id("CU_ChildrenCountEntryKindergarten"));
+            cu_ChildrenCountEntryKindergarten.Clear();
+            cu_ChildrenCountEntryKindergarten.SendKeys("12");
+            IWebElement cu_TeacherNameEntryKindergarten = driver.FindElement(By.Id("CU_TeacherNameEntrySpaceship"));
+            cu_TeacherNameEntryKindergarten.Clear();
+            cu_TeacherNameEntryKindergarten.SendKeys("Lance Wilson AKA Ryder"); //Everyone will turn into geniuses overnight....for all the wrong reasons that is.
+
+
+        }
+
 
     }
-
 
 }
