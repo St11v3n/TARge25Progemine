@@ -254,7 +254,7 @@ namespace TARge25Shop.SeleniumTesting
             Assert.Equal(thisRunGuid, kindergartenNameData);
             Assert.False(string.IsNullOrEmpty(kindergartenGroupNameData));
             Assert.NotEqual(kindergartenGroupNameData, "Group with no name.");
-            Assert.True(kindergartenGroupNameData == "completely unheard of haunebu");
+            Assert.True(kindergartenGroupNameData == "Something something");
             Assert.False(string.IsNullOrEmpty(kindergartenGroupNameData));
             //kontrolli kõik teised andmed ka üle põhjalikult.
 
