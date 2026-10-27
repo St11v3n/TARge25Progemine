@@ -811,7 +811,7 @@ namespace TARge25Shop.SeleniumTesting
                 IWebElement cu_ChildrenCountEntryKindergarten = driver.FindElement(By.Id("CU_ChildrenCountEntryKindergarten"));
                 cu_ChildrenCountEntryKindergarten.Clear();
                 cu_ChildrenCountEntryKindergarten.SendKeys("7");
-                IWebElement cu_TeacherNameEntryKindergarten = driver.FindElement(By.Id("CU_TeacherNameEntrySpaceship"));
+                IWebElement cu_TeacherNameEntryKindergarten = driver.FindElement(By.Id("CU_TeacherNameEntryKindergarten"));
                 cu_TeacherNameEntryKindergarten.Clear();
                 cu_TeacherNameEntryKindergarten.SendKeys("Rip Van Winkle");
             }
@@ -858,7 +858,7 @@ namespace TARge25Shop.SeleniumTesting
             IWebElement cu_ChildrenCountEntryKindergarten = driver.FindElement(By.Id("CU_ChildrenCountEntryKindergarten"));
             cu_ChildrenCountEntryKindergarten.Clear();
             cu_ChildrenCountEntryKindergarten.SendKeys("12");
-            IWebElement cu_TeacherNameEntryKindergarten = driver.FindElement(By.Id("CU_TeacherNameEntrySpaceship"));
+            IWebElement cu_TeacherNameEntryKindergarten = driver.FindElement(By.Id("CU_TeacherNameEntryKindergarten"));
             cu_TeacherNameEntryKindergarten.Clear();
             cu_TeacherNameEntryKindergarten.SendKeys("Lance Wilson AKA Ryder"); //Everyone will turn into geniuses overnight....for all the wrong reasons that is.
 
