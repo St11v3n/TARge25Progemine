@@ -72,15 +72,15 @@ namespace TARge25Shop.SeleniumTesting
             IWebDriver driver = SetupAndNavigateSIndex();
 
             //tegevus
-            IWebElement createInIndex = driver.FindElement(By.Id("CreateInIndex"));
-            createInIndex.Click();
+            IWebElement CreateInIndex = driver.FindElement(By.Id("CreateInIndex"));
+            CreateInIndex.Click();
 
             //sisestatavad andmed, siin tagastub ka kasutatud nimi
             string concreteName = InsertKindergartenData_ReturnName(driver, false);
             thisRunGuid = concreteName;
 
-            IWebElement cu_CreateKindergarten = driver.FindElement(By.Id("CU_CreateKindergarten"));
-            cu_CreateKindergarten.Click();
+            IWebElement CU_CreateKindergarten = driver.FindElement(By.Id("CU_CreateKindergarten"));
+            CU_CreateKindergarten.Click();
 
 
 
