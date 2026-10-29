@@ -14,8 +14,22 @@
 
     <dl class="row">
         <div class="form-group row">
+            <label asp-for="KindergartenName" class="col-sm-2 col-form-label"></label>
+            @Html.DisplayFor(model => model.KindergartenName)
+        </div>
+    </dl>
+
+    <dl class="row">
+        <div class="form-group row">
             <label asp-for="GroupName" class="col-sm-2 col-form-label"></label>
             @Html.DisplayFor(model => model.GroupName)
+        </div>
+    </dl>
+
+    <dl class="row">
+        <div class="form-group row">
+            <label asp-for="TeacherName" class="col-sm-2 col-form-label"></label>
+            @Html.DisplayFor(model => model.TeacherName)
         </div>
     </dl>
 
@@ -26,19 +40,9 @@
         </div>
     </dl>
 
-    <dl class="row">
-        <div class="form-group row">
-            <label asp-for="KindergartenName" class="col-sm-2 col-form-label"></label>
-            @Html.DisplayFor(model => model.KindergartenName)
-        </div>
-    </dl>
+    
 
-    <dl class="row">
-        <div class="form-group row">
-            <label asp-for="TeacherName" class="col-sm-2 col-form-label"></label>
-            @Html.DisplayFor(model => model.TeacherName)
-        </div>
-    </dl>
+    
 
     <dl class="row">
         <div class="form-group row">
