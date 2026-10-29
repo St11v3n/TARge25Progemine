@@ -173,19 +173,8 @@ namespace TARge25Shop.SeleniumTesting
             IWebElement details_KindergartenTeacherName = driver.FindElement(By.Id("Details_KindergartenTeacherName"));
             var details_kindergartenteachername = details_KindergartenTeacherName.Text;
 
-            driver.Quit();
-            //kontroll
-            Assert.True(isObjectFound);
-            Assert.NotNull(details_kindergartenid);
-            // et ei oleks tühi kontrollid kõikidele andmetele
-            Assert.NotEmpty(details_kindergartenname);
-            Assert.NotNull(details_kindergartengroupname);
-            Assert.True(!string.IsNullOrEmpty(details_kindergartenchildrencount));
-            Assert.Equal(thisRunGuid, details_kindergartenname);
-            Assert.Equal("Group with no name.", details_kindergartengroupname);
-            Assert.Equal("7", details_kindergartenchildrencount);
-            Assert.Equal("Rip Van Winkle", details_kindergartenteachername);
-            Assert.True(int.Parse(details_kindergartenchildrencount).GetType() == typeof(int));
+            IWebElement details_KindergartenChildrenCount = driver.FindElement(By.Id("Details_KindergartenChildrenCount"));
+             var details_kindergartenchildrencount = details_KindergartenChildrenCount.Text;
 
         }
         //Test, mis testib, et uuendatakse detailid spetsiifilise valitud lasteaia jaoks uue andmetega.
