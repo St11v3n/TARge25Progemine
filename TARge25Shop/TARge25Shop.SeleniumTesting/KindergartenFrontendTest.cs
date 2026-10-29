@@ -158,20 +158,17 @@ namespace TARge25Shop.SeleniumTesting
                     //arvuti tudub
                     //Thread.Sleep(500);
                     break;
-                }
-            }
-            //andmete kogumine pärast reloadi
-            IWebElement details_KindergartenId = driver.FindElement(By.Id("Details_KindergartenId"));
-            var details_kindergartenid = details_KindergartenId.Text;
+                 }
+             }
+             //andmete kogumine pärast reloadi
+             IWebElement details_KindergartenId = driver.FindElement(By.Id("Details_KindergartenId"));
+             var details_kindergartenid = details_KindergartenId.Text;
 
-            IWebElement details_KindergartenName = driver.FindElement(By.Id("Details_KindergartenName"));
-            var details_kindergartenname = details_KindergartenName.Text;
+             IWebElement details_KindergartenName = driver.FindElement(By.Id("Details_KindergartenName"));
+             var details_kindergartenname = details_KindergartenName.Text;
 
-            IWebElement details_KindergartenGroupName = driver.FindElement(By.Id("Details_KindergartenGroupName"));
-            var details_kindergartengroupname = details_KindergartenGroupName.Text;
-
-            IWebElement details_KindergartenChildrenCount = driver.FindElement(By.Id("Details_KindergartenChildrenCount"));
-            var details_kindergartenchildrencount = details_KindergartenChildrenCount.Text;
+             IWebElement details_KindergartenGroupName = driver.FindElement(By.Id("Details_KindergartenGroupName"));
+             var details_kindergartengroupname = details_KindergartenGroupName.Text;
 
             IWebElement details_KindergartenTeacherName = driver.FindElement(By.Id("Details_KindergartenTeacherName"));
             var details_kindergartenteachername = details_KindergartenTeacherName.Text;
