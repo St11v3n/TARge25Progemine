@@ -328,10 +328,13 @@ namespace TARge25Shop.SeleniumTesting
                  }
              }
 
-        //See test testib loomise vaate navigeerimisele, siis luuakse üks lasteaed, siis minnakse tagasi ineksi vaatele ja pärast
-        //navigeeritakse uuesti loomise vaatele et luua teist lasteaeda, ning minnakse tagasi jälle indeksi vaatele, kontrollitakse et mülematel oleks õiged andmed.
-        [Fact]
-        [Order(5)]
+             Assert.False(isDeleted);
+             Assert.True(!isDeleted);
+         }
+         //See test testib loomise vaate navigeerimisele, siis luuakse üks lasteaed, siis minnakse tagasi ineksi vaatele ja pärast
+         //navigeeritakse uuesti loomise vaatele et luua teist lasteaeda, ning minnakse tagasi jälle indeksi vaatele, kontrollitakse et mülematel oleks õiged andmed.
+         [Fact]
+         [Order(5)]
 
         public void Should_NavigateToCreate_AddMultipleKindergartens_WithCorrectData_ReturnToIndex()
         {
