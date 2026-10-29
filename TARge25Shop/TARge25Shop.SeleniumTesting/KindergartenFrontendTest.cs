@@ -117,11 +117,13 @@ namespace TARge25Shop.SeleniumTesting
 
             Assert.True(doesItExist == true);
             Assert.Equal(kindergartenNameData, thisRunGuid);
-            Assert.True(kindergartenGroupNameData == "Group with no name.");
-            Assert.Equal(kindergartenChildrenCountData, "7");
+            Assert.True(kindergartenGroupNameData == "Something something");
+            Assert.Equal(kindergartenChildrenCountData, "9");
+            Assert.Equal(kindergartenTeacherNameData, "Yusuf Onion");
             Assert.True((thisRunGuid == kindergartenNameData)
-                && ("Group with no name." == kindergartenGroupNameData)
-                && ("7" == kindergartenChildrenCountData));
+                && ("Something something" == kindergartenGroupNameData)
+                && ("9" == kindergartenChildrenCountData)
+                && ("Yusuf Onion" == kindergartenTeacherNameData));
         }
 
         //See test testib, et navigeerides detailide lehele spetsiifilise valitud lasteaiale näidatakse varem näidatud õiged andmeid, mis oli juba nähtav indeksi vaates.
