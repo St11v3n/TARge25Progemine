@@ -699,61 +699,63 @@ namespace TARge25Shop.SeleniumTesting
 
              //kontrolli kõik teised andmed ka üle põhjalikult.
 
-        }
-        //Test, mis testib, et mitte valitud lasteaed ei kustutatakse pärast valitud lasteaia kustutamist läbi kustutamise vaatest.
-        [Fact]
-        [Order(8)]
 
-        public void ShouldNot_DeleteANonSelectedKindergarten_FromAppVIADeleteView()
-        {
-            //ülesseade
-            IWebDriver driver = SetupAndNavigateSIndex();
 
-            //otsime üles kõik tabeli read, rida htmli tabelis tähistatakse "tr"iga
-            //ICollection<IWebElement> table = driver.FindElements(By.TagName("tr"));
-            var table = driver.FindElement(By.Id("IndexTable"));
-            List<IWebElement> rows = table.FindElements(By.TagName("tr")).ToList();
-            rows.RemoveAt(0);
-            bool doesItExist = false;
-            //tsükkel käib kõik read läbi
+         }
+         //Test, mis testib, et mitte valitud lasteaed ei kustutatakse pärast valitud lasteaia kustutamist läbi kustutamise vaatest.
+         [Fact]
+         [Order(8)]
 
-            foreach (var row in rows)
-            {
+         public void ShouldNot_DeleteANonSelectedKindergarten_FromAppVIADeleteView()
+         {
+             //ülesseade
+             IWebDriver driver = SetupAndNavigateSIndex();
 
-                var locatedelement = row.FindElement(By.Id("IndexNameKindergarten"));
-                if (locatedelement.Text == thisRunGuid1)
-                {
-                    doesItExist = true;
-                    //siis vajuta selles reas asuvat details nuppu
-                    var rowelement = row.FindElement(By.Id("IndexActionsKindergarten"));
-                    var button = rowelement.FindElement(By.Id("IndexKindergartenDelete"));
-                    button.Click();
-                    //pärast õiget vajutust, tsükkel katkestatakse
-                    //arvuti tudub
-                    Thread.Sleep(500);
-                    break;
-                }
-            }
-            var clickthisbutton = driver.FindElement(By.Id("Delete_Delete"));
-            clickthisbutton.Click();
-            bool isAvailable = false;
-            table = driver.FindElement(By.Id("IndexTable"));
-            rows = table.FindElements(By.TagName("tr")).ToList();
-            rows.RemoveAt(0);
-            foreach (var row in rows)
-            {
-                var nameElement = row.FindElement(By.Id("IndexNameKindergarten")).Text;
-                if (nameElement == thisRunGuid2)
-                {
-                    isAvailable = true;
-                    break;
-                }
-                
-            }
+             //otsime üles kõik tabeli read, rida htmli tabelis tähistatakse "tr"iga
+             //ICollection<IWebElement> table = driver.FindElements(By.TagName("tr"));
+             var table = driver.FindElement(By.Id("IndexTable"));
+             List<IWebElement> rows = table.FindElements(By.TagName("tr")).ToList();
+             rows.RemoveAt(0);
+             bool doesItExist = false;
+             //tsükkel käib kõik read läbi
 
-            Assert.False(!isAvailable);
-            Assert.True(isAvailable);
-        }
+             foreach (var row in rows)
+             {
+
+                 var locatedelement = row.FindElement(By.Id("IndexNameKindergarten"));
+                 if (locatedelement.Text == thisRunGuid1)
+                 {
+                     doesItExist = true;
+                     //siis vajuta selles reas asuvat details nuppu
+                     var rowelement = row.FindElement(By.Id("IndexActionsKindergarten"));
+                     var button = rowelement.FindElement(By.Id("IndexKindergartenDelete"));
+                     button.Click();
+                     //pärast õiget vajutust, tsükkel katkestatakse
+                     //arvuti tudub
+                     Thread.Sleep(500);
+                     break;
+                 }
+             }
+             var clickthisbutton = driver.FindElement(By.Id("Delete_Delete"));
+             clickthisbutton.Click();
+             bool isAvailable = false;
+             table = driver.FindElement(By.Id("IndexTable"));
+             rows = table.FindElements(By.TagName("tr")).ToList();
+             rows.RemoveAt(0);
+             foreach (var row in rows)
+             {
+                 var nameElement = row.FindElement(By.Id("IndexNameKindergarten")).Text;
+                 if (nameElement == thisRunGuid2)
+                 {
+                     isAvailable = true;
+                     break;
+                 }
+
+             }
+
+             Assert.False(!isAvailable);
+             Assert.True(isAvailable);
+         }
 
         //abimeetodid käivad siia alla.
         private static IWebDriver SetupAndNavigateSIndex()
@@ -761,7 +763,7 @@ namespace TARge25Shop.SeleniumTesting
             //firefoxi käskiv ja juhtiv draiver
             IWebDriver driver = new FirefoxDriver();
             //aadress millele draiver navigeerib
-            driver.Url = "https://localhost:7227/";
+            driver.Url = "https://localhost:7124/";
             //lehelt otsitav element
             IWebElement navigateToKindergarten = driver.FindElement(By.LinkText("Kindergarten"));
             //selle elemendiga tehtav tegevus
@@ -778,43 +780,53 @@ namespace TARge25Shop.SeleniumTesting
             Guid returnGuid = Guid.NewGuid();
             if (isOneOrTwo)
             {
-                IWebElement cu_NameEntryKindergarten = driver.FindElement(By.Id("CU_NameEntryKindergarten"));
+                IWebElement cu_NameEntryKindergarten = driver.FindElement(By.Id("CU_KindergartenNameEntryKindergarten"));
                 cu_NameEntryKindergarten.Clear();
                 cu_NameEntryKindergarten.SendKeys(returnGuid.ToString());
                 IWebElement cu_GroupNameEntryKindergarten = driver.FindElement(By.Id("CU_GroupNameEntryKindergarten"));
                 cu_GroupNameEntryKindergarten.Clear();
                 cu_GroupNameEntryKindergarten.SendKeys("Group with no name.");
-                IWebElement cu_ChildrenCountEntryKindergarten = driver.FindElement(By.Id("CU_ChildrenCountEntryKindergarten"));
-                cu_ChildrenCountEntryKindergarten.Clear();
-                cu_ChildrenCountEntryKindergarten.SendKeys("7");
                 IWebElement cu_TeacherNameEntryKindergarten = driver.FindElement(By.Id("CU_TeacherNameEntryKindergarten"));
                 cu_TeacherNameEntryKindergarten.Clear();
                 cu_TeacherNameEntryKindergarten.SendKeys("Rip Van Winkle");
+                IWebElement cu_ChildrenCountEntryKindergarten = driver.FindElement(By.Id("CU_ChildrenCountEntryKindergarten"));
+                cu_ChildrenCountEntryKindergarten.Clear();
+                cu_ChildrenCountEntryKindergarten.SendKeys("7");
+                
             }
             else
             {
-                IWebElement cu_NameEntryKindergarten = driver.FindElement(By.Id("CU_NameEntryKindergarten"));
+                IWebElement cu_NameEntryKindergarten = driver.FindElement(By.Id("CU_KindergartenNameEntryKindergarten"));
                 cu_NameEntryKindergarten.Clear();
                 cu_NameEntryKindergarten.SendKeys(returnGuid.ToString());
                 IWebElement cu_GroupNameEntryKindergarten = driver.FindElement(By.Id("CU_GroupNameEntryKindergarten"));
                 cu_GroupNameEntryKindergarten.Clear();
                 cu_GroupNameEntryKindergarten.SendKeys("Something something");
-                IWebElement cu_ChildrenCountEntryKindergarten = driver.FindElement(By.Id("CU_ChildrenCountEntryKindergarten"));
-                cu_ChildrenCountEntryKindergarten.Clear();
-                cu_ChildrenCountEntryKindergarten.SendKeys("9");
                 IWebElement cu_TeacherNameEntryKindergarten = driver.FindElement(By.Id("CU_TeacherNameEntryKindergarten"));
                 cu_TeacherNameEntryKindergarten.Clear();
                 cu_TeacherNameEntryKindergarten.SendKeys("Yusuf Onion");
+                IWebElement cu_ChildrenCountEntryKindergarten = driver.FindElement(By.Id("CU_ChildrenCountEntryKindergarten"));
+                cu_ChildrenCountEntryKindergarten.Clear();
+                cu_ChildrenCountEntryKindergarten.SendKeys("9");
+                
             }
             return returnGuid.ToString();
+
         }
 
+    
+
+
+    
+
+
         private void InsertKindergartenData(IWebDriver driver, string name = null, bool isOneOrTwo = false)
+        
         {
 
             if (isOneOrTwo)
             {
-                IWebElement cu_NameEntryKindergarten = driver.FindElement(By.Id("CU_NameEntryKindergarten"));
+                IWebElement cu_NameEntryKindergarten = driver.FindElement(By.Id("CU_KindergartenNameEntryKindergarten"));
                 cu_NameEntryKindergarten.Clear();
                 if (name != null)
                 {
@@ -836,7 +848,7 @@ namespace TARge25Shop.SeleniumTesting
             }
             else
             {
-                IWebElement cu_NameEntryKindergarten = driver.FindElement(By.Id("CU_NameEntryKindergarten"));
+                IWebElement cu_NameEntryKindergarten = driver.FindElement(By.Id("CU_KindergartenNameEntryKindergarten"));
                 cu_NameEntryKindergarten.Clear();
                 if (name != null)
                 {
@@ -861,7 +873,7 @@ namespace TARge25Shop.SeleniumTesting
         private void InsertKindergartenDataForTwo(IWebDriver driver, string name = null)
         {
 
-            IWebElement cu_NameEntryKindergarten = driver.FindElement(By.Id("CU_NameEntryKindergarten"));
+            IWebElement cu_NameEntryKindergarten = driver.FindElement(By.Id("CU_KindergartenNameEntryKindergarten"));
             cu_NameEntryKindergarten.Clear();
             if (name != null)
             {
