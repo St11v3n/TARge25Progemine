@@ -412,20 +412,24 @@ namespace TARge25Shop.SeleniumTesting
 
              //kontroll
 
-            Assert.True(true == doesItExist1);
-            Assert.True(true == doesItExist2);
-            Assert.Equal(kindergartenNameData1, thisRunGuid1);
-            Assert.Equal(kindergartenNameData2, thisRunGuid2);
-            Assert.True(kindergartenGroupNameData1 == "Group with no name.");
-            Assert.True(kindergartenGroupNameData2 == "Something something");
-            Assert.Equal(kindergartenChildrenCountData1, "7");
-            Assert.Equal(kindergartenChildrenCountData2, "9");
+             Assert.True(true == doesItExist1);
+             Assert.True(true == doesItExist2);
+             Assert.Equal(kindergartenNameData1, thisRunGuid1);
+             Assert.Equal(kindergartenNameData2, thisRunGuid2);
+             Assert.True(kindergartenGroupNameData1 == "Something something");
+             Assert.True(kindergartenGroupNameData2 == "Group with no name.");
+             Assert.Equal(kindergartenChildrenCountData1, "9");
+             Assert.Equal(kindergartenChildrenCountData2, "7");
+            Assert.Equal(kindergartenTeacherNameData1, "Yusuf Onion");
+            Assert.Equal(kindergartenTeacherNameData2, "Rip Van Winkle");
             Assert.True((thisRunGuid1 == kindergartenNameData1)
-                && ("Group with no name." == kindergartenGroupNameData1)
-                && ("7" == kindergartenChildrenCountData1));
-            Assert.True((thisRunGuid2 == kindergartenNameData2)
-                && ("Something something" == kindergartenGroupNameData2)
-                && ("9" == kindergartenChildrenCountData2));
+                 && ("Something something" == kindergartenGroupNameData1)
+                 && ("9" == kindergartenChildrenCountData1)
+                 && ("Yusuf Onion" == kindergartenTeacherNameData1));
+             Assert.True((thisRunGuid2 == kindergartenNameData2)
+                 && ("Group with no name." == kindergartenGroupNameData2)
+                 && ("7" == kindergartenChildrenCountData2)
+                 && ("Rip Van Winkle" == kindergartenTeacherNameData2));
 
 
         }
