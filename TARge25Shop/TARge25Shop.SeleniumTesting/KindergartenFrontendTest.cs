@@ -537,29 +537,29 @@ namespace TARge25Shop.SeleniumTesting
              IWebElement details_KindergartenTeacherName2 = driver.FindElement(By.Id("Details_KindergartenTeacherName"));
              var details_kindergartenteachername2 = details_KindergartenTeacherName2.Text;
 
-            driver.Quit();
-            //kontroll
-            Assert.True(isObjectFound);
-            Assert.NotNull(details_kindergartenid1);
-            Assert.NotNull(details_kindergartenid2);
-            // et ei oleks tühi kontrollid kõikidele andmetele
-            Assert.NotEmpty(details_kindergartenname1);
-            Assert.NotEmpty(details_kindergartenname2);
-            Assert.NotNull(details_kindergartengroupname1);
-            Assert.NotNull(details_kindergartengroupname2);
-            Assert.True(!string.IsNullOrEmpty(details_kindergartenchildrencount1));
-            Assert.True(!string.IsNullOrEmpty(details_kindergartenchildrencount2));
-            Assert.Equal(thisRunGuid1, details_kindergartenname1);
-            Assert.Equal(thisRunGuid2, details_kindergartenname2);
-            Assert.Equal("Group with no name.", details_kindergartengroupname1);
-            Assert.Equal("Something something", details_kindergartengroupname2);
-            Assert.Equal("7", details_kindergartenchildrencount1);
-            Assert.Equal("9", details_kindergartenchildrencount2);
-            Assert.Equal("Rip Van Winkle", details_kindergartenteachername1);
-            Assert.Equal("Yusuf Onion", details_kindergartenteachername2);
-            Assert.True(int.Parse(details_kindergartenchildrencount1).GetType() == typeof(int));
-            Assert.True(int.Parse(details_kindergartenchildrencount2).GetType() == typeof(int));
-        }
+             driver.Quit();
+             //kontroll
+             Assert.True(isObjectFound);
+             Assert.NotNull(details_kindergartenid1);
+             Assert.NotNull(details_kindergartenid2);
+             // et ei oleks tühi kontrollid kõikidele andmetele
+             Assert.NotEmpty(details_kindergartenname1);
+             Assert.NotEmpty(details_kindergartenname2);
+             Assert.NotNull(details_kindergartengroupname1);
+             Assert.NotNull(details_kindergartengroupname2);
+             Assert.True(!string.IsNullOrEmpty(details_kindergartenchildrencount1));
+             Assert.True(!string.IsNullOrEmpty(details_kindergartenchildrencount2));
+             Assert.Equal(thisRunGuid1, details_kindergartenname1);
+             Assert.Equal(thisRunGuid2, details_kindergartenname2);
+             Assert.Equal("Something something", details_kindergartengroupname1);
+             Assert.Equal("Group with no name.", details_kindergartengroupname2);
+             Assert.Equal("9", details_kindergartenchildrencount1);
+             Assert.Equal("7", details_kindergartenchildrencount2);
+             Assert.Equal("Yusuf Onion", details_kindergartenteachername1);
+             Assert.Equal("Rip Van Winkle", details_kindergartenteachername2);
+             Assert.True(int.Parse(details_kindergartenchildrencount1).GetType() == typeof(int));
+             Assert.True(int.Parse(details_kindergartenchildrencount2).GetType() == typeof(int));
+         }
 
         //See test testib mitme lasteaiade andmete uuendamist, need uued andmed on sama mõlematele lasteaiadele.
         [Fact]
