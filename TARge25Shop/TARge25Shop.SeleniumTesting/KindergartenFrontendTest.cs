@@ -436,104 +436,106 @@ namespace TARge25Shop.SeleniumTesting
          //See test testib, et minnakse detailide vaatele ühele lasteaiale ning kontrollitakse et selle andmed on sama mis on nähtav indeks vaates, siis see läheb tagasi indeks
          //vaatele ja uuesti läheb detailide vaatele teise lasteaia jaoks ning ka kontrollitakse et selle andmed on sama mis indeksi vaates näha on.
 
-        [Fact]
-        [Order(6)]
+         [Fact]
+         [Order(6)]
 
-        public void Should_NavigateToDetails_ForMultipleKindergartens_WithPreviouslyCorrectData()
-        {
-            //ülesseade
-            IWebDriver driver = SetupAndNavigateSIndex();
+         public void Should_NavigateToDetails_ForMultipleKindergartens_WithPreviouslyCorrectData()
+         {
+             //ülesseade
+             IWebDriver driver = SetupAndNavigateSIndex();
 
-            //otsime üles kõik tabeli read, rida htmli tabelis tähistatakse "tr"iga
-            //ICollection<IWebElement> table = driver.FindElements(By.TagName("tr"));
-            var table = driver.FindElement(By.Id("IndexTable"));
-            List<IWebElement> rows = table.FindElements(By.TagName("tr")).ToList();
-            rows.RemoveAt(0);
-            bool isObjectFound = false;
+             //otsime üles kõik tabeli read, rida htmli tabelis tähistatakse "tr"iga
+             //ICollection<IWebElement> table = driver.FindElements(By.TagName("tr"));
+             var table = driver.FindElement(By.Id("IndexTable"));
+             List<IWebElement> rows = table.FindElements(By.TagName("tr")).ToList();
+             rows.RemoveAt(0);
+             bool isObjectFound = false;
 
-            //tsükkel käib kõik read läbi            
-            foreach (var row in rows)
-            {
+             //tsükkel käib kõik read läbi            
+             foreach (var row in rows)
+             {
 
-                var locatedelement = row.FindElement(By.Id("IndexNameKindergarten"));
-                if (locatedelement.Text == thisRunGuid1)
-                {
-                    //siis vajuta selles reas asuvat details nuppu
-                    var rowelement = row.FindElement(By.Id("IndexActionsKindergarten"));
-                    var button = rowelement.FindElement(By.Id("IndexKindergartenDetails"));
-                    button.Click();
-                    //pärast õiget vajutust, tsükkel katkestatakse
-                    //arvuti tudub
-                    Thread.Sleep(500);
-                    break;
+                 var locatedelement = row.FindElement(By.Id("IndexNameKindergarten"));
+                 if (locatedelement.Text == thisRunGuid1)
+                 {
+                     isObjectFound = true;
+                     //siis vajuta selles reas asuvat details nuppu
+                     var rowelement = row.FindElement(By.Id("IndexActionsKindergarten"));
+                     var button = rowelement.FindElement(By.Id("IndexKindergartenDetails"));
+                     button.Click();
+                     //pärast õiget vajutust, tsükkel katkestatakse
+                     //arvuti tudub
+                     Thread.Sleep(500);
+                     break;
 
-                }
-
-
-
-            }
-
-            //andmete kogumine pärast reloadi
-            IWebElement details_KindergartenId1 = driver.FindElement(By.Id("Details_KindergartenId"));
-            var details_kindergartenid1 = details_KindergartenId1.Text;
-
-            IWebElement details_KindergartenName1 = driver.FindElement(By.Id("Details_KindergartenName"));
-            var details_kindergartenname1 = details_KindergartenName1.Text;
-
-            IWebElement details_KindergartenGroupName1 = driver.FindElement(By.Id("Details_KindergartenGroupName"));
-            var details_kindergartengroupname1 = details_KindergartenGroupName1.Text;
-
-            IWebElement details_KindergartenChildrenCount1 = driver.FindElement(By.Id("Details_KindergartenChildrenCount"));
-            var details_kindergartenchildrencount1 = details_KindergartenChildrenCount1.Text;
-
-            IWebElement details_KindergartenTeacherName1 = driver.FindElement(By.Id("Details_KindergartenTeacherName"));
-            var details_kindergartenteachername1 = details_KindergartenTeacherName1.Text;
+                 }
 
 
-            IWebElement navigateToIndexViewUsingTheBackButton = driver.FindElement(By.Id("Details_Back"));
-            navigateToIndexViewUsingTheBackButton.Click();
 
-            table = driver.FindElement(By.Id("IndexTable"));
+             }
 
-            rows = table.FindElements(By.TagName("tr")).ToList();
+             //andmete kogumine pärast reloadi
+             IWebElement details_KindergartenId1 = driver.FindElement(By.Id("Details_KindergartenId"));
+             var details_kindergartenid1 = details_KindergartenId1.Text;
 
-            rows.RemoveAt(0);
+             IWebElement details_KindergartenName1 = driver.FindElement(By.Id("Details_KindergartenName"));
+             var details_kindergartenname1 = details_KindergartenName1.Text;
 
-            foreach (var row in rows)
-            {
+             IWebElement details_KindergartenGroupName1 = driver.FindElement(By.Id("Details_KindergartenGroupName"));
+             var details_kindergartengroupname1 = details_KindergartenGroupName1.Text;
 
-                var locatedelement = row.FindElement(By.Id("IndexNameKindergarten"));
-                if (locatedelement.Text == thisRunGuid2)
-                {
-                    //siis vajuta selles reas asuvat details nuppu
-                    var rowelement = row.FindElement(By.Id("IndexActionsKindergarten"));
-                    var button = rowelement.FindElement(By.Id("IndexKindergartenDetails"));
-                    button.Click();
-                    //pärast õiget vajutust, tsükkel katkestatakse
-                    //arvuti tudub
-                    Thread.Sleep(500);
-                    break;
+             IWebElement details_KindergartenChildrenCount1 = driver.FindElement(By.Id("Details_KindergartenChildrenCount"));
+             var details_kindergartenchildrencount1 = details_KindergartenChildrenCount1.Text;
 
-                }
+             IWebElement details_KindergartenTeacherName1 = driver.FindElement(By.Id("Details_KindergartenTeacherName"));
+             var details_kindergartenteachername1 = details_KindergartenTeacherName1.Text;
 
 
-            }
+             IWebElement navigateToIndexViewUsingTheBackButton = driver.FindElement(By.Id("Details_Back"));
+             navigateToIndexViewUsingTheBackButton.Click();
 
-            //andmete kogumine pärast reloadi
-            IWebElement details_KindergartenId2 = driver.FindElement(By.Id("Details_KindergartenId"));
-            var details_kindergartenid2 = details_KindergartenId2.Text;
+             table = driver.FindElement(By.Id("IndexTable"));
 
-            IWebElement details_KindergartenName2 = driver.FindElement(By.Id("Details_KindergartenName"));
-            var details_kindergartenname2 = details_KindergartenName2.Text;
+             rows = table.FindElements(By.TagName("tr")).ToList();
 
-            IWebElement details_KindergartenGroupName2 = driver.FindElement(By.Id("Details_KindergartenGroupName"));
-            var details_kindergartengroupname2 = details_KindergartenGroupName2.Text;
+             rows.RemoveAt(0);
 
-            IWebElement details_KindergartenChildrenCount2 = driver.FindElement(By.Id("Details_KindergartenChildrenCount"));
-            var details_kindergartenchildrencount2 = details_KindergartenChildrenCount2.Text;
+             foreach (var row in rows)
+             {
 
-            IWebElement details_KindergartenTeacherName2 = driver.FindElement(By.Id("Details_KindergartenTeacherName"));
-            var details_kindergartenteachername2 = details_KindergartenTeacherName2.Text;
+                 var locatedelement = row.FindElement(By.Id("IndexNameKindergarten"));
+                 if (locatedelement.Text == thisRunGuid2)
+                 {
+                     isObjectFound = true;
+                     //siis vajuta selles reas asuvat details nuppu
+                     var rowelement = row.FindElement(By.Id("IndexActionsKindergarten"));
+                     var button = rowelement.FindElement(By.Id("IndexKindergartenDetails"));
+                     button.Click();
+                     //pärast õiget vajutust, tsükkel katkestatakse
+                     //arvuti tudub
+                     Thread.Sleep(500);
+                     break;
+
+                 }
+
+
+             }
+
+             //andmete kogumine pärast reloadi
+             IWebElement details_KindergartenId2 = driver.FindElement(By.Id("Details_KindergartenId"));
+             var details_kindergartenid2 = details_KindergartenId2.Text;
+
+             IWebElement details_KindergartenName2 = driver.FindElement(By.Id("Details_KindergartenName"));
+             var details_kindergartenname2 = details_KindergartenName2.Text;
+
+             IWebElement details_KindergartenGroupName2 = driver.FindElement(By.Id("Details_KindergartenGroupName"));
+             var details_kindergartengroupname2 = details_KindergartenGroupName2.Text;
+
+             IWebElement details_KindergartenChildrenCount2 = driver.FindElement(By.Id("Details_KindergartenChildrenCount"));
+             var details_kindergartenchildrencount2 = details_KindergartenChildrenCount2.Text;
+
+             IWebElement details_KindergartenTeacherName2 = driver.FindElement(By.Id("Details_KindergartenTeacherName"));
+             var details_kindergartenteachername2 = details_KindergartenTeacherName2.Text;
 
             driver.Quit();
             //kontroll
