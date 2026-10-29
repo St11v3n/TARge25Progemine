@@ -26,7 +26,7 @@ namespace TARge25Shop.ApplicationServices.Services
 
         public async Task<Kindergarten> Create(KindergartenDto dto)
         {
-            if (dto.GroupName == null || dto.ChildrenCount == 0 || dto.KindergartenName == null || dto.TeacherName == null)
+           /* if (dto.GroupName == null || dto.ChildrenCount == 0 || dto.KindergartenName == null || dto.TeacherName == null)
             {
                 return null;
             }
@@ -55,7 +55,7 @@ namespace TARge25Shop.ApplicationServices.Services
             if (dto.ChildrenCount is string)
             {
                 return null;
-            }
+            }*/
 
             Kindergarten kinderGarten = new();
 
@@ -85,7 +85,7 @@ namespace TARge25Shop.ApplicationServices.Services
         public async Task<Kindergarten> Update(KindergartenDto dto)
         {
 
-            if (dto.GroupName == null || dto.ChildrenCount == 0 || dto.KindergartenName == null || dto.TeacherName == null)
+            /*if (dto.GroupName == null || dto.ChildrenCount == 0 || dto.KindergartenName == null || dto.TeacherName == null)
             {
                 return null;
             }
@@ -114,7 +114,7 @@ namespace TARge25Shop.ApplicationServices.Services
             if (dto.ChildrenCount is string)
             {
                 return null;
-            }
+            }*/
 
 
                 Kindergarten kinderGarten = new();
@@ -151,10 +151,10 @@ namespace TARge25Shop.ApplicationServices.Services
 
         public async Task<Kindergarten> Delete(Guid id)
         {
-            if (id == Guid.Empty)
+            /*if (id == Guid.Empty)
             {
                 return null;
-            }
+            }*/
 
             var kindergarten = await _context.Kindergartens
                 .FirstOrDefaultAsync(x => x.Id == id);
