@@ -364,53 +364,53 @@ namespace TARge25Shop.SeleniumTesting
              IWebElement cu_CreateKindergarten2 = driver.FindElement(By.Id("CU_CreateKindergarten"));
              cu_CreateKindergarten2.Click();
 
-            //andmete kogumine pärast reloadi
-            var tableOfIndex = driver.FindElement(By.Id("IndexTable"));
-            List<IWebElement> rowsOfTable = tableOfIndex.FindElements(By.TagName("tr")).ToList();
-            rowsOfTable.RemoveAt(0);
-            string kindergartenGroupNameData1 = "";
-            string kindergartenNameData1 = "";
-            string kindergartenTeacherNameData1 = "";
-            string kindergartenChildrenCountData1 = "";
-            string kindergartenBuiltAtData1 = "";
+             //andmete kogumine pärast reloadi
+             var tableOfIndex = driver.FindElement(By.Id("IndexTable"));
+             List<IWebElement> rowsOfTable = tableOfIndex.FindElements(By.TagName("tr")).ToList();
+             rowsOfTable.RemoveAt(0);
+             string kindergartenGroupNameData1 = "";
+             string kindergartenNameData1 = "";
+             string kindergartenTeacherNameData1 = "";
+             string kindergartenChildrenCountData1 = "";
+             string kindergartenBuiltAtData1 = "";
 
-            string kindergartenGroupNameData2 = "";
-            string kindergartenNameData2 = "";
-            string kindergartenTeacherNameData2 = "";
-            string kindergartenChildrenCountData2 = "";
-            string kindergartenBuiltAtData2 = "";
+             string kindergartenGroupNameData2 = "";
+             string kindergartenNameData2 = "";
+             string kindergartenTeacherNameData2 = "";
+             string kindergartenChildrenCountData2 = "";
+             string kindergartenBuiltAtData2 = "";
 
-            bool doesItExist1 = false;
-            bool doesItExist2 = false;
-            foreach (var row in rowsOfTable)
-            {
-                if (row.FindElement(By.Id("IndexNameKindergarten")).Text == thisRunGuid1)
-                {
-                    doesItExist1 = true;
-                    kindergartenNameData1 = thisRunGuid1;
-                    kindergartenGroupNameData1 = row.FindElement(By.Id("IndexGroupNameKindergarten")).Text;
-                    kindergartenTeacherNameData1 = row.FindElement(By.Id("IndexTeacherNameKindergarten")).Text;
-                    kindergartenChildrenCountData1 = row.FindElement(By.Id("IndexChildrenCountKindergarten")).Text;
-                    kindergartenBuiltAtData1 = row.FindElement(By.Id("IndexBuiltDateKindergarten")).Text;
+             bool doesItExist1 = false;
+             bool doesItExist2 = false;
+             foreach (var row in rowsOfTable)
+             {
+                 if (row.FindElement(By.Id("IndexNameKindergarten")).Text == thisRunGuid1)
+                 {
+                     doesItExist1 = true;
+                     kindergartenNameData1 = thisRunGuid1;
+                     kindergartenGroupNameData1 = row.FindElement(By.Id("IndexGroupNameKindergarten")).Text;
+                     kindergartenTeacherNameData1 = row.FindElement(By.Id("IndexTeacherNameKindergarten")).Text;
+                     kindergartenChildrenCountData1 = row.FindElement(By.Id("IndexChildrenCountKindergarten")).Text;
+                     kindergartenBuiltAtData1 = row.FindElement(By.Id("IndexBuiltDateKindergarten")).Text;
 
-                }
+                 }
 
-                if (row.FindElement(By.Id("IndexNameKindergarten")).Text == thisRunGuid2)
-                {
-                    doesItExist2 = true;
-                    kindergartenNameData2 = thisRunGuid2;
-                    kindergartenGroupNameData2 = row.FindElement(By.Id("IndexGroupNameKindergarten")).Text;
-                    kindergartenTeacherNameData2 = row.FindElement(By.Id("IndexTeacherNameKindergarten")).Text;
-                    kindergartenChildrenCountData2 = row.FindElement(By.Id("IndexChildrenCountKindergarten")).Text;
-                    kindergartenBuiltAtData2 = row.FindElement(By.Id("IndexBuiltDateKindergarten")).Text;
+                 if (row.FindElement(By.Id("IndexNameKindergarten")).Text == thisRunGuid2)
+                 {
+                     doesItExist2 = true;
+                     kindergartenNameData2 = thisRunGuid2;
+                     kindergartenGroupNameData2 = row.FindElement(By.Id("IndexGroupNameKindergarten")).Text;
+                     kindergartenTeacherNameData2 = row.FindElement(By.Id("IndexTeacherNameKindergarten")).Text;
+                     kindergartenChildrenCountData2 = row.FindElement(By.Id("IndexChildrenCountKindergarten")).Text;
+                     kindergartenBuiltAtData2 = row.FindElement(By.Id("IndexBuiltDateKindergarten")).Text;
 
 
 
-                }
-            }
-            driver.Quit();
+                 }
+             }
+             driver.Quit();
 
-            //kontroll
+             //kontroll
 
             Assert.True(true == doesItExist1);
             Assert.True(true == doesItExist2);
