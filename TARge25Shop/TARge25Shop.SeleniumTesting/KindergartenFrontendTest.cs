@@ -336,33 +336,33 @@ namespace TARge25Shop.SeleniumTesting
          [Fact]
          [Order(5)]
 
-        public void Should_NavigateToCreate_AddMultipleKindergartens_WithCorrectData_ReturnToIndex()
-        {
-            //ülesseade
-            IWebDriver driver = SetupAndNavigateSIndex();
+         public void Should_NavigateToCreate_AddMultipleKindergartens_WithCorrectData_ReturnToIndex()
+         {
+             //ülesseade
+             IWebDriver driver = SetupAndNavigateSIndex();
 
-            //tegevus
-            IWebElement createInIndex1 = driver.FindElement(By.Id("CreateInIndex"));
-            createInIndex1.Click();
+             //tegevus
+             IWebElement createInIndex1 = driver.FindElement(By.Id("CreateInIndex"));
+             createInIndex1.Click();
 
-            //sisestatavad andmed, siin tagastub ka kasutatud nimi
-            string concreteName1 = InsertKindergartenData_ReturnName(driver, false);
-            thisRunGuid1 = concreteName1;
+             //sisestatavad andmed, siin tagastub ka kasutatud nimi
+             string concreteName1 = InsertKindergartenData_ReturnName(driver, false);
+             thisRunGuid1 = concreteName1;
 
-            IWebElement cu_CreateKindergarten1 = driver.FindElement(By.Id("CU_CreateKindergarten"));
-            cu_CreateKindergarten1.Click();
+             IWebElement cu_CreateKindergarten1 = driver.FindElement(By.Id("CU_CreateKindergarten"));
+             cu_CreateKindergarten1.Click();
 
 
 
-            IWebElement createInIndex2 = driver.FindElement(By.Id("CreateInIndex"));
-            createInIndex2.Click();
+             IWebElement createInIndex2 = driver.FindElement(By.Id("CreateInIndex"));
+             createInIndex2.Click();
 
-            string concreteName2 = InsertKindergartenData_ReturnName(driver, true);
+             string concreteName2 = InsertKindergartenData_ReturnName(driver, true);
 
-            thisRunGuid2 = concreteName2;
+             thisRunGuid2 = concreteName2;
 
-            IWebElement cu_CreateKindergarten2 = driver.FindElement(By.Id("CU_CreateKindergarten"));
-            cu_CreateKindergarten2.Click();
+             IWebElement cu_CreateKindergarten2 = driver.FindElement(By.Id("CU_CreateKindergarten"));
+             cu_CreateKindergarten2.Click();
 
             //andmete kogumine pärast reloadi
             var tableOfIndex = driver.FindElement(By.Id("IndexTable"));
