@@ -79,8 +79,10 @@ namespace TARge25Shop.SeleniumTesting
             string concreteName = InsertKindergartenData_ReturnName(driver, false);
             thisRunGuid = concreteName;
 
-            IWebElement CU_CreateKindergarten = driver.FindElement(By.Id("CU_CreateKindergarten"));
-            CU_CreateKindergarten.Click();
+            IWebElement cu_CreateKindergarten = driver.FindElement(By.Id("CU_CreateKindergarten"));
+            cu_CreateKindergarten.Click();
+
+            Thread.Sleep(1000);
 
 
 
