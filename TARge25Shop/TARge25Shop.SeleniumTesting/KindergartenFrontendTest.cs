@@ -127,34 +127,36 @@ namespace TARge25Shop.SeleniumTesting
         }
 
         //See test testib, et navigeerides detailide lehele spetsiifilise valitud lasteaiale näidatakse varem näidatud õiged andmeid, mis oli juba nähtav indeksi vaates.
-        [Fact]
-        [Order(2)]
-        public void Should_NavigateToDetails_OfThisKindergarten_WithPreviouslyCorrectData()
-        {
-            //ülesseade
-            IWebDriver driver = SetupAndNavigateSIndex();
+         [Fact]
+         [Order(2)]
+         public void Should_NavigateToDetails_OfThisKindergarten_WithPreviouslyCorrectData()
+         {
+             //ülesseade
+             IWebDriver driver = SetupAndNavigateSIndex();
 
-            //otsime üles kõik tabeli read, rida htmli tabelis tähistatakse "tr"iga
-            //ICollection<IWebElement> table = driver.FindElements(By.TagName("tr"));
-            var table = driver.FindElement(By.Id("IndexTable"));
-            List<IWebElement> rows = table.FindElements(By.TagName("tr")).ToList();
-            rows.RemoveAt(0);
-            bool isObjectFound = false;
+             //otsime üles kõik tabeli read, rida htmli tabelis tähistatakse "tr"iga
+             //ICollection<IWebElement> table = driver.FindElements(By.TagName("tr"));
+             var table = driver.FindElement(By.Id("IndexTable"));
+             List<IWebElement> rows = table.FindElements(By.TagName("tr")).ToList();
+             rows.RemoveAt(0);
+             bool isObjectFound = false;
 
-            //tsükkel käib kõik read läbi            
-            foreach (var row in rows)
-            {
-
+             //tsükkel käib kõik read läbi            
+             foreach (var row in rows)
+             {
+                
                 var locatedelement = row.FindElement(By.Id("IndexNameKindergarten"));
-                if (locatedelement.Text == thisRunGuid)
-                {
+                 if (locatedelement.Text == thisRunGuid)
+                 {
+                    isObjectFound = true;
                     //siis vajuta selles reas asuvat details nuppu
+
                     var rowelement = row.FindElement(By.Id("IndexActionsKindergarten"));
                     var button = rowelement.FindElement(By.Id("IndexKindergartenDetails"));
                     button.Click();
                     //pärast õiget vajutust, tsükkel katkestatakse
                     //arvuti tudub
-                    Thread.Sleep(500);
+                    //Thread.Sleep(500);
                     break;
                 }
             }
