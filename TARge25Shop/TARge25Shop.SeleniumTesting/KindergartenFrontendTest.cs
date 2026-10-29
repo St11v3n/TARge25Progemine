@@ -433,8 +433,8 @@ namespace TARge25Shop.SeleniumTesting
 
 
         }
-        //See test testib, et minnakse detailide vaatele ühele lasteaiale ning kontrollitakse et selle andmed on sama mis on nähtav indeks vaates, siis see läheb tagasi indeks
-        //vaatele ja uuesti läheb detailide vaatele teise lasteaia jaoks ning ka kontrollitakse et selle andmed on sama mis indeksi vaates näha on.
+         //See test testib, et minnakse detailide vaatele ühele lasteaiale ning kontrollitakse et selle andmed on sama mis on nähtav indeks vaates, siis see läheb tagasi indeks
+         //vaatele ja uuesti läheb detailide vaatele teise lasteaia jaoks ning ka kontrollitakse et selle andmed on sama mis indeksi vaates näha on.
 
         [Fact]
         [Order(6)]
