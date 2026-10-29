@@ -561,145 +561,143 @@ namespace TARge25Shop.SeleniumTesting
              Assert.True(int.Parse(details_kindergartenchildrencount2).GetType() == typeof(int));
          }
 
-        //See test testib mitme lasteaiade andmete uuendamist, need uued andmed on sama mõlematele lasteaiadele.
-        [Fact]
-        [Order(7)]
+         //See test testib mitme lasteaiade andmete uuendamist, need uued andmed on sama mõlematele lasteaiadele.
+         [Fact]
+         [Order(7)]
 
-        public void Should_UpdateDetails_ForBothKindergartens_WithNewData()
-        {
-            //ülesseade
-            IWebDriver driver = SetupAndNavigateSIndex();
+         public void Should_UpdateDetails_ForBothKindergartens_WithNewData()
+         {
+             //ülesseade
+             IWebDriver driver = SetupAndNavigateSIndex();
 
-            //otsime üles kõik tabeli read, rida htmli tabelis tähistatakse "tr"iga
-            //ICollection<IWebElement> table = driver.FindElements(By.TagName("tr"));
-            var table = driver.FindElement(By.Id("IndexTable"));
-            List<IWebElement> rows = table.FindElements(By.TagName("tr")).ToList();
-            rows.RemoveAt(0);
-            bool doesItExist = false;
-            //tsükkel käib kõik read läbi
+             //otsime üles kõik tabeli read, rida htmli tabelis tähistatakse "tr"iga
+             //ICollection<IWebElement> table = driver.FindElements(By.TagName("tr"));
+             var table = driver.FindElement(By.Id("IndexTable"));
+             List<IWebElement> rows = table.FindElements(By.TagName("tr")).ToList();
+             rows.RemoveAt(0);
+             bool doesItExist = false;
+             //tsükkel käib kõik read läbi
 
-            foreach (var row in rows)
-            {
+             foreach (var row in rows)
+             {
 
-                var locatedelement = row.FindElement(By.Id("IndexNameKindergarten"));
-                if (locatedelement.Text == thisRunGuid1)
-                {
-                    doesItExist = true;
-                    //siis vajuta selles reas asuvat details nuppu
-                    var rowelement = row.FindElement(By.Id("IndexActionsKindergarten"));
-                    var button = rowelement.FindElement(By.Id("IndexKindergartenUpdate"));
-                    button.Click();
-                    //pärast õiget vajutust, tsükkel katkestatakse
-                    //arvuti tudub
-                    Thread.Sleep(500);
-                    break;
-                }
-            }
-            //sisestatavad andmed
-            InsertKindergartenDataForTwo(driver, thisRunGuid1);
+                 var locatedelement = row.FindElement(By.Id("IndexNameKindergarten"));
+                 if (locatedelement.Text == thisRunGuid1)
+                 {
+                     doesItExist = true;
+                     //siis vajuta selles reas asuvat details nuppu
+                     var rowelement = row.FindElement(By.Id("IndexActionsKindergarten"));
+                     var button = rowelement.FindElement(By.Id("IndexKindergartenUpdate"));
+                     button.Click();
+                     //pärast õiget vajutust, tsükkel katkestatakse
+                     //arvuti tudub
+                     Thread.Sleep(500);
+                     break;
+                 }
+             }
+             //sisestatavad andmed
+             InsertKindergartenDataForTwo(driver, thisRunGuid1);
 
-            IWebElement cu_CreateKindergarten = driver.FindElement(By.Id("CU_UpdateKindergarten"));
-            cu_CreateKindergarten.Click();
+             IWebElement cu_CreateKindergarten = driver.FindElement(By.Id("CU_UpdateKindergarten"));
+             cu_CreateKindergarten.Click();
 
-            //andmete kogumine pärast reloadi
-            var tableOfIndex = driver.FindElement(By.Id("IndexTable"));
-            List<IWebElement> rowsOfTable = tableOfIndex.FindElements(By.TagName("tr")).ToList();
-            rowsOfTable.RemoveAt(0);
-            string kindergartenNameData1 = "";
-            string kindergartenGroupNameData1 = "";
-            string kindergartenChildrenCountData1 = "";
-            string kindergartenTeacherNameData1 = "";
-            string kindergartenBuiltAtData1 = "";
-            doesItExist = false;
+             //andmete kogumine pärast reloadi
+             var tableOfIndex = driver.FindElement(By.Id("IndexTable"));
+             List<IWebElement> rowsOfTable = tableOfIndex.FindElements(By.TagName("tr")).ToList();
+             rowsOfTable.RemoveAt(0);
+             string kindergartenNameData1 = "";
+             string kindergartenGroupNameData1 = "";
+             string kindergartenChildrenCountData1 = "";
+             string kindergartenTeacherNameData1 = "";
+             string kindergartenBuiltAtData1 = "";
+             doesItExist = false;
 
-            foreach (var row in rowsOfTable)
-            {
-                if (row.FindElement(By.Id("IndexNameKindergarten")).Text == thisRunGuid1)
-                {
-                    doesItExist = true;
-                    kindergartenNameData1 = thisRunGuid1;
-                    kindergartenGroupNameData1 = row.FindElement(By.Id("IndexGroupNameKindergarten")).Text;
-                    kindergartenChildrenCountData1 = row.FindElement(By.Id("IndexChildrenCountKindergarten")).Text;
-                    kindergartenBuiltAtData1 = row.FindElement(By.Id("IndexBuiltDateKindergarten")).Text;
-                    break;
-                }
-            }
+             foreach (var row in rowsOfTable)
+             {
+                 if (row.FindElement(By.Id("IndexNameKindergarten")).Text == thisRunGuid1)
+                 {
+                     doesItExist = true;
+                     kindergartenNameData1 = thisRunGuid1;
+                     kindergartenGroupNameData1 = row.FindElement(By.Id("IndexGroupNameKindergarten")).Text;
+                     kindergartenChildrenCountData1 = row.FindElement(By.Id("IndexChildrenCountKindergarten")).Text;
+                     kindergartenBuiltAtData1 = row.FindElement(By.Id("IndexBuiltDateKindergarten")).Text;
+                     break;
+                 }
+             }
 
-            table = driver.FindElement(By.Id("IndexTable"));
-            rows = table.FindElements(By.TagName("tr")).ToList();
-            rows.RemoveAt(0);
-            doesItExist = false;
-            //tsükkel käib kõik read läbi
-            foreach (var row in rows)
-            {
+             table = driver.FindElement(By.Id("IndexTable"));
+             rows = table.FindElements(By.TagName("tr")).ToList();
+             rows.RemoveAt(0);
+             doesItExist = false;
+             //tsükkel käib kõik read läbi
+             foreach (var row in rows)
+             {
 
-                var locatedelement = row.FindElement(By.Id("IndexNameKindergarten"));
-                if (locatedelement.Text == thisRunGuid2)
-                {
-                    doesItExist = true;
-                    //siis vajuta selles reas asuvat details nuppu
-                    var rowelement = row.FindElement(By.Id("IndexActionsKindergarten"));
-                    var button = rowelement.FindElement(By.Id("IndexKindergartenUpdate"));
-                    button.Click();
-                    //pärast õiget vajutust, tsükkel katkestatakse
-                    //arvuti tudub
-                    Thread.Sleep(500);
-                    break;
-                }
-            }
+                 var locatedelement = row.FindElement(By.Id("IndexNameKindergarten"));
+                 if (locatedelement.Text == thisRunGuid2)
+                 {
+                     doesItExist = true;
+                     //siis vajuta selles reas asuvat details nuppu
+                     var rowelement = row.FindElement(By.Id("IndexActionsKindergarten"));
+                     var button = rowelement.FindElement(By.Id("IndexKindergartenUpdate"));
+                     button.Click();
+                     //pärast õiget vajutust, tsükkel katkestatakse
+                     //arvuti tudub
+                     Thread.Sleep(500);
+                     break;
+                 }
+             }
 
-            //sisestatavad andmed
-            InsertKindergartenDataForTwo(driver, thisRunGuid2);
+             //sisestatavad andmed
+             InsertKindergartenDataForTwo(driver, thisRunGuid2);
 
-            cu_CreateKindergarten = driver.FindElement(By.Id("CU_UpdateKindergarten"));
-            cu_CreateKindergarten.Click();
+             cu_CreateKindergarten = driver.FindElement(By.Id("CU_UpdateKindergarten"));
+             cu_CreateKindergarten.Click();
 
-            //andmete kogumine pärast reloadi
-            tableOfIndex = driver.FindElement(By.Id("IndexTable"));
-            rowsOfTable = tableOfIndex.FindElements(By.TagName("tr")).ToList();
-            rowsOfTable.RemoveAt(0);
-            string kindergartenNameData2 = "";
-            string kindergartenGroupNameData2 = "";
-            string kindergartenChildrenCountData2 = "";
-            string kindergartenTeacherNameData2 = "";
-            string kindergartenBuiltAtData2 = "";
-            doesItExist = false;
+             //andmete kogumine pärast reloadi
+             tableOfIndex = driver.FindElement(By.Id("IndexTable"));
+             rowsOfTable = tableOfIndex.FindElements(By.TagName("tr")).ToList();
+             rowsOfTable.RemoveAt(0);
+             string kindergartenNameData2 = "";
+             string kindergartenGroupNameData2 = "";
+             string kindergartenChildrenCountData2 = "";
+             string kindergartenTeacherNameData2 = "";
+             string kindergartenBuiltAtData2 = "";
+             doesItExist = false;
 
-            foreach (var row in rowsOfTable)
-            {
-                if (row.FindElement(By.Id("IndexNameKindergarten")).Text == thisRunGuid2)
-                {
-                    doesItExist = true;
-                    kindergartenNameData2 = thisRunGuid2;
-                    kindergartenGroupNameData2 = row.FindElement(By.Id("IndexGroupNameKindergarten")).Text;
-                    kindergartenChildrenCountData2 = row.FindElement(By.Id("IndexChildrenCountKindergarten")).Text;
-                    kindergartenBuiltAtData2 = row.FindElement(By.Id("IndexBuiltDateKindergarten")).Text;
-                    break;
-                }
-            }
+             foreach (var row in rowsOfTable)
+             {
+                 if (row.FindElement(By.Id("IndexNameKindergarten")).Text == thisRunGuid2)
+                 {
+                     doesItExist = true;
+                     kindergartenNameData2 = thisRunGuid2;
+                     kindergartenGroupNameData2 = row.FindElement(By.Id("IndexGroupNameKindergarten")).Text;
+                     kindergartenChildrenCountData2 = row.FindElement(By.Id("IndexChildrenCountKindergarten")).Text;
+                     kindergartenBuiltAtData2 = row.FindElement(By.Id("IndexBuiltDateKindergarten")).Text;
+                     break;
+                 }
+             }
 
-            driver.Quit();
-
-            
-            Assert.True(doesItExist);
-            Assert.NotNull(kindergartenNameData1);
-            Assert.NotNull(kindergartenNameData2);
-            Assert.Equal(thisRunGuid1, kindergartenNameData1);
-            Assert.Equal(thisRunGuid2, kindergartenNameData2);
-            Assert.False(string.IsNullOrEmpty(kindergartenGroupNameData1));
-            Assert.False(string.IsNullOrEmpty(kindergartenGroupNameData2));
-            Assert.NotEqual(kindergartenGroupNameData1, "Group with no name.");
-            Assert.NotEqual(kindergartenGroupNameData2, "Something something");
-            Assert.True(kindergartenGroupNameData1 == "idk");
-            Assert.True(kindergartenGroupNameData2 == "idk");
-            Assert.False(string.IsNullOrEmpty(kindergartenGroupNameData1));
-            Assert.False(string.IsNullOrEmpty(kindergartenGroupNameData2));
-            Assert.True(kindergartenChildrenCountData1 == "12");
-            Assert.True(kindergartenChildrenCountData2 == "12");
-            
-            //kontrolli kõik teised andmed ka üle põhjalikult.
+             driver.Quit();
 
 
+             Assert.True(doesItExist);
+             Assert.NotNull(kindergartenNameData1);
+             Assert.NotNull(kindergartenNameData2);
+             Assert.Equal(thisRunGuid1, kindergartenNameData1);
+             Assert.Equal(thisRunGuid2, kindergartenNameData2);
+             Assert.False(string.IsNullOrEmpty(kindergartenGroupNameData1));
+             Assert.False(string.IsNullOrEmpty(kindergartenGroupNameData2));
+             Assert.NotEqual(kindergartenGroupNameData1, "Something something");
+             Assert.NotEqual(kindergartenGroupNameData2, "Group with no name.");
+             Assert.True(kindergartenGroupNameData1 == "idk");
+             Assert.True(kindergartenGroupNameData2 == "idk");
+             Assert.False(string.IsNullOrEmpty(kindergartenGroupNameData1));
+             Assert.False(string.IsNullOrEmpty(kindergartenGroupNameData2));
+             Assert.True(kindergartenChildrenCountData1 == "12");
+             Assert.True(kindergartenChildrenCountData2 == "12");
+
+             //kontrolli kõik teised andmed ka üle põhjalikult.
 
         }
         //Test, mis testib, et mitte valitud lasteaed ei kustutatakse pärast valitud lasteaia kustutamist läbi kustutamise vaatest.
