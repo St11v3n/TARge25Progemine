@@ -115,7 +115,7 @@ namespace TARge25Shop.SeleniumTesting
 
             //kontroll
 
-            Assert.True(true == doesItExist);
+            Assert.True(doesItExist == true);
             Assert.Equal(kindergartenNameData, thisRunGuid);
             Assert.True(kindergartenGroupNameData == "Group with no name.");
             Assert.Equal(kindergartenChildrenCountData, "7");
