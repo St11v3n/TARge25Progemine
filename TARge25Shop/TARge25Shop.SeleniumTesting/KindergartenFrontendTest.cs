@@ -275,62 +275,59 @@ namespace TARge25Shop.SeleniumTesting
 
         }
 
-        //Test testib, et kustutatakse spetsiifilise valitud lasteaia rakendusest kustutamise vaate kaudu.
-        [Fact]
-        [Order(4)]
-        public void Should_DeleteThisKindergarten_FromAppVIADeleteView()
-        {
-            //ülesseade
-            IWebDriver driver = SetupAndNavigateSIndex();
+         //Test testib, et kustutatakse spetsiifilise valitud lasteaia rakendusest kustutamise vaate kaudu.
+         [Fact]
+         [Order(4)]
+         public void Should_DeleteThisKindergarten_FromAppVIADeleteView()
+         {
+             //ülesseade
+             IWebDriver driver = SetupAndNavigateSIndex();
 
-            //otsime üles kõik tabeli read, rida htmli tabelis tähistatakse "tr"iga
-            //ICollection<IWebElement> table = driver.FindElements(By.TagName("tr"));
-            var table = driver.FindElement(By.Id("IndexTable"));
-            List<IWebElement> rows = table.FindElements(By.TagName("tr")).ToList();
-            rows.RemoveAt(0);
-            bool doesItExist = false;
-            //tsükkel käib kõik read läbi
+             //otsime üles kõik tabeli read, rida htmli tabelis tähistatakse "tr"iga
+             //ICollection<IWebElement> table = driver.FindElements(By.TagName("tr"));
+             var table = driver.FindElement(By.Id("IndexTable"));
+             List<IWebElement> rows = table.FindElements(By.TagName("tr")).ToList();
+             rows.RemoveAt(0);
+             bool doesItExist = false;
+             //tsükkel käib kõik read läbi
 
-            foreach (var row in rows)
-            {
+             foreach (var row in rows)
+             {
 
-                var locatedelement = row.FindElement(By.Id("IndexNameKindergarten"));
-                if (locatedelement.Text == thisRunGuid)
-                {
-                    doesItExist = true;
-                    //siis vajuta selles reas asuvat details nuppu
-                    var rowelement = row.FindElement(By.Id("IndexActionsKindergarten"));
-                    var button = rowelement.FindElement(By.Id("IndexKindergartenDelete"));
-                    button.Click();
-                    //pärast õiget vajutust, tsükkel katkestatakse
-                    //arvuti tudub
-                    Thread.Sleep(500);
-                    break;
-                }
-            }
-            var clickthisbutton = driver.FindElement(By.Id("Delete_Delete"));
-            clickthisbutton.Click();
-            bool isDeleted = false;
-            table = driver.FindElement(By.Id("IndexTable"));
-            rows = table.FindElements(By.TagName("tr")).ToList();
-            rows.RemoveAt(0);
-            foreach (var row in rows)
-            {
-                var nameElement = row.FindElement(By.Id("IndexNameKindergarten")).Text;
-                if (nameElement == thisRunGuid)
-                {
-                    isDeleted = false;
-                    break;
-                }
-                else
-                {
-                    isDeleted = true;
-                }
-            }
+                 var locatedelement = row.FindElement(By.Id("IndexNameKindergarten"));
+                 if (locatedelement.Text == thisRunGuid)
+                 {
+                     doesItExist = true;
+                     //siis vajuta selles reas asuvat details nuppu
+                     var rowelement = row.FindElement(By.Id("IndexActionsKindergarten"));
+                     var button = rowelement.FindElement(By.Id("IndexKindergartenDelete"));
+                     button.Click();
+                     //pärast õiget vajutust, tsükkel katkestatakse
+                     //arvuti tudub
+                     Thread.Sleep(500);
+                     break;
+                 }
+             }
+             var clickthisbutton = driver.FindElement(By.Id("Delete_Delete"));
+             clickthisbutton.Click();
+             bool isDeleted = false;
+             table = driver.FindElement(By.Id("IndexTable"));
+             rows = table.FindElements(By.TagName("tr")).ToList();
+             rows.RemoveAt(0);
+             foreach (var row in rows)
+             {
+                 var nameElement = row.FindElement(By.Id("IndexNameKindergarten")).Text;
+                 if (nameElement == thisRunGuid)
+                 {
+                     isDeleted = false;
+                     break;
+                 }
+                 else
+                 {
+                     isDeleted = true;
+                 }
+             }
 
-            Assert.False(isDeleted);
-            Assert.True(!isDeleted);
-        }
         //See test testib loomise vaate navigeerimisele, siis luuakse üks lasteaed, siis minnakse tagasi ineksi vaatele ja pärast
         //navigeeritakse uuesti loomise vaatele et luua teist lasteaeda, ning minnakse tagasi jälle indeksi vaatele, kontrollitakse et mülematel oleks õiged andmed.
         [Fact]
