@@ -176,22 +176,23 @@ namespace TARge25Shop.SeleniumTesting
             IWebElement details_KindergartenChildrenCount = driver.FindElement(By.Id("Details_KindergartenChildrenCount"));
              var details_kindergartenchildrencount = details_KindergartenChildrenCount.Text;
 
-        }
-        //Test, mis testib, et uuendatakse detailid spetsiifilise valitud lasteaia jaoks uue andmetega.
-        [Fact]
-        [Order(3)]
-        public void Should_UpdateDetails_OfThisKindergarten_WithNewData()
-        {
-            //ülesseade
-            IWebDriver driver = SetupAndNavigateSIndex();
+            
 
-            //otsime üles kõik tabeli read, rida htmli tabelis tähistatakse "tr"iga
-            //ICollection<IWebElement> table = driver.FindElements(By.TagName("tr"));
-            var table = driver.FindElement(By.Id("IndexTable"));
-            List<IWebElement> rows = table.FindElements(By.TagName("tr")).ToList();
-            rows.RemoveAt(0);
-            bool doesItExist = false;
-            //tsükkel käib kõik read läbi
+             driver.Quit();
+             //kontroll
+             Assert.True(isObjectFound);
+             Assert.NotNull(details_kindergartenid);
+             // et ei oleks tühi kontrollid kõikidele andmetele
+             Assert.NotEmpty(details_kindergartenname);
+             Assert.NotNull(details_kindergartengroupname);
+             Assert.True(!string.IsNullOrEmpty(details_kindergartenchildrencount));
+             Assert.Equal(thisRunGuid, details_kindergartenname);
+             Assert.Equal("Something something", details_kindergartengroupname);
+             Assert.Equal("9", details_kindergartenchildrencount);
+             Assert.Equal("Yusuf Onion", details_kindergartenteachername);
+             Assert.True(int.Parse(details_kindergartenchildrencount).GetType() == typeof(int));
+
+         }
 
             foreach (var row in rows)
             {
