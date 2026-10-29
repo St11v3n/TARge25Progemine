@@ -90,8 +90,9 @@ namespace TARge25Shop.SeleniumTesting
             var tableOfIndex = driver.FindElement(By.Id("IndexTable"));
             List<IWebElement> rowsOfTable = tableOfIndex.FindElements(By.TagName("tr")).ToList();
             rowsOfTable.RemoveAt(0);
-            string kindergartenGroupNameData = "";
+
             string kindergartenNameData = "";
+            string kindergartenGroupNameData = "";
             string kindergartenTeacherNameData = "";
             string kindergartenChildrenCountData = "";
             string kindergartenBuiltAtData = "";
