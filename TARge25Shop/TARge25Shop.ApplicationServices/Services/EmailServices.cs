@@ -60,5 +60,35 @@ namespace TARge25Shop.ApplicationServices.Services
             smtp.Send(email);
             smtp.Disconnect(true);
         }
+
+        public void SendEmailToken(EmailTokenDto dto, string token)
+        {
+            dto.Token = token;
+            //kutsu SendEmail meetodit
+            //peaaegu sama nagu SendEmail meetodis, aga siin on vaja lisada token emaili body-sse
+            //pilte ja faile ei ole vaja lisada
+            var email = new MimeMessage();
+            //Set the sender and recipient addresses
+            email.From.Add(MailboxAddress.Parse(_config.GetSection("EmailUserName").Value));
+            email.To.Add(MailboxAddress.Parse(dto.To));
+            email.Subject = dto.Subject;
+
+            var builder = new BodyBuilder
+            {
+                HtmlBody = dto.Token
+            };
+
+            
+            
+
+            email.Body = builder.ToMessageBody();
+
+            using var smtp = new SmtpClient();
+
+            smtp.Connect(_config.GetSection("EmailHost").Value, 487, MailKit.Security.SecureSocketOptions.StartTls);
+            smtp.Authenticate(_config.GetSection("EmailUserName").Value, _config.GetSection("EmailPassword").Value);
+            smtp.Send(email);
+            smtp.Disconnect(true);
+        }
     }
 }
