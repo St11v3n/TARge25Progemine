@@ -6,6 +6,8 @@ using TARge25Shop.Core.Dto;
 using TARge25Shop.Core.ServiceInterface;
 using TARge25Shop.Models.Account;
 using TARge25Shop.Core.Domain;
+using TARge25Shop.Models;
+using System.Diagnostics;
 
 namespace TARge25Shop.Controllers
 {
@@ -122,8 +124,27 @@ namespace TARge25Shop.Controllers
                 "ActedOn", $"{user.Email}",
                 "CreatedAccountData", $"{user.Email}\n{user.City}\n[password hidde]"
                 ];
+            
+            
             //teha vaade ConfirmationEmailMessage
-            return null;
+
+            if(result.Succeeded)
+            {
+                errordatas =
+                    [
+                    "Area", "Account",
+                    "Issue", "Success",
+                    "StatusMessage", "Registration Success",
+                    "ActedOn", $"{user.Email}",
+                    "CreatedAccountData", $"{user.Email}\n{user.City}\n[password hidde]"
+                    ];
+                ViewBag.ErrorMessage = errordatas;
+                return View();
+            }
+            ViewBag.ErrorDatas = errordatas;
+            ViewBag.ErrorTitles = "Email cannot be confirmed";
+            ViewBag.ErrorMessage = $"The user email, with userid of {userId}, cannot be confirmed";
+            return View("Error", new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
     }
 
