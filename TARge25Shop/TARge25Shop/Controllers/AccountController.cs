@@ -239,7 +239,7 @@ namespace TARge25Shop.Controllers
 
         [HttpGet]
         [AllowAnonymous]
-        [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)];
+        [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult ResetPassword(string email, string token)
         {
 
@@ -256,6 +256,51 @@ namespace TARge25Shop.Controllers
         [AllowAnonymous]
         public async Task<IActionResult> ResetPassword(ResetPasswordViewModel model)
         {
+            if (ModelState.IsValid)
+            {
+                var user = await _userManager.FindByEmailAsync(model.Email);
+
+        
+
+                if (user != null)
+                {
+                    //tulemuses kasutate ResetPasswordAsync ja see annab kaasa user, tokeni ja salasõna
+
+                    // kui õnnestub, siis returnib vaadet resetPasswordConfrimation
+
+                    var result = await _userManager.ResetPasswordAsync(user, model.Token, model.Password);
+
+                    if (result.Succeeded)
+                    {
+                        if (await _userManager.IsLockedOutAsync(user))
+                        {
+                            await _userManager.SetLockoutEndDateAsync(user, DateTimeOffset.UtcNow);
+                        }
+
+                        return View("ResetPasswordConfirmation");
+                    }
+
+                    foreach (var error in result.Errors)
+                    {
+                        ModelState.AddModelError("", error.Description);
+                    }
+
+                    return View(model);
+
+
+
+
+
+
+
+                }
+                //võib näidata vga, is on tekkind või suunab tagasi emaili kinnituse vaatesse
+                return View(model);
+                
+
+                
+
+            }
             return View(model);
         }
     }
