@@ -1,13 +1,13 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
-using TARge25Shop.ApplicationServices.Services;
-using TARge25Shop.Core.Dto;
 using TARge25Shop.Core.ServiceInterface;
-using TARge25Shop.Models.Account;
 using TARge25Shop.Core.Domain;
-using TARge25Shop.Models;
+using TARge25Shop.Models.Account;
+using TARge25Shop.Core.Dto;
 using System.Diagnostics;
+using TARge25Shop.Models;
+
 
 namespace TARge25Shop.Controllers
 {
@@ -15,7 +15,6 @@ namespace TARge25Shop.Controllers
     {
         private readonly UserManager<ApplicationUser> _userManager;
         private readonly SignInManager<ApplicationUser> _signInManager;
-
         private readonly IEmailServices _emailServices;
 
 
@@ -69,7 +68,7 @@ namespace TARge25Shop.Controllers
                     newsignup.Subject = "SHOP Confirm your email";
                     newsignup.To = user.Email;
 
-                    if(_signInManager.IsSignedIn(User) && User.IsInRole("Admin"))
+                    if (_signInManager.IsSignedIn(User) && User.IsInRole("Admin"))
                     {
                         return RedirectToAction("ListUsers", "Administration");
                     }
@@ -79,7 +78,7 @@ namespace TARge25Shop.Controllers
                         [
                         "Area", "Accounts",
                         "Issue", "Success",
-                        "StatusMessage", "Registration Success",
+                        "StatusMessage", "Registration Sucess",
                         "ActedOn", $"{vm.Email}",
                         "CreatedAccountData", $"{vm.Email}\n{vm.City}\n[password hidden]\n[password hidden]"
                         ];
@@ -117,18 +116,15 @@ namespace TARge25Shop.Controllers
 
             var result = await _userManager.ConfirmEmailAsync(user, token);
             List<string> errordatas =
-                [
-                "Area", "Account",
-                "Issue", "Success",
-                "StatusMessage", "Registration Success",
-                "ActedOn", $"{user.Email}",
-                "CreatedAccountData", $"{user.Email}\n{user.City}\n[password hidde]"
-                ];
-            
-            
-            //teha vaade ConfirmationEmailMessage
+                    [
+                    "Area", "Account",
+                    "Issue", "Success",
+                    "StatusMessage", "Registration Success",
+                    "ActedOn", $"{user.Email}",
+                    "CreatedAccountData", $"{user.Email}\n{user.City}\n[password hidden]"
+                    ];
 
-            if(result.Succeeded)
+            if (result.Succeeded)
             {
                 errordatas =
                     [
@@ -136,16 +132,18 @@ namespace TARge25Shop.Controllers
                     "Issue", "Success",
                     "StatusMessage", "Registration Success",
                     "ActedOn", $"{user.Email}",
-                    "CreatedAccountData", $"{user.Email}\n{user.City}\n[password hidde]"
+                    "CreatedAccountData", $"{user.Email}\n{user.City}\n[password hidden]"
                     ];
                 ViewBag.ErrorMessage = errordatas;
                 return View();
             }
+
             ViewBag.ErrorDatas = errordatas;
             ViewBag.ErrorTitles = "Email cannot be confirmed";
             ViewBag.ErrorMessage = $"The user email, with userid of {userId}, cannot be confirmed";
             return View("Error", new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
+
 
         [HttpGet]
         [AllowAnonymous]
@@ -190,10 +188,9 @@ namespace TARge25Shop.Controllers
                 }
 
                 ModelState.AddModelError("", "Invalid login Attempt");
-                
             }
 
-            return View (model);
+            return View(model);
         }
 
         [HttpGet]
@@ -209,14 +206,12 @@ namespace TARge25Shop.Controllers
         {
             if (ModelState.IsValid)
             {
-                var user = await _userManager.FindByNameAsync(model.Email);
+                var user = await _userManager.FindByEmailAsync(model.Email);
                 if (user != null && await _userManager.IsEmailConfirmedAsync(user))
                 {
-                    //muutuja-token tuleb uus token genereerida
-
+                    //muutuja token tuleb uus token genereerida
                     var token = await _userManager.GeneratePasswordResetTokenAsync(user);
-
-                    //muutuja passwordResetLink, mis viib ResetPassword vaatele
+                    //muutja passwordResetLink, mis viib Resetpassword vaatele
                     var passwordResetLink = Url.Action("ResetPassword", "Account", new { email = model.Email, token = token }, Request.Scheme);
 
                     //saadame emaili
@@ -227,10 +222,10 @@ namespace TARge25Shop.Controllers
                         Subject = "reset your password",
                         Body = $"Please reset your password by clicking <a href='{passwordResetLink}'>here</a>"
                     };
-                    _emailServices.SendEmail(emailDto);
-                    return View("FrogotPasswordConfirmation");
 
-                    
+                    _emailServices.SendEmail(emailDto);
+
+                    return View("ForgotPasswordConfirmation");
                 }
                 return View("ForgotPasswordConfirmation");
             }
@@ -242,13 +237,13 @@ namespace TARge25Shop.Controllers
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult ResetPassword(string email, string token)
         {
-
-            //kui token või email on null, siis tuleb sõnum,
+            //kui token või email on null, siis tuleb sõnum, 
+            //Invalid password reset token
             if (token == null || email == null)
             {
                 ModelState.AddModelError("", "Invalid password reset token");
             }
-            //Invalid password reset token
+
             return View();
         }
 
@@ -260,14 +255,9 @@ namespace TARge25Shop.Controllers
             {
                 var user = await _userManager.FindByEmailAsync(model.Email);
 
-        
-
                 if (user != null)
                 {
-                    //tulemuses kasutate ResetPasswordAsync ja see annab kaasa user, tokeni ja salasõna
-
-                    // kui õnnestub, siis returnib vaadet resetPasswordConfrimation
-
+                    //tulemuses kasutate ResetPasswordAsync ja see annab kaasa uesr, tokeni ja salasõna
                     var result = await _userManager.ResetPasswordAsync(user, model.Token, model.Password);
 
                     if (result.Succeeded)
@@ -286,23 +276,60 @@ namespace TARge25Shop.Controllers
                     }
 
                     return View(model);
-
-
-
-
-
-
-
                 }
-                //võib näidata vga, is on tekkind või suunab tagasi emaili kinnituse vaatesse
+                //võib näidata viga, mis on tekkinud või suunab tagasi emaili kinnituse vaatesse
                 return View(model);
-                
-
-                
-
             }
             return View(model);
         }
-    }
 
+        [HttpGet]
+        public IActionResult ChangePassword()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> ChangePassword(ChangePasswordViewModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                var user = await _userManager.GetUserAsync(User);
+
+                //kui user on null, siis suuna Login vaatesse
+                if (user == null)
+                {
+                    return RedirectToAction("Login");
+                }
+
+                //var result muutuja peab kasutama meetotit muudaPassword
+                var result = await _userManager.ChangePasswordAsync(user, model.CurrentPassword, model.NewPassword);
+
+                //kui ei ole edukas, siis n'ita veateadet
+                if (!result.Succeeded)
+                {
+                    foreach (var error in result.Errors)
+                    {
+                        ModelState.AddModelError(string.Empty, error.Description);
+                    }
+
+                    return View();
+                }
+
+                //tuleb kasutada värskenda sisse kirjutamist meetotit
+                //suunab vaatele muutsid salasõna edukalt
+                await _signInManager.RefreshSignInAsync(user);
+                return View("ChangePasswordConfirmation");
+            }
+
+            return View(model);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Logout()
+        {
+            await _signInManager.SignOutAsync();
+            return RedirectToAction("Index", "Home");
+        }
+    }
 }
